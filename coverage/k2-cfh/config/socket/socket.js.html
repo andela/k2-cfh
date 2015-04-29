@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for k2-cfh/config/socket/socket.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">k2-cfh/config/socket</a> socket.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">12.08% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>18/149</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/57</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">12.08% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>18/149</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var Game = require('./game');
+var Player = require('./player');
+require("console-stamp")(console, "m/dd HH:MM:ss");
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+&nbsp;
+var avatars = require(__dirname + '/../../app/controllers/avatars.js').all();
+// Valid characters to use to generate random private game IDs
+var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+&nbsp;
+module.exports = function(io) {
+&nbsp;
+  var game;
+  var allGames = {};
+  var allPlayers = {};
+  var gamesNeedingPlayers = [];
+  var gameID = 0;
+&nbsp;
+  io.sockets.on('connection', <span class="fstat-no" title="function not covered" >fu</span>nction (socket) {
+<span class="cstat-no" title="statement not covered" >    console.log(socket.id +  ' Connected');</span>
+<span class="cstat-no" title="statement not covered" >    socket.emit('id', {id: socket.id});</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    socket.on('pickCards', <span class="fstat-no" title="function not covered" >fu</span>nction(data) {</span>
+<span class="cstat-no" title="statement not covered" >      console.log(socket.id,"picked",data);</span>
+<span class="cstat-no" title="statement not covered" >      if (allGames[socket.gameID]) {</span>
+<span class="cstat-no" title="statement not covered" >        allGames[socket.gameID].pickCards(data.cards,socket.id);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        console.log('Received pickCard from',socket.id, 'but game does not appear to exist!');</span>
+      }
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    socket.on('pickWinning', <span class="fstat-no" title="function not covered" >fu</span>nction(data) {</span>
+<span class="cstat-no" title="statement not covered" >      if (allGames[socket.gameID]) {</span>
+<span class="cstat-no" title="statement not covered" >        allGames[socket.gameID].pickWinning(data.card,socket.id);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        console.log('Received pickWinning from',socket.id, 'but game does not appear to exist!');</span>
+      }
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    socket.on('joinGame', <span class="fstat-no" title="function not covered" >fu</span>nction(data) {</span>
+<span class="cstat-no" title="statement not covered" >      if (!allPlayers[socket.id]) {</span>
+<span class="cstat-no" title="statement not covered" >        joinGame(socket,data);</span>
+      }
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    socket.on('joinNewGame', <span class="fstat-no" title="function not covered" >fu</span>nction(data) {</span>
+<span class="cstat-no" title="statement not covered" >      exitGame(socket);</span>
+<span class="cstat-no" title="statement not covered" >      joinGame(socket,data);</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    socket.on('startGame', <span class="fstat-no" title="function not covered" >fu</span>nction() {</span>
+<span class="cstat-no" title="statement not covered" >      if (allGames[socket.gameID]) {</span>
+        var thisGame = <span class="cstat-no" title="statement not covered" >allGames[socket.gameID];</span>
+<span class="cstat-no" title="statement not covered" >        console.log('comparing',thisGame.players[0].socket.id,'with',socket.id);</span>
+<span class="cstat-no" title="statement not covered" >        if (thisGame.players.length &gt;= thisGame.playerMinLimit) {</span>
+          // Remove this game from gamesNeedingPlayers so new players can't join it.
+<span class="cstat-no" title="statement not covered" >          gamesNeedingPlayers.forEach(<span class="fstat-no" title="function not covered" >fu</span>nction(game,index) {</span>
+<span class="cstat-no" title="statement not covered" >            if (game.gameID === socket.gameID) {</span>
+<span class="cstat-no" title="statement not covered" >              return gamesNeedingPlayers.splice(index,1);</span>
+            }
+          });
+<span class="cstat-no" title="statement not covered" >          thisGame.prepareGame();</span>
+<span class="cstat-no" title="statement not covered" >          thisGame.sendNotification('The game has begun!');</span>
+        }
+      }
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    socket.on('leaveGame', <span class="fstat-no" title="function not covered" >fu</span>nction() {</span>
+<span class="cstat-no" title="statement not covered" >      exitGame(socket);</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    socket.on('disconnect', <span class="fstat-no" title="function not covered" >fu</span>nction(){</span>
+<span class="cstat-no" title="statement not covered" >      console.log('Rooms on Disconnect ', io.sockets.manager.rooms);</span>
+<span class="cstat-no" title="statement not covered" >      exitGame(socket);</span>
+    });
+  });
+&nbsp;
+  var joinGame = <span class="fstat-no" title="function not covered" >fu</span>nction(socket,data) {
+    var player = <span class="cstat-no" title="statement not covered" >new Player(socket);</span>
+<span class="cstat-no" title="statement not covered" >    data = data || {};</span>
+<span class="cstat-no" title="statement not covered" >    player.userID = data.userID || 'unauthenticated';</span>
+<span class="cstat-no" title="statement not covered" >    if (data.userID !== 'unauthenticated') {</span>
+<span class="cstat-no" title="statement not covered" >      User.findOne({</span>
+        _id: data.userID
+      }).exec(<span class="fstat-no" title="function not covered" >fu</span>nction(err, user) {
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >          console.log('err',err);</span>
+<span class="cstat-no" title="statement not covered" >          return err; </span>// Hopefully this never happens.
+        }
+<span class="cstat-no" title="statement not covered" >        if (!user) {</span>
+          // If the user's ID isn't found (rare)
+<span class="cstat-no" title="statement not covered" >          player.username = 'Guest';</span>
+<span class="cstat-no" title="statement not covered" >          player.avatar = avatars[Math.floor(Math.random()*4)+12];</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          player.username = user.name;</span>
+<span class="cstat-no" title="statement not covered" >          player.premium = user.premium || 0;</span>
+<span class="cstat-no" title="statement not covered" >          player.avatar = user.avatar || avatars[Math.floor(Math.random()*4)+12];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        getGame(player,socket,data.room,data.createPrivate);</span>
+      });
+    } else {
+      // If the user isn't authenticated (guest)
+<span class="cstat-no" title="statement not covered" >      player.username = 'Guest';</span>
+<span class="cstat-no" title="statement not covered" >      player.avatar = avatars[Math.floor(Math.random()*4)+12];</span>
+<span class="cstat-no" title="statement not covered" >      getGame(player,socket,data.room,data.createPrivate);</span>
+    }
+  };
+&nbsp;
+  var getGame = <span class="fstat-no" title="function not covered" >fu</span>nction(player,socket,requestedGameId,createPrivate) {
+<span class="cstat-no" title="statement not covered" >    requestedGameId = requestedGameId || '';</span>
+<span class="cstat-no" title="statement not covered" >    createPrivate = createPrivate || false;</span>
+<span class="cstat-no" title="statement not covered" >    console.log(socket.id,'is requesting room',requestedGameId);</span>
+<span class="cstat-no" title="statement not covered" >    if (requestedGameId.length &amp;&amp; allGames[requestedGameId]) {</span>
+<span class="cstat-no" title="statement not covered" >      console.log('Room',requestedGameId,'is valid');</span>
+      var game = <span class="cstat-no" title="statement not covered" >allGames[requestedGameId];</span>
+      // Ensure that the same socket doesn't try to join the same game
+      // This can happen because we rewrite the browser's URL to reflect
+      // the new game ID, causing the view to reload.
+      // Also checking the number of players, so node doesn't crash when
+      // no one is in this custom room.
+<span class="cstat-no" title="statement not covered" >      if (game.state === 'awaiting players' &amp;&amp; (!game.players.length ||</span>
+        game.players[0].socket.id !== socket.id)) {
+        // Put player into the requested game
+<span class="cstat-no" title="statement not covered" >        console.log('Allowing player to join',requestedGameId);</span>
+<span class="cstat-no" title="statement not covered" >        allPlayers[socket.id] = true;</span>
+<span class="cstat-no" title="statement not covered" >        game.players.push(player);</span>
+<span class="cstat-no" title="statement not covered" >        socket.join(game.gameID);</span>
+<span class="cstat-no" title="statement not covered" >        socket.gameID = game.gameID;</span>
+<span class="cstat-no" title="statement not covered" >        game.assignPlayerColors();</span>
+<span class="cstat-no" title="statement not covered" >        game.assignGuestNames();</span>
+<span class="cstat-no" title="statement not covered" >        game.sendUpdate();</span>
+<span class="cstat-no" title="statement not covered" >        game.sendNotification(player.username+' has joined the game!');</span>
+<span class="cstat-no" title="statement not covered" >        if (game.players.length &gt;= game.playerMaxLimit) {</span>
+<span class="cstat-no" title="statement not covered" >          gamesNeedingPlayers.shift();</span>
+<span class="cstat-no" title="statement not covered" >          game.prepareGame();</span>
+        }
+      } else {
+        // TODO: Send an error message back to this user saying the game has already started
+      }
+    } else {
+      // Put players into the general queue
+<span class="cstat-no" title="statement not covered" >      console.log('Redirecting player',socket.id,'to general queue');</span>
+<span class="cstat-no" title="statement not covered" >      if (createPrivate) {</span>
+<span class="cstat-no" title="statement not covered" >        createGameWithFriends(player,socket);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        fireGame(player,socket);</span>
+      }
+    }
+&nbsp;
+  };
+&nbsp;
+  var fireGame = <span class="fstat-no" title="function not covered" >fu</span>nction(player,socket) {
+    var game;
+<span class="cstat-no" title="statement not covered" >    if (gamesNeedingPlayers.length &lt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >      gameID += 1;</span>
+      var gameIDStr = <span class="cstat-no" title="statement not covered" >gameID.toString();</span>
+<span class="cstat-no" title="statement not covered" >      game = new Game(gameIDStr, io);</span>
+<span class="cstat-no" title="statement not covered" >      allPlayers[socket.id] = true;</span>
+<span class="cstat-no" title="statement not covered" >      game.players.push(player);</span>
+<span class="cstat-no" title="statement not covered" >      allGames[gameID] = game;</span>
+<span class="cstat-no" title="statement not covered" >      gamesNeedingPlayers.push(game);</span>
+<span class="cstat-no" title="statement not covered" >      socket.join(game.gameID);</span>
+<span class="cstat-no" title="statement not covered" >      socket.gameID = game.gameID;</span>
+<span class="cstat-no" title="statement not covered" >      console.log(socket.id,'has joined newly created game',game.gameID);</span>
+<span class="cstat-no" title="statement not covered" >      game.assignPlayerColors();</span>
+<span class="cstat-no" title="statement not covered" >      game.assignGuestNames();</span>
+<span class="cstat-no" title="statement not covered" >      game.sendUpdate();</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      game = gamesNeedingPlayers[0];</span>
+<span class="cstat-no" title="statement not covered" >      allPlayers[socket.id] = true;</span>
+<span class="cstat-no" title="statement not covered" >      game.players.push(player);</span>
+<span class="cstat-no" title="statement not covered" >      console.log(socket.id,'has joined game',game.gameID);</span>
+<span class="cstat-no" title="statement not covered" >      socket.join(game.gameID);</span>
+<span class="cstat-no" title="statement not covered" >      socket.gameID = game.gameID;</span>
+<span class="cstat-no" title="statement not covered" >      game.assignPlayerColors();</span>
+<span class="cstat-no" title="statement not covered" >      game.assignGuestNames();</span>
+<span class="cstat-no" title="statement not covered" >      game.sendUpdate();</span>
+<span class="cstat-no" title="statement not covered" >      game.sendNotification(player.username+' has joined the game!');</span>
+<span class="cstat-no" title="statement not covered" >      if (game.players.length &gt;= game.playerMaxLimit) {</span>
+<span class="cstat-no" title="statement not covered" >        gamesNeedingPlayers.shift();</span>
+<span class="cstat-no" title="statement not covered" >        game.prepareGame();</span>
+      }
+    }
+  };
+&nbsp;
+  var createGameWithFriends = <span class="fstat-no" title="function not covered" >fu</span>nction(player,socket) {
+    var isUniqueRoom = <span class="cstat-no" title="statement not covered" >false;</span>
+    var uniqueRoom = <span class="cstat-no" title="statement not covered" >'';</span>
+    // Generate a random 6-character game ID
+<span class="cstat-no" title="statement not covered" >    while (!isUniqueRoom) {</span>
+<span class="cstat-no" title="statement not covered" >      uniqueRoom = '';</span>
+<span class="cstat-no" title="statement not covered" >      for (var i = 0; i &lt; 6; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        uniqueRoom += chars[Math.floor(Math.random()*chars.length)];</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (!allGames[uniqueRoom] &amp;&amp; !(/^\d+$/).test(uniqueRoom)) {</span>
+<span class="cstat-no" title="statement not covered" >        isUniqueRoom = true;</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    console.log(socket.id,'has created unique game',uniqueRoom);</span>
+    var game = <span class="cstat-no" title="statement not covered" >new Game(uniqueRoom,io);</span>
+<span class="cstat-no" title="statement not covered" >    allPlayers[socket.id] = true;</span>
+<span class="cstat-no" title="statement not covered" >    game.players.push(player);</span>
+<span class="cstat-no" title="statement not covered" >    allGames[uniqueRoom] = game;</span>
+<span class="cstat-no" title="statement not covered" >    socket.join(game.gameID);</span>
+<span class="cstat-no" title="statement not covered" >    socket.gameID = game.gameID;</span>
+<span class="cstat-no" title="statement not covered" >    game.assignPlayerColors();</span>
+<span class="cstat-no" title="statement not covered" >    game.assignGuestNames();</span>
+<span class="cstat-no" title="statement not covered" >    game.sendUpdate();</span>
+  };
+&nbsp;
+  var exitGame = <span class="fstat-no" title="function not covered" >fu</span>nction(socket) {
+<span class="cstat-no" title="statement not covered" >    console.log(socket.id,'has disconnected');</span>
+<span class="cstat-no" title="statement not covered" >    if (allGames[socket.gameID]) { // Make sure game exists</span>
+      var game = <span class="cstat-no" title="statement not covered" >allGames[socket.gameID];</span>
+<span class="cstat-no" title="statement not covered" >      console.log(socket.id,'has left game',game.gameID);</span>
+<span class="cstat-no" title="statement not covered" >      delete allPlayers[socket.id];</span>
+<span class="cstat-no" title="statement not covered" >      if (game.state === 'awaiting players' ||</span>
+        game.players.length-1 &gt;= game.playerMinLimit) {
+<span class="cstat-no" title="statement not covered" >        game.removePlayer(socket.id);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        game.stateDissolveGame();</span>
+<span class="cstat-no" title="statement not covered" >        for (var j = 0; j &lt; game.players.length; j++) {</span>
+<span class="cstat-no" title="statement not covered" >          game.players[j].socket.leave(socket.gameID);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        game.killGame();</span>
+<span class="cstat-no" title="statement not covered" >        delete allGames[socket.gameID];</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    socket.leave(socket.gameID);</span>
+  };
+&nbsp;
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Nov 23 2017 15:47:26 GMT+0100 (WAT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
