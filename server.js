@@ -7,7 +7,6 @@ var express = require('express'),
     logger = require('mean-logger'),
     io = require('socket.io');
     require('dotenv').config();
-
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
