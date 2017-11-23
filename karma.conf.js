@@ -1,6 +1,8 @@
+/* eslint-disable func-names */
 // Karma configuration
 // Generated on Mon Nov 20 2017 13:09:21 GMT+0100 (WAT)
-module.exports = (config) => {
+
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)

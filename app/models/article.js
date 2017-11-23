@@ -37,9 +37,9 @@ ArticleSchema.statics = {
 };
 
 /**
- * validate title and content
- * if empty
- */
+* validate title and content
+* if empty
+*/
 ArticleSchema.path('title').validate(function (title) {
   return title.length;
 }, 'title cannot be blank');
