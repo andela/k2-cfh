@@ -1,4 +1,4 @@
-/* eslint-disable no-var, prefer-destructuring, object-shorthand, func-names, prefer-arrow-callback */
+/* eslint-disable no-var, prefer-destructuring, object-shorthand, func-names, prefer-arrow-callback, max-len, import/no-unresolved */
 
 /**
  * Module dependencies.
