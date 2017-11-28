@@ -4,5 +4,7 @@ public/lib
 .DS_store
 c4h_keys.txt
 .env
-package-lock.json
+packgage-lock.json
+dist
+bower_components
 npm-debug.log
