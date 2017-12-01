@@ -15,7 +15,7 @@
   "scripts": {
     "start": "node node_modules/gulp/bin/gulp bundle && node node_modules/gulp/bin/gulp",
     "test:client": "karma start",
-    "test": "nyc --reporter=text --reporter=html node node_modules/grunt-cli/bin/grunt test",
+    "test": "nyc --reporter=text --reporter=html node_modules/grunt-cli/bin/grunt test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "postinstall": "node node_modules/grunt-cli/bin/grunt install"
   },
