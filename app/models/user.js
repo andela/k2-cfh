@@ -2,17 +2,17 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  Schema = mongoose.Schema,
-  bcrypt = require('bcryptjs'),
-  _ = require('underscore'),
-  authTypes = ['github', 'twitter', 'facebook', 'google'];
+// var mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import _ from 'underscore';
 
+const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 /**
  * User Schema
  */
-var UserSchema = new Schema({
+const UserSchema = mongoose.Schema({
   name: String,
   email: String,
   username: String,
@@ -40,9 +40,7 @@ UserSchema.virtual('password').set(function(password) {
 /**
  * Validations
  */
-var validatePresenceOf = function(value) {
-  return value && value.length;
-};
+const validatePresenceOf = value => value && value.length;
 
 // the below 4 validations only apply if you are signing up traditionally
 UserSchema.path('name').validate(function(name) {
@@ -113,4 +111,4 @@ UserSchema.methods = {
     }
 };
 
-mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);
