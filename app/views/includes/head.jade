@@ -1,7 +1,6 @@
 head
   meta(charset='utf-8')
   meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-  meta(name='viewport', content='width=device-width,initial-scale=1')
 
   title= appName
   meta(http-equiv='Content-type', content='text/html;charset=UTF-8')
@@ -9,10 +8,7 @@ head
   meta(name="description", content="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good.")
 
   meta(name="apple-mobile-web-app-capable", content="yes")
-  meta(name="viewport", content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0")
-
-  link(href='/img/icons/favicon.ico', rel='shortcut icon', type='image/x-icon')
-  link(href='https://fonts.googleapis.com/css?family=Lobster', rel='stylesheet', type='text/css')
+  meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0")
 
   meta(property='fb:app_id', content='APP_ID')
   meta(property='og:title', content='#{appName} - #{title}')
@@ -23,10 +19,20 @@ head
   meta(property='og:site_name', content='Cards for Humanity')
   meta(property='fb:admins', content='APP_ADMIN')
 
-  link(rel='stylesheet', href='/lib/bootstrap/css/bootstrap.css')
-  link(rel='stylesheet', href='/css/common.css')
-  link(rel='stylesheet', href='/css/animate.css')
-  link(rel='stylesheet', href='/css/style.css')
+  //link(rel='stylesheet', href='/css/common.css')
+  //link(rel='stylesheet', href='/css/animate.css')
+  //link(rel='stylesheet', href='/css/style.css')
+
+  link(href='/assets/bootstrap/css/bootstrap.min.css', rel='stylesheet', type='text/css')
+  link(href='/assets/icons/lines/init.css', rel='stylesheet' type='text/css')
+  link(href='/assets/fonts/opensans/init.css', rel='stylesheet', type='text/css')
+  link(href='/assets/fonts/tangerine/init.css', rel='stylesheet', type='text/css')
+  link(href='/assets/icons/fa/init.css', rel='stylesheet', type='text/css')
+  link(href='/assets/css/style.css', rel='stylesheet', type='text/css')
+  link(href='/assets/css/responsive/breakA.css', rel='stylesheet', type='text/css')
+  link(href='/assets/css/responsive/breakB.css', rel='stylesheet', type='text/css')
+  link(href='/assets/css/responsive/breakC.css', rel='stylesheet', type='text/css')
+  link(rel='icon', href='/assets/img/favicon.png')
 
 
   //if lt IE 9

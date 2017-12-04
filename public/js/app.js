@@ -5,6 +5,9 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
           when('/', {
             templateUrl: 'views/index.html'
           }).
+          when('/testimonies', {
+            templateUrl: 'views/testimonies.html'
+          }).
           when('/app', {
             templateUrl: '/views/app.html',
           }).

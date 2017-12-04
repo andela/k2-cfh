@@ -1,0 +1,123 @@
+@media all and (max-width:575px){
+    /*   Header    */
+    header{
+        max-height:140px;
+    }
+    #header-spacer{
+        min-height:100px;
+        max-height:100px;
+        height:100px;
+    }
+    #header-logo{
+        display:block;
+        margin:25px auto 0;
+        height:18px;
+    }
+    /*    Banner     */
+    #banner{
+        position:relative;
+        min-height:300px;
+        max-height:300px;
+    }
+    #banner-heading{
+        display:block;
+        margin-top:40px;
+        font-size:50px
+    }
+    #banner-heading-small{
+        font-size:15px;
+        line-height:200%;
+        width:90%;
+        margin:40px auto;
+    }
+    #banner-body{
+        display:none;
+    }
+    .banner-buttons{
+        font-size:11px;
+        padding:10px 0;
+        font-weight:400;
+        min-width:120px;
+    }
+    /*       Footer      */
+    #footer-text{
+        font-size:13px;
+    }
+    #footer-base{
+        line-height:210%;
+        margin-top:5px;
+        font-size:10px;
+        margin-bottom:30px;
+    }
+    .footer-heading{
+        font-size:13px;
+    }
+    #footer-emogies{
+        margin:25px auto;
+    }
+
+    /*   About   */
+
+    #about{
+        height:auto;
+        padding-bottom:40px;
+        overflow:hidden;
+    }
+    #about-heading{
+        font-size:15px;
+    }
+    #about-body{
+        font-size:14px;
+    }
+    
+    /*   How to    */
+
+    #howto{
+        height:1480px;
+    }
+    #howto img{
+        height:1480px;
+    }
+    .howto-card{
+        margin:0 auto 40px;
+    }
+
+    /* Team  */
+    #team{
+        min-height:none;
+        max-height:none;
+        height: auto;
+        padding-bottom:40px;
+    }
+    #team-heading{
+        font-size:15px;
+    }
+    .team-member{
+        overflow:hidden;
+        margin-bottom:40px;
+    }
+    
+    /*   Testimony   */
+
+    #testimony-banner-heading{
+        margin-top:60px;
+        font-size:70px;
+    }
+    
+    #testimony-about-heading{
+        font-size:15px;
+        margin-top:40px
+    }
+    #testimony-about-body{
+        font-size:15px;
+    }
+    #testimony-about{
+        height:auto;
+        padding-bottom:30px;
+    }
+
+    #main-testimony-heading{
+        font-size:16px;
+        margin:40px auto 90px;
+    }
+}
