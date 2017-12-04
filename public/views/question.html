@@ -1,3 +1,43 @@
+<div>
+  <div id="startGameModal" class="modal fade ">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Cards For Humanity</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Start the game with {{game.players.length}} players?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-color" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-color" ng-click="startGame()">Start Game</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="notEnoughPlayersModal" class="modal fade ">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Cards For Humanity</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{game.players.length}} player(s) available for this game. You cannot start the game at this time you need a minimum of 3 players to start.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-color" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
 <div id="question-container-inner">
   <div class="card longBlack">
     <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
@@ -7,17 +47,23 @@
     <div id="startGame" ng-show="game.state === 'awaiting players'">
       <div id="finding-players">Finding Players</div>
       <div id="player-count-container">
-        <div id="player-count">{{game.players.length}} / 6 </div>
+        <div id="player-count">{{game.players.length}} / 12 </div>
         <div id="the-word-players"> Players </div>
       </div>
       <div id="loading-container">
         <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
       </div>
-      <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
+      <div id="start-game-container" ng-click="startGameModal()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
         <div id='start-game-button'>
           Start Game</br>with {{game.players.length}} players
         </div>
       </div>
+      <div>
+        <button ng-show="game.playerIndex === 0" class="btn btn-color" data-toggle="modal" data-target="#myModal">
+          Invite Users
+        </button>
+    </div>
+
     </div>
     <!-- Game Over Stuff -->
     <div id="game-end-info">
@@ -34,5 +80,48 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Search for Users</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body  -->
+        <div ng-hide="(game.player.length > game.playerMaxLimit)" class="modal-body">
+            <p style="text-align:center; color: red;">{{ message }}</p>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="type a name to search" autocomplete="off" ng-change="searchUser()" ng-blur="" ng-model="searchTerm" id="name">
+          </div>
+          <div>
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="user in searchResult">
+                <div class="row">
+                  <div class="col-md-4">
+                    <p>{{user.name}}</p>
+                  </div>
+                  <div class="col-md-4 offset-md-4">
+                      <button class="btn btn-color" ng-click="inviteUser(user.email)" ng-disabled="isInvited(user.email)">invite</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-body" ng-show="(game.player.length > game.playerMaxLimit)">
+          <p>Maximum number of players reached.</p>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
