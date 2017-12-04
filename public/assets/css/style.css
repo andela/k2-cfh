@@ -1,0 +1,743 @@
+*{
+    margin:0;
+    padding:0;
+    outline:none !important;
+}
+body{
+    display:block;
+    position:relative;
+    width:100%;
+    min-width:470px;
+    overflow-x:hidden;
+}
+.page-align{
+    display:block;
+    width:90%;
+    margin:0 auto;
+}
+.form-group{
+    margin-bottom:7px !important;
+}
+.clear{
+    clear:both;
+}
+button{
+    cursor:pointer;
+}
+
+/***************************************   
+        Template Links
+****************************************/
+
+a,
+a:link,
+a:active,
+a:visited,
+a:hover{
+    color:#0275d8;
+    text-decoration:none;
+}
+
+/*************************************
+*      Template  Overlays
+*************************************/
+
+#main-overlay{
+    display:none;
+    width:100%;
+    height:100%;
+    position:fixed;
+    background:black;
+    opacity:0.6;
+    top:0;left:0;
+    z-index:51;
+}
+#main-overlay-top{
+    display:none;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;left:0;
+    z-index:52;
+}
+.overlay{
+    display:block;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;left:0;
+    z-index:48;
+}
+.overlay-top{
+    display:block;
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;left:0;
+    z-index:49;
+}
+
+/*************************************
+*      Template  White boxes
+*************************************/
+
+.main-whitebox{
+    display:none;
+    width:450px;
+    min-height:400px;
+    background:white;
+    border-radius:4px;
+    border:2px solid gray;
+    margin:4% auto 0;
+    padding:30px 20px 20px;
+}
+
+/*************************************
+*      Template  Socials
+*************************************/
+
+.fb-bg{
+    background:#3b5998;
+}
+.tw-bg{
+    background:#00aced;
+}
+.yt-bg{
+    background:#bb0000;
+}
+.gh-bg{
+    background:#6e5494;
+}
+.gg-bg{
+    background:#ea4335;
+}
+
+/***************************************   
+        Template Buttons
+
+*  .butA 
+*  .butA-revert
+
+****************************************/
+
+.butA,.butB{
+    display:inline-block;
+    transition:background 0.5s;
+    overflow:hidden;
+    border-radius:0;
+    font-size:11px;
+}
+.butA{
+    border:1px solid #3570B0;
+    background:#3570B0;
+    color:white;
+}
+.butA:hover{
+    background:white;
+    color:#3570B0;
+    border-color:#3570B0;
+}
+.butB{
+    background:#CD7678;
+    color:white;
+    border-color:#CD7678;
+}
+.butB:hover{
+    border:1px solid #CD7678;
+    background:white;
+    color:#CD7678;
+}
+
+
+/***************************
+*      Header  
+***************************/
+
+header{
+    display:block;
+    width:100%;
+    position:fixed;
+    min-height:70px;
+    max-height:70px;
+    overflow:hidden;
+    background:white;
+    z-index:50;
+    border-bottom:1px solid lightgray;
+}
+#header-spacer{
+    display:block;
+    min-height:70px;
+    max-height:70px;
+    background:transparent;
+}
+#navbar{
+    display:block;
+    margin:20px auto 15px;
+    text-align:center;
+}
+#navbar a span{
+    display:inline-block;
+    font-size:12px;
+    color:black;
+    font-weight:600;
+    margin:0 2.5%;
+}
+#navbar a span:hover{
+    color:#CD7678;
+}
+#header-logo{
+    display:block;
+    margin-top:21px;
+    height:30px;
+    max-width:100%;
+}
+.header-buttons{
+    min-width:70px;
+    padding:7px 18px 5px;
+    border-radius:200px;
+    margin:22px 0 0 15px;
+}
+.header-links{
+    display:inline-block;
+    font:15px "Open Sans",arial;
+    font-weight:400;
+    margin:27px 0 0 25px;
+    cursor:pointer;
+    color:black;
+}
+.header-links:hover{
+    color:#0275d8;
+}
+#nav{
+    display:block;
+    position:fixed;
+    top:70px;padding:0 0 ;
+    min-height:70px;
+    z-index:50;left:0;
+    width:100%;
+    background:white;
+    border-bottom:1px solid lightgray;
+}
+/***************************
+*      Banner 
+***************************/
+
+#banner{
+    width:100%;
+    position:relative;
+    min-height:520px;
+    max-height:520px;
+    overflow:hidden;
+    background:black;
+}
+#banner{
+    width:100%;
+    position:relative;
+    min-height:520px;
+    max-height:520px;
+    overflow:hidden;
+    background:black;
+}
+#banner-overlay{
+    background:#5192d9;
+    opacity:0.1;
+}
+#banner-video{
+    margin-top:-30px;
+}
+#banner-heading{
+    display:block;
+    margin-top:100px;
+    font:90px 'Tangerine',arial;
+    color:white;
+}
+#banner-heading-small{
+    color:white;
+    font:18px 'Open Sans',arial;
+    font-weight:600;
+    margin:20px auto 20px;
+}
+.banner-buttons{
+    padding:10px 10px;
+    border-radius:2px;
+    font-size:15px;
+    background:none;
+    border:2px solid white;
+    min-width:130px;
+    margin:0 8px 0;
+    transition: background 0.5s;
+}
+#banner-body{
+    color:white;
+    font:16px 'Open Sans',arial;
+    font-weight:200;line-height:180%;
+    margin:20px auto 50px;
+}
+
+/***************************
+*      About
+***************************/
+
+#about{
+    position:relative;
+    width:100%;
+    height:480px;
+    overflow:hidden;
+}
+#about-image{
+    width:100%;
+    min-height:480px;
+}
+#about-heading{
+    font-size:19px;
+    font-weight:600;
+    color:#0275d8;
+    margin:40px auto 30px;
+}
+#about-body{
+    display:block;
+    width:90%;
+    color:black;
+    margin:0 auto;
+    font:19px/200% 'Open Sans',arial;
+    font-weight:200;
+}
+
+/***************************
+*      How to play
+***************************/
+
+#howto{
+    display:block;
+    width:100%;
+    height:500px;
+    position:relative;
+    overflow:hidden;
+}
+#howto img{
+    width:100%;
+    min-height:500px;
+}
+#howto-heading{
+    font-size:19px;
+    color:white;
+    font-weight:600;
+    margin:50px auto 60px;    
+}
+.howto-card{
+    display:block;
+    width:250px;
+    max-width:95%;
+    margin:0 auto;
+    background:white;
+    border-radius:3px;
+}
+.howto-card .first{
+    display:block;
+    font:16px/200% 'Open Sans',arial;
+    font-weight:400;
+    text-align:center;
+    padding:25px 15px 15px;
+    min-height:260px;
+    max-height:260px;
+    overflow:hidden;
+}
+.howto-card .second{
+    display:block;
+    text-align:center;
+    font:12px 'Open Sans',arial;
+    text-transform:uppercase;
+    font-weight:600;
+    padding:0 0 20px;
+    color:#CD7678;
+}
+
+
+/***************************
+*      Donations
+***************************/
+
+#donation{
+    width:100%;
+    min-height:480px;
+    max-height:480px;
+    overflow:hidden;
+}
+#donation-heading{
+    margin:50px auto 0;
+    font-size:19px;
+    font-weight:600;
+    color: #0275d8;
+}
+#donation-heading-small{
+    font-weight:400;
+    font-size:12px;
+    margin-top:10px;
+    color:#C2585A;
+    text-transform:uppercase;
+}
+#donate-button{ 
+    display:block;
+    margin:25px auto 0;
+    padding:9px 15px 6px;
+    border-radius:200px;
+}
+#donation-box{
+    display:block;
+    width:250px;
+    min-height:175px;
+    max-height:175px;
+    overflow:hidden;
+    border-radius:2px;
+    margin:3px auto 0;
+    background:#3c4859
+}
+#donation-image{
+    height:480px;min-width:100%;
+}
+#donation-box h6{
+    font-weight:600;
+    font-size:12px;
+    margin-top:30px;
+    color:white;
+}
+#donation-box h5{
+    font-weight:200;
+    font-size:18px;
+    margin-top:20px;
+    color:white;
+}
+#donation-p1{
+    font:15px/190% 'Open Sans',arial;
+    font-weight:200;
+    color:gray
+}
+#donation-p2{
+    font-size:14px;
+    line-height:190%;
+    font-weight:200;
+    color:gray;
+}
+#donation-base{
+    font-weight:600;
+    line-height: 210%;
+    font-size:14px;
+    margin-top:40px;
+}
+
+/***************************
+*      Teams
+***************************/
+
+#team{
+    width:100%;
+    background: #3570B0;
+    min-height:400px;
+    max-height:400px;
+    overflow:hidden;
+}
+#team-heading{
+    margin:50px auto 0;
+    font-size:19px;
+    font-weight:600;
+    color: white;
+}
+.team-member{
+    overflow:hidden;
+}
+.team-image{
+    display:block;
+    width:100%;
+    margin:0 auto;
+    border-radius:50%;
+    width:150px;
+    height:150px;
+}
+.team-name{
+    display:block;
+    font:15px 'Open Sans',arial;
+    color:white;
+    margin-top:20px;
+    font-weight:400;
+}
+
+/***************************************   
+            Footer
+****************************************/
+
+footer{
+    width:100%;
+    padding-bottom:20px;
+}
+#footer-text{
+    font:14px/200% 'Open Sans',arial;
+    margin-top:15px;
+    font-weight:200;
+}
+#footer-links{
+    margin-top:10px;
+}
+#footer-links a span{
+    display:block;
+    margin-top:15px;
+    font:11px 'Open Sans',arial;
+    font-weight:600;
+    color:gray;
+}
+#footer-links a span:hover{
+    color:#C2585A;
+}
+#footer-follow{
+    display:block;
+    margin:20px 0 10px;
+    font:11px 'Open Sans',arial;
+    font-weight:600;
+    color:gray;
+}
+.footer-social{
+    border-radius:2px;
+    display:inline-block;
+    width:25px;
+    height:23px;
+    color:white;
+    margin-right:5px;
+}
+.footer-social i{
+    display:inline-block;
+    font-size:14px;
+    margin-top:3px;
+}
+#footer-base{
+    display:block;
+    font:11px 'Open Sans',arial;
+    font-weight:600;
+    margin:20px 0 0;
+}
+.footer-heading{
+    display:block;
+    font-size:15px;
+    margin:0 auto 5px;
+    font-weight:600
+}
+#footer-nl-text{
+    margin-top:10px;
+    font:14px 'Open Sans',arial;
+    font-weight:200;
+}
+.footer-nl-field{
+    display:block;
+    margin-top:20px;
+    width:100%;
+    border:1px solid lightgray;
+    padding:10px 9px;
+    border-radius:2px;
+    font:15px 'Open Sans',arial;
+    font-weight:200;
+}
+.footer-nl-button{
+    display:block;
+    margin:10px 0 0;
+    padding:5px 20px;
+    border-radius:2px;
+}
+#footer-emogies{
+    display:block;
+    width:90%;
+    margin:45px auto 25px;
+}
+
+/***************************************   
+   Common to both Sign In and Sign Up
+****************************************/
+
+.hr{
+    display:block;
+    min-height:1px;
+    max-height:1px;
+    overflow:hidden;
+    background:lightgray;
+    min-width:50px;
+}
+.su-label{
+    color:gray;font-weight:600;font-size:12px;
+}
+.su-field{
+    display:block;width:100%;padding:7px 10px;border:1px solid lightgray;
+    border-radius:2px;font-size:16px;font-weight:200;
+}
+.su-button{
+    margin-top:20px;
+    padding:10px 20px;
+    border-radius:2px;
+}
+.su-heading{
+    font-size:30px;font-weight:200;
+}
+.su-heading-small{
+    font-size:14px;color:gray;margin:12px auto 20px;font-weight:400;
+}
+.su-error{
+    display:block;
+    width:100%;
+    overflow:hidden;
+    background:#F1F1F1;
+    font-size:14px;
+    font-weight:200;
+    color:gray;
+    padding:10px 10px;
+    border:1px solid lightgray;
+    border-radius:2px;
+    margin:0 0 15px;
+}
+
+/***************************************   
+        Sign Up only
+****************************************/
+
+.signup-social{
+    display:block;width:100%;
+    padding:10px;color:white;border-radius:3px;
+}
+.signup-social i{
+    font-size:15px;color:white;margin:2px 5px 0 0;
+}
+.signup-social span{
+    font-size:13px;
+}
+.signup-button{
+    display:block;
+    width:100%;
+}
+#signup-hr{
+    width:99.7%;
+    margin:20px auto 18px;
+}
+.signup-avatar{
+    display:block;
+    width:40px;
+    height:40px;
+    border:1px solid transparent;
+    overflow:hidden;
+    border-radius:2px;
+    cursor:pointer;
+}
+.signup-avatar img{
+    display:block;
+    width:85%;
+    margin:3px auto 0;
+}
+.signup-avatar:hover{
+    background:#E7E7E7;
+    border-color:lightgray;
+}
+.signup-avatar-active{
+    background:#C2585A;
+    border-color:#C2585A;
+}
+.signup-avatar-active:hover{
+    background:#C2585A;
+    border-color:#C2585A;
+}
+.signup-avatar-inactive{
+    background:transparent;
+    border-color:transparent;
+}
+
+/***************************************   
+        Sign In only
+****************************************/
+
+#signin-forgot{
+    font-size:11px;
+    margin-top:35px;
+    font-weight:600;
+}
+#signin-forgot:hover{
+    color:#C2585A;
+}
+
+/***************************************   
+        Tesimonials
+****************************************/
+
+#testimony-banner-overlay{
+    background:#5192d9;
+    opacity:0.4;
+}
+#testimony-banner{
+    width:100%;
+    position:relative;
+    min-height:320px;
+    max-height:320px;
+    overflow:hidden;
+    background:black;
+}
+#testimony-banner-heading{
+    display:block;
+    margin-top:80px;
+    font:90px 'Tangerine',arial;
+    color:white;
+}
+
+/*   Testimony About   */
+
+#testimony-about{
+    position:relative;
+    width:100%;
+    height:380px;
+    overflow:hidden;
+}
+#testimony-about-heading{
+    font-size:18px;
+    font-weight:600;
+    color:#0275d8;
+    margin:50px auto 30px;
+}
+#testimony-about-body{
+    display:block;
+    width:80%;
+    color:black;
+    margin:0 auto;
+    font:15px/200% 'Open Sans',arial;
+    font-weight:200;
+}
+#testimony-video{
+    display:block;
+    width:530px;
+    background:#464748;
+    height:380px;
+    overflow:hidden;
+}
+
+/*   Main testimonies   */
+
+#main-testimonies{
+    display:block;width:100%;background:#F1F1F1;padding:1px 0;
+}
+#main-testimony-heading{
+    font-size:19px;
+    font-weight:600;
+    color:black;
+    margin:60px auto 130px;
+}
+.testimony{
+    display:block;margin:0 auto 70px;width:330px;
+    border-radius:3px;background:white;
+    border:1px solid lightgray;position:relative;
+}
+.testimony img{
+    display:block;position:absolute;left:10%;top:-50px;width:100px;height:100px;
+    border:2px solid lightgray;border-radius:50%;
+}
+.testimony p{
+    display:block;font-weight:200;font:14px/180% 'Open Sans',arial;
+    min-height:220px;
+    max-height:220px;
+    overflow:hidden;
+    margin-top:70px;padding:0 18px;
+    text-align:justify;
+    text-justify: iter-word;
+}
+.testimony div{
+    display:block;color:gray;text-align:center;padding:0 0 20px;font-size:13px;
+}

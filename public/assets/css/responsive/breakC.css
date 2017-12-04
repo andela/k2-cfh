@@ -1,0 +1,85 @@
+@media all and (min-width:768px) and (max-width:992px){
+    /*   Header    */
+    #header-logo{
+        width:100%;
+        height:auto;
+        margin-top:28px;
+    }
+    .header-buttons{
+        min-width:50px;
+        padding:5px 15px 3px;
+        border-radius:200px;
+        margin:24px 0 0 10px;
+    }
+    .header-links{
+        font:13px "Open Sans",arial;
+        margin:27px 0 0 18px;
+    }
+    /*   Banner   */
+    #banner{
+        position:relative;
+        min-height:400px;
+        max-height:400px;
+    }
+    #banner-heading{
+        display:block;
+        margin-top:50px;
+        font-size:70px;
+    }
+    #banner-heading-small{
+        line-height:210%;
+        margin:50px auto;
+    }
+    #banner-body{
+        display:none;
+    }
+
+    /*       Footer      */
+    #footer-text{
+        font-size:15px;
+    }
+    #footer-base{
+        line-height:210%;
+        margin-top:5px;
+        font-size:13px;
+        margin-bottom:30px;
+    }
+    .footer-heading{
+        font-size:13px;
+    }
+    #footer-emogies{
+        margin:25px auto;
+    }
+
+     /*   About  */
+
+     #about{
+        height:350px;
+    }
+    #about-image{
+        width:auto;
+        max-width:100%;
+        min-height:350px;
+    }
+    #about-heading{
+        font-size:15px;
+        margin:30px auto 20px;
+    }
+    #about-body{
+        width:95%;
+        font-size:14px;
+    }
+
+    /*   How to    */
+
+    #howto{
+        height:850px;
+    }
+    #howto img{
+        height:850px;
+    }
+    .howto-card{
+        margin:0 auto 40px;
+    }
+
+}
