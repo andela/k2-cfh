@@ -6,6 +6,7 @@ module.exports = (app, passport) => {
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
   app.get('/signout', users.signout);
+  app.post('/api/auth/signup', users.createJwt);
 
   // Setting up the users api
   app.post('/users', users.create);
@@ -88,7 +89,6 @@ module.exports = (app, passport) => {
   const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
-
   app.get('/api/search/users', users.searchUser);
   app.post('/api/users/invite', users.inviteUser);
 };

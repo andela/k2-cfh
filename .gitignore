@@ -10,3 +10,4 @@ coverage
 dist
 npm-debug.log
 .vscode
+.idea
