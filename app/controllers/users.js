@@ -4,24 +4,12 @@
  */
 import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
+import validator from 'validator';
 import avatarImport from './avatars';
 import { signUser } from '../../config/jwt';
 
 const User = mongoose.model('User');
 const avatars = avatarImport.all();
-
-// /**
-//  * function authCallback
-//  *
-//  * @param {any} req
-//  * @param {any} res
-//  * @returns {null} null
-//  */
-// exports.authCallback = (req, res) => {
-// import User from '../models/user';
-
-
-// const allAvatars = require('./avatars').all();
 
 /**
 * function authCallback
@@ -90,7 +78,6 @@ exports.session = (req, res) => {
 };
 
 /**
-<<<<<<< HEAD
  * * Check avatar - Confirm if the user who logged in via passport
  * already has an avatar. If they don't have one, redirect them
  * to our Choose an Avatar page.
@@ -206,6 +193,46 @@ exports.createJwt = (req, res) => {
       message: 'Please enter your credentials'
     });
   }
+};
+
+/**
+ * Create user with JWT on sign in
+ * @export
+ *
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ *
+ * @returns {object} object
+ */
+exports.loginJwt = (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).send({ message: 'Please enter your credentials' });
+  }
+  if (!validator.isEmail(req.body.email)) {
+    return res.status(422).json({ message: 'Please enter valid email' });
+  }
+  User.findOne({ email }).exec((err, user) => {
+    if (err) return next(err);
+    if (!user) return res.status(401).send({ message: 'Incorrect username or password' });
+    const checkPassword = user.authenticate(password);
+    if (!checkPassword) {
+      return res.status(401).json({
+        message: 'Invalid Credentials'
+      });
+    }
+    const userDetails = {
+      id: user._id,
+      name: user.name,
+      email: user.email
+    };
+    const token = signUser(userDetails);
+    res.status(200).send({
+      message: 'Log in successful',
+      token
+    });
+  });
 };
 
 /**
