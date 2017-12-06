@@ -15,6 +15,7 @@ import config from './config/config';
 import auth from './config/middlewares/authorization';
 import routes from './config/routes';
 import expressConfig from './config/express';
+import passportConfig from './config/passport';
 
 dotenv.config();
 
@@ -45,7 +46,7 @@ const walk = (path) => {
 walk(modelsPath);
 
 // bootstrap passport config
-require('./config/passport')(passport);
+passportConfig(passport);
 
 const app = express();
 
@@ -70,5 +71,4 @@ require('./config/socket/socket')(ioObj);
 logger.init(app, passport, mongoose);
 
 // expose app
-exports = app;
-module.exports = app;
+export default app;

@@ -5,18 +5,33 @@
 import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
 import avatarImport from './avatars';
+import { signUser } from '../../config/jwt';
 
 const User = mongoose.model('User');
-// const avatars = require('./avatars').all();
 const avatars = avatarImport.all();
 
+// /**
+//  * function authCallback
+//  *
+//  * @param {any} req
+//  * @param {any} res
+//  * @returns {null} null
+//  */
+// exports.authCallback = (req, res) => {
+// import User from '../models/user';
+
+
+// const allAvatars = require('./avatars').all();
+
 /**
- * function authCallback
- *
- * @param {any} req
- * @param {any} res
- * @returns {null} null
- */
+* function authCallback
+*
+* @param {req} req
+* @param {res} res
+* @param {next} next
+*
+* @returns {object} object
+*/
 exports.authCallback = (req, res) => {
   res.redirect('/chooseavatars');
 };
@@ -75,6 +90,7 @@ exports.session = (req, res) => {
 };
 
 /**
+<<<<<<< HEAD
  * * Check avatar - Confirm if the user who logged in via passport
  * already has an avatar. If they don't have one, redirect them
  * to our Choose an Avatar page.
@@ -96,7 +112,7 @@ exports.checkAvatar = (req, res) => {
         }
       });
   } else {
-    // If user doesn't even exist, redirect to /
+  // If user doesn't even exist, redirect to /
     res.redirect('/');
   }
 };
@@ -140,6 +156,59 @@ exports.create = (req, res) => {
 };
 
 /**
+ * Create user with JWT on sign up
+ * @export
+ *
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ *
+ * @returns {object} object
+ */
+exports.createJwt = (req, res) => {
+  if (req.body.name && req.body.password && req.body.email && req.body.username) {
+    User.findOne({
+      email: req.body.email
+    })
+      .exec()
+      .then((err, existingUser) => {
+        if (err) {
+          return res.status(409).json({
+            message: 'Email already exists'
+          });
+        }
+        if (!existingUser) {
+          const appUser = new User(req.body);
+          appUser.avatar = avatars[appUser.avatar];
+          appUser.save((error, newUser) => {
+            if (error) {
+              return res.status(500).json({
+                message: 'Signup not successful'
+              });
+            }
+            const userDetails = {
+              id: newUser._id,
+              email: newUser.email,
+              name: newUser.name,
+              username: newUser.username
+            };
+            const token = signUser(userDetails);
+            res.status(201).send({
+              message: 'Registration successful',
+              token,
+              userDetails
+            });
+          });
+        }
+      });
+  } else {
+    return res.status(400).json({
+      message: 'Please enter your credentials'
+    });
+  }
+};
+
+/**
  * Assign avatar to user
  *
  * @param {any} req
@@ -149,7 +218,7 @@ exports.create = (req, res) => {
 exports.avatars = (req, res) => {
   // Update the current user's profile to include the avatar choice they've made
   if (req.user && req.user._id && req.body.avatar !== undefined &&
-    /\d/.test(req.body.avatar) && avatars[req.body.avatar]) {
+  /\d/.test(req.body.avatar) && avatars[req.body.avatar]) {
     User.findOne({
       _id: req.user._id
     })
