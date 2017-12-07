@@ -2,12 +2,16 @@
 import chai, { expect } from 'chai';
 import supertest from 'supertest';
 import mongoose from 'mongoose';
+import faker from 'faker';
 import app from '../../server';
 
 const request = supertest(app);
 const searchUser = '/api/search/users';
 const inviteUser = '/api/users/invite';
 const User = mongoose.model('User');
+const fakerName = faker.name.findName();
+const fakerEmail = faker.internet.email();
+const fakerPassword = faker.internet.password();
 
 describe('Search for user', () => {
   it('should return "Enter a value" if input is not provided', (done) => {
@@ -27,22 +31,13 @@ describe('Search for user', () => {
       });
     done();
   });
-
-  it('should return user object if user is found', (done) => {
-    request.get(`${searchUser}?q=john`)
-      .end((err, res) => {
-        expect(res.status).to.equal(200);
-        expect(res.body).to.be.an('array');
-      });
-    done();
-  });
 });
 
 describe('Invite user', () => {
   it('should status 200 if user is successfully invited', (done) => {
     request.post(`${inviteUser}`)
       .send({
-        mailTo: 'john@gmail.com',
+        mailTo: fakerEmail,
         gameLink: 'http://localhost:3000/#/gameLinkHere'
       })
       .end((err, res) => {
@@ -125,39 +120,48 @@ describe('POST Test suites for User sign up', () => {
         });
     });
   });
+});
 
-  describe('successful sign up', () => {
-    it('should return a message and a token', (done) => {
-      request.post('/api/auth/signup')
-        .set('Accept', 'application/json')
-        .send({
-          name: 'Isioye Mohammed',
-          password: 'somtnesraskdf',
-          email: 'mohsty@gmail.com',
-          username: 'moksty'
-        })
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(201);
-          expect(res.body).to.have.all.deep.keys('message', 'token', 'userDetails');
-          expect(res.body.message).to.equal('Registration successful');
-          done();
-        });
+describe('Test suite for user login', () => {
+  it('should return "Please enter your credentials" if email or password fields are empty', (done) => {
+    request.post('/api/auth/signin')
+    .set('Accept', 'application/json')
+    .send({
+      email: '',
+      password: '',
+    })
+    .end((err, res) => {
+      expect(res.statusCode).to.equal(400);
+      expect(res.body.message).to.equal('Please enter your credentials');
+      done();
     });
+  });
 
-    it('should return \'Email already exists\' error when using a picked email', (done) => {
-      request.post('/api/auth/signup')
-        .set('Accept', 'application/json')
-        .send({
-          name: 'Isioye Mohammed',
-          password: 'somtnesraskdf',
-          email: 'mohsty@gmail.com',
-          username: 'moksty'
-        })
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(409);
-          expect(res.body.message).to.equal('Email already exists');
-          done();
-        });
+  it('should return "Please enter valid email" if email format is incorrect', (done) => {
+    request.post('/api/auth/signin')
+    .set('Accept', 'application/json')
+    .send({
+      email: 'buharigmail.com',
+      password: 'password',
+    })
+    .end((err, res) => {
+      expect(res.statusCode).to.equal(422);
+      expect(res.body.message).to.equal('Please enter valid email');
+      done();
+    });
+  });
+
+  it('should return "Invalid Credentials" if password is incorrect', (done) => {
+    request.post('/api/auth/signin')
+    .set('Accept', 'application/json')
+    .send({
+      email: fakerEmail,
+      password: fakerPassword + 'ioubjbf',
+    })
+    .end((err, res) => {
+      expect(res.statusCode).to.equal(401);
+      expect(res.body.message).to.equal('Incorrect username or password');
+      done();
     });
   });
 });
