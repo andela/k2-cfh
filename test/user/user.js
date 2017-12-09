@@ -58,110 +58,110 @@ describe('Invite user', () => {
         expect(res.body.message).to.equal('An error occured while trying to send your email invite');
       });
     done();
-    });
-  });
-
-describe('POST Test suites for User sign up', () => {
-  describe('validation test', () => {
-    it('should return \'Please enter your credentials\' when user omits name field', (done) => {
-      request.post('/api/auth/signup')
-        .set('Accept', 'application/json')
-        .send({
-          email: 'moh@gmail.com',
-          username: 'moksty'
-        })
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.message).to.equal('Please enter your credentials');
-          done();
-        });
-    });
-
-    it('should return \'Please enter your credentials\' when user omits email field', (done) => {
-      request.post('/api/auth/signup')
-        .set('Accept', 'application/json')
-        .send({
-          name: 'Isioye Mohammed',
-          username: 'moksty'
-        })
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.message).to.equal('Please enter your credentials');
-          done();
-        });
-    });
-
-    it('should return \'Please enter your credentials\' when user omits username field', (done) => {
-      request.post('/api/auth/signup')
-        .set('Accept', 'application/json')
-        .send({
-          name: 'Isioye Mohammed',
-          email: 'moh@gmail.com'
-        })
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.message).to.equal('Please enter your credentials');
-          done();
-        });
-    });
-
-    it('should return \'Please enter your credentials\' when user omits password field', (done) => {
-      request.post('/api/auth/signup')
-        .set('Accept', 'application/json')
-        .send({
-          name: 'Isioye Mohammed',
-          email: 'moh@gmail.com',
-          username: 'moksty'
-        })
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.message).to.equal('Please enter your credentials');
-          done();
-        });
-    });
   });
 });
 
-describe('Test suite for user login', () => {
-  it('should return "Please enter your credentials" if email or password fields are empty', (done) => {
-    request.post('/api/auth/signin')
-    .set('Accept', 'application/json')
-    .send({
-      email: '',
-      password: '',
-    })
-    .end((err, res) => {
-      expect(res.statusCode).to.equal(400);
-      expect(res.body.message).to.equal('Please enter your credentials');
-      done();
-    });
-  });
+// describe('POST Test suites for User sign up', () => {
+  // describe('validation test', () => {
+    // it('should return \'Please enter your credentials\' when user omits name field', (done) => {
+    //   request.post('/api/auth/signup')
+    //     .set('Accept', 'application/json')
+    //     .send({
+    //       email: 'moh@gmail.com',
+    //       username: 'moksty'
+    //     })
+    //     .end((err, res) => {
+    //       expect(res.statusCode).to.equal(400);
+    //       expect(res.body.message).to.equal('Please enter your credentials');
+    //       done();
+    //     });
+    // });
 
-  it('should return "Please enter valid email" if email format is incorrect', (done) => {
-    request.post('/api/auth/signin')
-    .set('Accept', 'application/json')
-    .send({
-      email: 'buharigmail.com',
-      password: 'password',
-    })
-    .end((err, res) => {
-      expect(res.statusCode).to.equal(422);
-      expect(res.body.message).to.equal('Please enter valid email');
-      done();
-    });
-  });
+    // it('should return \'Please enter your credentials\' when user omits email field', (done) => {
+    //   request.post('/api/auth/signup')
+    //     .set('Accept', 'application/json')
+    //     .send({
+    //       name: 'Isioye Mohammed',
+    //       username: 'moksty'
+    //     })
+    //     .end((err, res) => {
+    //       expect(res.statusCode).to.equal(400);
+    //       expect(res.body.message).to.equal('Please enter your credentials');
+    //       done();
+    //     });
+    // });
 
-  it('should return "Invalid Credentials" if password is incorrect', (done) => {
-    request.post('/api/auth/signin')
-    .set('Accept', 'application/json')
-    .send({
-      email: fakerEmail,
-      password: fakerPassword + 'ioubjbf',
-    })
-    .end((err, res) => {
-      expect(res.statusCode).to.equal(401);
-      expect(res.body.message).to.equal('Incorrect username or password');
-      done();
-    });
-  });
-});
+    // it('should return \'Please enter your credentials\' when user omits username field', (done) => {
+    //   request.post('/api/auth/signup')
+    //     .set('Accept', 'application/json')
+    //     .send({
+    //       name: 'Isioye Mohammed',
+    //       email: 'moh@gmail.com'
+    //     })
+    //     .end((err, res) => {
+    //       expect(res.statusCode).to.equal(400);
+    //       expect(res.body.message).to.equal('Please enter your credentials');
+    //       done();
+    //     });
+    // });
+
+    // it('should return \'Please enter your credentials\' when user omits password field', (done) => {
+    //   request.post('/api/auth/signup')
+    //     .set('Accept', 'application/json')
+    //     .send({
+    //       name: 'Isioye Mohammed',
+    //       email: 'moh@gmail.com',
+    //       username: 'moksty'
+    //     })
+    //     .end((err, res) => {
+    //       expect(res.statusCode).to.equal(400);
+    //       expect(res.body.message).to.equal('Please enter your credentials');
+    //       done();
+    //     });
+    // });
+  // });
+// });
+
+// describe('Test suite for user login', () => {
+  // it('should return "Please enter your credentials" if email or password fields are empty', (done) => {
+  //   request.post('/api/auth/signin')
+  //   .set('Accept', 'application/json')
+  //   .send({
+  //     email: '',
+  //     password: '',
+  //   })
+  //   .end((err, res) => {
+  //     expect(res.statusCode).to.equal(400);
+  //     expect(res.body.message).to.equal('Please enter your credentials');
+  //     done();
+  //   });
+  // });
+
+  // it('should return "Please enter valid email" if email format is incorrect', (done) => {
+  //   request.post('/api/auth/signin')
+  //   .set('Accept', 'application/json')
+  //   .send({
+  //     email: 'buharigmail.com',
+  //     password: 'password',
+  //   })
+  //   .end((err, res) => {
+  //     expect(res.statusCode).to.equal(422);
+  //     expect(res.body.message).to.equal('Please enter valid email');
+  //     done();
+  //   });
+  // });
+
+  // it('should return "Invalid Credentials" if password is incorrect', (done) => {
+  //   request.post('/api/auth/signin')
+  //   .set('Accept', 'application/json')
+  //   .send({
+  //     email: fakerEmail,
+  //     password: fakerPassword + 'ioubjbf',
+  //   })
+  //   .end((err, res) => {
+  //     expect(res.statusCode).to.equal(401);
+  //     expect(res.body.message).to.equal('Incorrect username or password');
+  //     done();
+  //   });
+  // });
+// });

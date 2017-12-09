@@ -99,6 +99,8 @@ angular.module('mean.system')
       }
     };
 
+    $scope.gameURL = window.location.href;
+
     $scope.winnerPicked = () => game.winningCard !== -1;
 
     $scope.startGame = () => {
