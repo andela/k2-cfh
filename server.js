@@ -11,6 +11,7 @@ import logger from 'mean-logger';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import paths from 'path';
+import cookieParser from 'cookie-parser';
 import config from './config/config';
 import auth from './config/middlewares/authorization';
 import routes from './config/routes';
@@ -54,6 +55,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(cookieParser());
 // express settings
 expressConfig(app, passport, mongoose);
 

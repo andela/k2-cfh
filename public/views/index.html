@@ -6,12 +6,13 @@
 <div id="main-overlay-top">
 
     <!-- Sign In Whitebox -->
-    <div id="signInWhiteBox" class="main-whitebox" ng-include src='"/views/partials/signin.html"'></div>
-
+    <div id="signInWhiteBox" ng-controller='signinController' class="main-whitebox" ng-include src='"/views/partials/signin.html"'></div>
+    
     <!-- Sign Up Whitebox -->
-    <div id="signUpWhiteBox" class="main-whitebox" ng-include src='"/views/partials/signup.html"'></div>
+    <div id="signUpWhiteBox" ng-controller='signupController' class="main-whitebox" ng-include src='"/views/partials/signup.html"'></div>
 
 </div>
+
 <!-- ******************************************** -->
 <!--                Header                        -->
 <!-- ******************************************** -->
