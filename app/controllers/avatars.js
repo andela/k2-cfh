@@ -1,29 +1,30 @@
 /**
  * List of Avatars
  */
-const avatars = ['/img/chosen/E01.png',
-           '/img/chosen/F01.png',
-           '/img/chosen/FA04.png',
-           '/img/chosen/FB03.png',
-           '/img/chosen/FC01.png',
-           '/img/chosen/FD01.png',
-           '/img/chosen/FE01.png',
-           '/img/chosen/FH03.png',
-           '/img/chosen/FI02.png',
-           '/img/chosen/H01.png',
-           '/img/chosen/J01.png',
-           '/img/chosen/M05.png',
-           '/img/chosen/N02.png',
-           '/img/chosen/N03.png',
-           '/img/chosen/N04.png',
-           '/img/chosen/N05.png'];
 
-exports.allJSON = function(req, res) {
-  // Only return the first 12
-  // The last 4 are reserved for guests
-  res.jsonp(avatars.slice(0,12));
+const avatars = [
+  '/assets/img/avatars/1.png',
+  '/assets/img/avatars/2.png',
+  '/assets/img/avatars/3.png',
+  '/assets/img/avatars/4.png',
+  '/assets/img/avatars/5.png',
+  '/assets/img/avatars/6.png',
+  '/assets/img/avatars/7.png',
+  '/assets/img/avatars/8.png',
+  '/assets/img/avatars/9.png',
+  '/assets/img/avatars/10.png',
+  '/assets/img/avatars/11.png',
+  '/assets/img/avatars/12.png',
+  '/assets/img/avatars/13.png',
+  '/assets/img/avatars/14.png',
+  '/assets/img/avatars/15.png',
+  '/assets/img/avatars/16.png',
+  '/assets/img/avatars/17.png',
+  '/assets/img/avatars/18.png'
+];
+
+exports.allJSON = (req, res) => {
+  res.jsonp(avatars);
 };
 
-exports.all = function() {
-  return avatars;
-};
+exports.all = () => avatars;

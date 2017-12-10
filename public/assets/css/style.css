@@ -86,10 +86,9 @@ a:hover{
     width:450px;
     min-height:400px;
     background:white;
-    border-radius:4px;
-    border:2px solid gray;
+    border-radius:7px;
     margin:4% auto 0;
-    padding:30px 20px 20px;
+    padding:30px 20px 40px;
 }
 
 /*************************************
@@ -283,7 +282,7 @@ header{
     width:100%;
     height:480px;
     overflow:hidden;
-    background:lightgray;
+    background:white;
 }
 #about-image{
     width:100%;
@@ -360,7 +359,7 @@ header{
 
 #donation{
     width:100%;
-    background:lightgray;
+    background:white;
     min-height:480px;
     max-height:480px;
     overflow:hidden;
@@ -588,8 +587,18 @@ footer{
     color:gray;
     padding:10px 10px;
     border:1px solid lightgray;
-    border-radius:2px;
+    border-radius:4px;
     margin:0 0 15px;
+}
+.su-error-failed{
+    color:white;
+    background:#C2585A;
+    border-color:#C2585A;
+}
+.su-error-success{
+    color:white;
+    background:#3570B0;
+    border-color:#3570B0;
 }
 
 /***************************************   
@@ -616,11 +625,12 @@ footer{
 }
 .signup-avatar{
     display:block;
-    width:40px;
-    height:40px;
+    width:60px;
+    height:60px;
     border:1px solid transparent;
     overflow:hidden;
     border-radius:2px;
+    margin:0 auto 35px;
     cursor:pointer;
 }
 .signup-avatar img{
