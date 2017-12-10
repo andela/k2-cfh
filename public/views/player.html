@@ -1,21 +1,22 @@
-<div id="player-container" ng-repeat="player in game.players" style="background-color:{{colors[player.color]}}">
-  <div id ="above-czar-container">
-    <div id="avatar_">
+<div id="player-conainer" ng-repeat="player in game.players" style="background-color: {{colors[player.color]}}; border-radius:50px; padding:5px; margin-bottom:10px;">
+  <div id ="above-czar-container" style="display:flex; flex-basis:1 1; flex-shrink:1;">
+    <div id="avatar_" style="height:30px;">
       <span ng-show="isPremium($index)">
-        <img ng-src="img/king.png" id="king">
+        <img style="height:50px;" ng-src="img/king.png" id="king">
       </span>
-      <img ng-src="{{player.avatar}}"/>
+      <img style="height:30px;" ng-src="{{player.avatar}}"/>
     </div>
-    <div id="player-container-inner">
-      <div id="player-name"><h4>{{player.username | upperFirstLetter}}</h4></div>
-      <div id="player-score"><h2>{{player.points}}/{{game.pointLimit}}</h2></div>
+    <!-- <div id="player-container-inner"> -->
+      <div id="player-name" style="margin-right: auto;" ><h4 style="font-size: 16px;">{{player.username | upperFirstLetter}}</h4></div>
+      <div id="czar-container" ng-show="currentCzar($index)" style="max-height: 20px; padding:3px; margin: 4px;">
+          <span id='the-czar' style="font-size:12px;">CZAR</span>
+        </div>
       <div ng-show="isPlayer($index)" id="player-star">
-        <img src="../img/11.png"/>
+        <img style="height: 20px;" src="../img/11.png"/>
       </div>
-    </div>
+      <div id="player-score"><h2 style="font-size: 14px; background:rgb(41, 51, 110); border-radius:50%; padding:5px; color:#fff; margin-left:5px;">{{player.points}}/{{game.pointLimit}}</h2></div>      
+    <!-- </div> -->
   </div>
-  <div id="czar-container" ng-show="currentCzar($index)">
-    <span id='the-czar'>CZAR</span>
-  </div>
+  
 </div>
 
