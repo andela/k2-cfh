@@ -11,11 +11,14 @@ import logger from 'mean-logger';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import paths from 'path';
+import cookieParser from 'cookie-parser';
 import config from './config/config';
 import auth from './config/middlewares/authorization';
 import routes from './config/routes';
 import expressConfig from './config/express';
-import passportConfig from './config/passport';
+import QuestionModel from './app/seeders/questions';
+import AnsersMigration from './app/seeders/answers';
+
 
 dotenv.config();
 
@@ -46,7 +49,7 @@ const walk = (path) => {
 walk(modelsPath);
 
 // bootstrap passport config
-passportConfig(passport);
+// passportConfig(passport);
 
 const app = express();
 
@@ -54,6 +57,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(cookieParser());
 // express settings
 expressConfig(app, passport, mongoose);
 
@@ -69,6 +73,9 @@ require('./config/socket/socket')(ioObj);
 
 // Initializing logger
 logger.init(app, passport, mongoose);
+
+// QuestionModel();
+// AnsersMigration();
 
 // expose app
 export default app;

@@ -43,4 +43,6 @@ QuestionSchema.statics = {
   }
 };
 
-mongoose.model('Question', QuestionSchema);
+const QuestionModel = mongoose.model('Question', QuestionSchema);
+export default QuestionModel;
+ 

@@ -1,6 +1,7 @@
 /* eslint-disable max-len, import/no-dynamic-require, func-names, prefer-destructuring, no-plusplus, no-underscore-dangle, import/no-unresolved, no-use-before-define */
 const async = require('async');
 const _ = require('underscore');
+import axios from 'axios';
 
 const answers = require(`${__dirname}/../../app/controllers/answers.js`);
 const questions = require(`${__dirname}/../../app/controllers/questions.js`);
@@ -235,8 +236,7 @@ Game.prototype.stateResults = function (self) {
 };
 
 Game.prototype.stateEndGame = function (winner) {
-  this.state = 'game ended';
-  this.gameWinner = winner;
+  this.state = "game ended";
   this.sendUpdate();
 };
 

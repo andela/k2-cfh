@@ -137,7 +137,8 @@ export default (passport) => {
       {
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: process.env.GITHUB_CALLBACK
+        callbackURL: process.env.GITHUB_CALLBACK,
+        scope: ['user:email']
       },
       ((accessToken, refreshToken, profile, done) => {
         User.findOne({

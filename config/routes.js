@@ -1,13 +1,15 @@
-/* eslint-disable max-len, global-require, import/no-unresolved */
-module.exports = (app, passport) => {
+import async from 'async';
+import { createGame } from '../app/controllers/gameHistory';
+import { isLoggedIn } from '../config/jwt';
+
+const route = (app, passport, auth) => {
   // User Routes
   const users = require('../app/controllers/users');
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
+
   app.get('/signout', users.signout);
-  app.post('/api/auth/signup', users.createJwt);
-  app.post('/api/auth/signin', users.loginJwt);
   // Setting up the users api
   app.post('/users', users.create);
   app.post('/users/avatars', users.avatars);
@@ -24,45 +26,38 @@ module.exports = (app, passport) => {
   app.get('/users/:userId', users.show);
 
   // Setting the facebook oauth routes
-  app.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['email'],
-    failureRedirect: '/signin'
-  }), users.signin);
+  app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    failureRedirect: '/signin'
-  }), users.authCallback);
+    failureRedirect: '/'
+  }), users.socialAuth);
 
   // Setting the github oauth routes
-  app.get('/auth/github', passport.authenticate('github', {
-    failureRedirect: '/signin'
-  }), users.signin);
+  app.get('/auth/github', passport.authenticate('github', { failureRedirect: '/' }));
 
   app.get('/auth/github/callback', passport.authenticate('github', {
-    failureRedirect: '/signin'
-  }), users.authCallback);
+    failureRedirect: '/'
+  }), users.socialAuth);
 
   // Setting the twitter oauth routes
-  app.get('/auth/twitter', passport.authenticate('twitter', {
-    failureRedirect: '/signin'
-  }), users.signin);
+  app.get('/auth/twitter', passport.authenticate('twitter', { failureRedirect: '/' }));
 
   app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-    failureRedirect: '/signin'
-  }), users.authCallback);
+    failureRedirect: '/'
+  }), users.socialAuth);
 
   // Setting the google oauth routes
   app.get('/auth/google', passport.authenticate('google', {
-    failureRedirect: '/signin',
+    failureRedirect: '/',
     scope: [
       'https://www.googleapis.com/auth/userinfo.profile',
       'https://www.googleapis.com/auth/userinfo.email'
     ]
-  }), users.signin);
+  }));
 
   app.get('/auth/google/callback', passport.authenticate('google', {
-    failureRedirect: '/signin'
-  }), users.authCallback);
+    failureRedirect: '/'
+  }), users.socialAuth);
 
   // Finish with setting up the userId param
   app.param('userId', users.user);
@@ -91,4 +86,9 @@ module.exports = (app, passport) => {
   app.get('/', index.render);
   app.get('/api/search/users', users.searchUser);
   app.post('/api/users/invite', users.inviteUser);
+
+  // game route
+  app.post('/api/games/:id/start', isLoggedIn, createGame);
 };
+
+export default route;

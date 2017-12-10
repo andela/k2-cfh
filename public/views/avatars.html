@@ -1,0 +1,26 @@
+
+<!-- <div ng-controller="authCheckController"></div> -->
+
+<header ng-include="'/views/partials/avatar-header.html'"></header>
+<div id="header-spacer"></div>
+
+<div class="row mt-5" ng-controller="avatarsController">
+    <div class="col-md-6 offset-md-3">
+        <div style="display:block;font-size:20px;color:gray" class="text-center mb-5">
+            Select an avatar image for yourself to be seen during the game
+        </div>                 
+        <div class="row">
+
+            <div ng-repeat="(index , avatar) in avatars track by $index" class="col-2">
+                <a href="javascript:;" ng-click="checkAvatar(index)">
+                    <span id="avatar{{index}}Span" class="signup-avatar">
+                        <img ng-src="{{ avatar }}">
+                    </span>
+                </a>
+            </div>
+
+        </div>
+        <button ng-click="finish()" style="display:block;padding:10px 20px;min-width:150px;border-radius:200px;margin:30px auto;" class="butA">FINISH</button>
+        <div style="display:none;color:red;font-size:18px;font-weight:200;" class="text-center mt-4 mb-2" id="avatarError">Please select an avatar</div>
+    </div>
+</div>

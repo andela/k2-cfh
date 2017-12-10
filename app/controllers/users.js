@@ -11,6 +11,22 @@ import { signUser } from '../../config/jwt';
 const User = mongoose.model('User');
 const avatars = avatarImport.all();
 
+exports.socialAuth = (req, res) => {
+  if (!req.user) {
+    res.redirect('/#!/');
+  } else {
+    const unSignedInfo = {
+      id: req.user._id,
+      email: req.user.email,
+      name: req.user.name,
+      username: req.user.username
+    };
+    const token = signUser(unSignedInfo);
+    res.cookie('token', token);
+    res.redirect('/#!/avatars');
+  }
+};
+
 /**
 * function authCallback
 *
@@ -21,7 +37,7 @@ const avatars = avatarImport.all();
 * @returns {object} object
 */
 exports.authCallback = (req, res) => {
-  res.redirect('/chooseavatars');
+  res.redirect('/#!/app');
 };
 
 /**
@@ -33,7 +49,7 @@ exports.authCallback = (req, res) => {
  */
 exports.signin = (req, res) => {
   if (!req.user) {
-    res.redirect('/#!/signin?error=invalid');
+    res.redirect('/#!/');
   } else {
     res.redirect('/#!/app');
   }
