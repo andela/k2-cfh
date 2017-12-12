@@ -9,7 +9,7 @@ angular.module('mean.system')
     };
     setInterval(() => {
       toastr.info('No one has ever become poor by giving, Please donate to the Make A Wish Foundation!');
-    }, 30000);
+    }, 150000);
 
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
