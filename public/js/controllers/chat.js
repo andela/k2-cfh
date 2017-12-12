@@ -84,5 +84,22 @@ angular.module('mean.system')
       // 50 is the bottom margin on the last li in chat list
       chatsList.scrollTop = chatsList.scrollHeight + 50;
     };
-  }]);
 
+    $(document).ready(() => {
+      const emoji = $('#chatInput').emojioneArea({
+        hidePickerOnBlur: true,
+        recentEmojis: true,
+        pickerPosition: 'top',
+        emojiPlaceholder: ':smile_cat:',
+        events: {
+          keyup: (editor, event) => {
+            if (event.which === 13) {
+              $scope.content = (emoji.data('emojioneArea').getText());
+              emoji.data('emojioneArea').setText('');
+              $scope.addChat(event);
+            }
+          }
+        }
+      });
+    });
+  }]);
