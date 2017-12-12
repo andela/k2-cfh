@@ -1,6 +1,16 @@
 /* eslint-disable max-len, no-undef, no-unused-vars */
 angular.module('mean.system')
   .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) => {
+    toastr.options = {
+      positionClass: 'toast-top-full-width',
+      progressBar: 'true',
+      preventDuplicates: 'true',
+      onClick: 'hide'
+    };
+    setInterval(() => {
+      toastr.info('No one has ever become poor by giving, Please donate to the Make A Wish Foundation!');
+    }, 150000);
+
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -9,6 +19,7 @@ angular.module('mean.system')
     $scope.pickedCards = [];
     $scope.searchTerm = '';
     $scope.invitedUsers = [];
+    $scope.firstPick = false;
     let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
@@ -17,11 +28,12 @@ angular.module('mean.system')
         if ($scope.pickedCards.indexOf(card.id) < 0) {
           $scope.pickedCards.push(card.id);
           if (game.curQuestion.numAnswers === 1) {
+            $scope.firstPick = true;
             $scope.sendPickedCards();
             $scope.hasPickedCards = true;
           } else if (game.curQuestion.numAnswers === 2 &&
-            $scope.pickedCards.length === 2) {
-            // delay and send
+          $scope.pickedCards.length === 2) {
+          // delay and send
             $scope.hasPickedCards = true;
             $timeout($scope.sendPickedCards, 300);
           }
@@ -130,17 +142,21 @@ angular.module('mean.system')
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
         $scope.showTable = true;
       }
+      if (game.state === 'awaiting players') {
+        console.log(game.players);
+      }
     });
+
 
     $scope.$watch('game.gameID', () => {
       if (game.gameID && game.state === 'awaiting players') {
         if (!$scope.isCustomGame() && $location.search().game) {
-          // If the player didn't successfully enter the request room,
-          // reset the URL so they don't think they're in the requested room.
+        // If the player didn't successfully enter the request room,
+        // reset the URL so they don't think they're in the requested room.
           $location.search({});
         } else if ($scope.isCustomGame() && !$location.search().game) {
-          // Once the game ID is set, update the URL if this is a game with friends,
-          // where the link is meant to be shared.
+        // Once the game ID is set, update the URL if this is a game with friends,
+        // where the link is meant to be shared.
           $location.search({ game: game.gameID });
           if (!$scope.modalShown) {
             setTimeout(() => {

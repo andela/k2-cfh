@@ -1,0 +1,135 @@
+<style>
+    html,body, #main-container{
+        display:block;
+        position:relative;
+        width:100%;
+        height:100%;
+        overflow:hidden;
+    }
+</style>
+
+<div id='game-wrapper'>
+    <div id="main-controller-sub" ng-controller="GameController">
+        <div ng-include src='"/views/partials/header.html"'></div>
+        <div id="header-spacer"></div>
+
+        <div id="game-app-container">
+            <div class='row mt-4'>
+                <!--  Left column -->
+                <div class="col-md-9">
+                    <!--  Timer and game screen -->
+                    <div class="row" id='game-top-div'>
+                        <div class="col-md-3" style="padding-right:0">
+                            <div id="timer-container">
+                                <div id="timer-time">64</div>
+                                <div id="timer-text">Time Remaining</div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div id="game-screen">
+                                <div id="game-screen-content">
+
+                                    <!--  Finding layers -->
+                                    <div id='intro-tab' class='game-screen-tab' style='display:none;'>
+                                        <div id='finding-players-text'>Finding Players</div>
+                                        <div class='mt-4 row'>
+                                            <div class='col-md-4 text-center'>
+                                                <div class='player-count'>
+                                                    <span class='top'>2 / 12</span>
+                                                    <span class='bottom'>Players</span>
+                                                </div>
+                                            </div>
+                                            <div class='col-md-3 text-center'>
+                                                <img class='game-screen-loader' ng-src='/assets/img/loader.gif'>
+                                            </div>
+                                            <div class='col-md-5 text-center'>
+                                                <button class='game-screen-button-2 mr-2' type='button'>Start Now</button> 
+                                                <button class='game-screen-button' type='button'>Invite Users</button> 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                     <!--  Questions -->
+                                    <div id='question-tab' class='game-screen-tab' style='display:none;'>
+                                       <div class='text-center game-question-text' >How are your balls doing ?</div>                                       
+                                    </div>
+                                    <!-- game status view with too many people -->
+                                    <div id='endgame-tab' class='game-screen-tab' style='display:none;'>
+                                        <div class='mt-4' style='display:none;'>
+                                            <h5 class='text-center'>What the!? The game ended because too many people left!</h5>
+                                            <h6 class='text-center mt-2'>Our sincere apologies.</h6> 
+                                        </div>  
+                                        <div class='mt-4' style='display:none;'>                                           
+                                            <h5 class='text-center'>Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!</h5>
+                                            <h6 class='text-center mt-2'>That makes you a loser, unfortunately.</h6> 
+                                        </div> 
+                                        <div class='mt-4' style='display:none;'>                                           
+                                            <h5 class='text-center'>Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</h5>
+                                            <h6 class='text-center mt-2' style='line-height:190%;'>We hope you feel special. If you'd like to share that special feeling with the world, consider donating to charity. Or just horde it all for youself.</h6> 
+                                        </div>                                  
+                                    </div>
+
+                                    <!--  Notification -->
+                                    <div id='notification-tab' class='game-screen-tab-base' style='display:none;'>
+                                        <span style='font-weight:600;font-size:14px;'>Hello, please pack your balls in, its tiome for in balls</span>                                      
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div id="base-container">
+                                <!-- How to play -->
+                                <div id="howtoplay" class='mt-4 base-container-tab' style='display:none;'>
+                                    <h5 id='howtoplay-heading'>How To Play</h5>
+                                    <ul id='howtoplay-ul'>
+                                        <li>1.&nbsp;&nbsp;Each player begins with, and will always have, 10 white answer cards.</li>
+                                        <li>2.&nbsp;&nbsp;For each round, one player is randomly chosen as the Card Czar.</li>
+                                        <li>3.&nbsp;&nbsp;Everyone else answers the black question card by clicking on the answer card they want to use.</li>
+                                        <li>4.&nbsp;&nbsp;The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</li>
+                                        <li>5.&nbsp;&nbsp;Want to adorn your avatar with a glorious crown? Donate to charity after the game!</li>
+                                    </ul>
+                                </div>
+                                <!-- Czar -->
+                                <div id="czar-select" class='base-container-tab' style='display:none;'>
+                                    <h4 id='czar-select-h1'>You are the Card Czar.</h4>
+                                    <h5 id='czar-select-h2'>Players are choosing their answers. Prepare to select a winner.</h5>
+                                    </h5>
+                                    <div id='czar-select-base'>
+                                        <div class='top'>Did you know?</div>
+                                        <div class='mid'>Wish kids are more willing to comply with difficult, but vital, treatment regimens.</div>
+                                        <img class='bottom float-right' ng-src='/assets/img/make-a-wish-logo.png'>
+                                        <div class='clear'></div>
+                                    </div>
+                                </div>
+                                <!-- Czar -->
+                                <div id="answers" class='base-container-tab' style='display:none;'>
+                                    <div class='answers-cards' ng-repeat="i in [3,4,5,6,7,5,6,7,8,9] track by $index">
+                                        fjfjfhjfjnkdfkjnf
+                                    </div>
+                                    <div class='clear'></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  Right column -->
+                <div class="col-md-3">
+                    <div id="players-div">
+                        <div class='row player-info player-info-{{i}}' ng-repeat='i in [0,1,2,3,4,5]'>
+                        <div class='col-3'>
+                            <img src='/assets/img/avatars/13.png' class='player-info-img'>
+                        </div>
+                        <div class='col-6 player-info-name'>Abdulfatai Aka</div>
+                        <div class='col-3 '>
+                            <span class='player-info-score'>0/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
