@@ -9,6 +9,7 @@ angular.module('mean.system')
     $scope.pickedCards = [];
     $scope.searchTerm = '';
     $scope.invitedUsers = [];
+    $scope.firstPick = false;
     let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
@@ -17,6 +18,7 @@ angular.module('mean.system')
         if ($scope.pickedCards.indexOf(card.id) < 0) {
           $scope.pickedCards.push(card.id);
           if (game.curQuestion.numAnswers === 1) {
+            $scope.firstPick = true;
             $scope.sendPickedCards();
             $scope.hasPickedCards = true;
           } else if (game.curQuestion.numAnswers === 2 &&
@@ -130,7 +132,11 @@ angular.module('mean.system')
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
         $scope.showTable = true;
       }
+      if (game.state === 'awaiting players') {
+        console.log(game.players);
+      }
     });
+
 
     $scope.$watch('game.gameID', () => {
       if (game.gameID && game.state === 'awaiting players') {

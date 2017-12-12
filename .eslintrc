@@ -2,6 +2,7 @@
   "root": true,
   "globals": {
     "angular": true,
+    "introJs": true,
     "$": true,
     "document": true,
     "window" : true

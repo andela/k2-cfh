@@ -1,6 +1,7 @@
 angular.module('mean.system')
   .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', ($scope, Global, $location, socket, game) => {
     $scope.global = Global;
+
     $scope.playAsGuest = () => {
       game.joinGame();
       $location.path('/app');
@@ -63,8 +64,8 @@ angular.module('mean.system')
         const { token } = response.data;
         //  If signin was successful
         if (status === 200 && token) {
-        //  save token
-        // var token = response.token;
+          //  save token
+          // var token = response.token;
           $window.localStorage.setItem('token', token);
           $location.path('/avatars');
         } else {
@@ -80,7 +81,7 @@ angular.module('mean.system')
     };
   }])
 
-//  SignUp controller
+  //  SignUp controller
 
   .controller('signupController', ['$scope', '$http', '$location', '$window', ($scope, $http, $location, $window) => {
     $scope.user = {
@@ -116,8 +117,8 @@ angular.module('mean.system')
         const { token } = response.data;
         //  If signin was successful
         if (status === 201 && token) {
-        //  save token
-        // var token = response.token;
+          //  save token
+          // var token = response.token;
           $window.localStorage.setItem('token', token);
           $location.path('/avatars');
         } else {

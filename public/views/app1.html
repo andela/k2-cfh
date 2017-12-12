@@ -1,0 +1,26 @@
+</script>
+<div ng-controller="GameController">
+  <div ng-include src='"/views/partials/header.html"'></div>
+  <div id="header-spacer" style="clear:both"></div>
+  <div ng-include src='"/views/adds.html"'></div>
+
+
+  <div id="app-container"  style="height:100%; padding:5px;">
+
+    <div id="gameplay-container">
+      <div id="upper-gameplay-container">
+        <div id="menu-timeremaining-container">
+          <div id="menu-container">
+            <span id="menu-button">Menu</span>
+          </div>
+          <div id="timer-container">
+            <timer></timer>
+          </div>
+        </div>
+        <div id="question-container-outer">
+          <question ng-controller="InviteUserController"></question>
+        </div>
+      </div>
+      <answers></answers>
+  </div>
+</div>

@@ -21,6 +21,7 @@
     "postinstall": "node node_modules/grunt-cli/bin/grunt install"
   },
   "dependencies": {
+    "angular-intro.js": "^3.3.0",
     "async": "~0.2.9",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
