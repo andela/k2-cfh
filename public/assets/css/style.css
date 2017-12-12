@@ -25,6 +25,9 @@ button{
     cursor:pointer;
 }
 
+.close-button{
+    display:inline-block;color:#0275d8;margin-top:7px;font-size:24px;
+}
 /***************************************   
         Template Links
 ****************************************/
@@ -259,7 +262,7 @@ header{
 .banner-buttons{
     padding:10px 10px;
     border-radius:2px;
-    font-size:15px;
+    font-size:13px;
     background:none;
     border:2px solid white;
     min-width:130px;
@@ -435,6 +438,7 @@ header{
     background: #3570B0;
     min-height:400px;
     max-height:400px;
+    max-width: 100% !important;
     overflow:hidden;
 }
 #team-heading{
@@ -588,7 +592,7 @@ footer{
     padding:10px 10px;
     border:1px solid lightgray;
     border-radius:4px;
-    margin:0 0 15px;
+    margin:30px 0 15px;
 }
 .su-error-failed{
     color:white;

@@ -1,9 +1,26 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$window', ($scope, Global, $location, socket, game, AvatarService) => {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', ($scope, Global, $location, socket, game) => {
     $scope.global = Global;
     $scope.playAsGuest = () => {
       game.joinGame();
       $location.path('/app');
+    };
+
+    $scope.hideWhiteBox = () => {
+      $('#main-overlay,#main-overlay-top').css('display', 'none');
+      $('.main-whitebox').css('display', 'none');
+    };
+
+    $scope.signInClick = () => {
+      $('#main-overlay').css('display', 'block');
+      $('#main-overlay-top').css('display', 'block');
+      $('#signInWhiteBox').css('display', 'block');
+    };
+
+    $scope.signUpClick = () => {
+      $('#main-overlay').css('display', 'block');
+      $('#main-overlay-top').css('display', 'block');
+      $('#signUpWhiteBox').css('display', 'block');
     };
 
     $scope.showError = () => {
@@ -12,12 +29,6 @@ angular.module('mean.system')
       }
       return false;
     };
-
-    $scope.avatars = [];
-    AvatarService.getAvatars()
-      .then((data) => {
-        $scope.avatars = data;
-      });
   }])
   //  SignIn controller
   .controller('signinController', ['$scope', '$http', '$location', '$window', ($scope, $http, $location, $window) => {
