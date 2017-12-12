@@ -1,7 +1,6 @@
 /* eslint-disable max-len, no-undef, no-unused-vars */
 angular.module('mean.system')
   .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) => {
-
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;

@@ -135,5 +135,44 @@
     </div>
   </div>
 
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 right-container">
+      <div class="right-container-top">
+          <div id="social-bar-container" >
+            <player></player>
+          </div>
+      </div>    
+      <div class="right-container-bottom chat-box" ng-controller="ChatController">
+        <div class="chat-box__messenger" ng-show="isChatOpen">
+          <div class="chat-box__header">
+            <h4>Chats</h4>
+          </div>
+          <ul class="chats">
+            <li class="chat" ng-repeat="chat in chats">
+              <img class="chat__user-img" ng-src="{{chat.user.avatar}}" alt="{{chat.user.username}}">
+              <div class="chat__content">
+                <div class="chat__content--top">
+                  <span class="chat__user-name">{{chat.user.username}}</span>
+                  <span class="chat__created-at">{{chat.createdAt}}</span>
+                </div>
+                <p class="chat__message">{{chat.content}}</p>
+              </div>
+            </li>
+          </ul>
+          <form ng-submit="addChat()" class="chat-box__form">
+            <img src="https://image.flaticon.com/icons/png/512/42/42877.png" alt="">
+            <input type="text" class="form-control" placeholder="What's on your mind?" ng-model="content" id="chatInput"/>
+          </form> 
+        </div>
+        
+        <div class="chat-box__launcher" ng-click="toggleChatOpen()">
+          <i class="fa fa-times fa-2x" aria-hidden="true" ng-show="isChatOpen"></i>
+          <i class="fa fa-comment fa-2x" aria-hidden="true" ng-hide="isChatOpen">
+            <span class="hasUnread" ng-show="hasUnreadMessages"></span>
+          </i>
+        </div>
+      </div>
+  </div>
+
+
 </div>
 

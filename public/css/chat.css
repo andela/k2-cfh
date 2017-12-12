@@ -1,0 +1,121 @@
+.chat-box{
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10000;
+}
+
+.chat-box__messenger{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+  width: 300px;
+  height: 400px;
+  border-radius: 10px;
+}
+
+.chat-box__launcher{
+  height: 70px;
+  width: 70px;
+  background-color: #0071b2;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+  margin-left: auto;
+  margin-top: 1.2rem;
+} 
+
+.chat-box__launcher i{
+  color: #fff;
+  position: relative;
+}
+.chat-box__launcher i span{
+  background-color: red;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.chat-box .chat-box__header{
+  background-color: #0071b2;
+  padding: .8rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.chat-box .chat-box__header h4{
+  font-weight: 500;
+  margin: 0;
+  color: #fff;
+}
+
+.chat-box .chats{
+  flex: 1;
+  padding: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-bottom: 0;
+  background: #fff;
+}
+
+.chats .chat{
+  display: flex;
+  padding: .8rem .8rem 0 .8rem;
+}
+.chats .chat:last-of-type{
+  margin-bottom: 70px;
+}
+
+.chat img{
+  height: 30px;
+  width: 30px;
+  margin-right: .5rem;
+}
+
+.chat .chat__user-name{
+  color: #000;
+  font-weight: bold;
+}
+
+.chat .chat__message{
+  word-wrap: break-word;
+}
+
+.chat .chat__created-at{
+  font-size: .6rem;
+}
+
+.chat-box .chat-box__form{
+  background-color: #e5e4e4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: .8rem;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.chat-box__form img{
+  width: 20px;
+  height: 20px;
+  margin-right: .5rem;
+}
+
+.chat-box__form input{
+  background-color: #fff;
+  border-radius: 5px;
+  padding-left: .5rem;
+  border-bottom: 0 !important;
+}
+
+.chat-box__form input:focus{
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
