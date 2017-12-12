@@ -77,7 +77,7 @@ gulp.task('sass', () => {
 
 gulp.task('bower', () => {
   bower()
-    .pipe(gulp.dest('./dist/public/lib'));
+    .pipe(gulp.dest('./bower_components'));
 });
 
 gulp.task('mochaTest', () => {
