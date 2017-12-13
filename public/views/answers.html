@@ -1,3 +1,6 @@
+<div style="margin-top: 70px; margin-bottom: -70px; width: 100%;">
+  <div style="width:100%; min-height: 90px; background-image: url('/img/bet.png'); margin-bottom: 100px; clear: both;"></div>
+</div>
 <div ng-cloak id="cards-container" style="margin-top:70px;" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
   <div id="social-bar-container">
     <player></player>
@@ -75,7 +78,7 @@
   </div>
 </div>
 <div style="clear:both"></div>
-<div id="czar-blank-container" style="position: absolute; top: 300px; display: block; z-index: 1000; width: 80%;" ng-show="isCzar() && game.state !== 'game ended' && game.state !== 'game dissolved' && game.state !== 'waiting for czar to decide' && game.state !== 'winner has been chosen'">
+<div id="czar-blank-container" style="position: absolute; display: block; z-index: 1000; width: 80%;" ng-show="isCzar() && game.state !== 'game ended' && game.state !== 'game dissolved' && game.state !== 'waiting for czar to decide' && game.state !== 'winner has been chosen'">
   <div style="clear:both"></div>
   <div id="czar-blank-inner" style="top:10px;">
     You are the Card Czar.
