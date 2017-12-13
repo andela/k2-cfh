@@ -1,246 +1,256 @@
-<!-- ******************************************** -->
-<!--         Page overlays and whiteboxes         -->
-<!-- ******************************************** -->
+<div ng-controller='IndexController'>
+    <!-- ******************************************** -->
+    <!--         Page overlays and whiteboxes         -->
+    <!-- ******************************************** -->
 
-<div id="main-overlay"></div>
-<div id="main-overlay-top">
+    <div id="main-overlay"></div>
+    <div id="main-overlay-top">
 
-    <!-- Sign In Whitebox -->
-    <div id="signInWhiteBox" ng-controller='signinController' class="main-whitebox" ng-include src='"/views/partials/signin.html"'></div>
-    
-    <!-- Sign Up Whitebox -->
-    <div id="signUpWhiteBox" ng-controller='signupController' class="main-whitebox" ng-include src='"/views/partials/signup.html"'></div>
+        <!-- Sign In Whitebox -->
+        <div id="signInWhiteBox" ng-controller='signinController' class="main-whitebox" ng-include src='"/views/partials/signin.html"'></div>
 
-</div>
+        <!-- Sign Up Whitebox -->
+        <div id="signUpWhiteBox" ng-controller='signupController' class="main-whitebox" ng-include src='"/views/partials/signup.html"'></div>
 
-<!-- ******************************************** -->
-<!--                Header                        -->
-<!-- ******************************************** -->
+    </div>
 
-<header>
-    <div class="page-align">
-        <div class="row">
-            <div class="col-12 col-md-3">
-                <img src="/assets/img/logo.png" id="header-logo"> 
+    <!-- ******************************************** -->
+    <!--                Header                        -->
+    <!-- ******************************************** -->
+
+    <header>
+        <div class="page-align">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <img src="/assets/img/logo.png" id="header-logo">
+                </div>
+                <div class="hidden-sm-down col-md-9">
+                    <!-- id="signInModalShow" -->
+                    <button class="butA header-buttons float-right" type="button" ng-click='signInClick()'>SIGN IN</button>
+                    <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
+                        <button class="butB header-buttons float-right" type="button">DONATE</button>
+                    </a>
+                    <a href="#!/testimonies">
+                        <span class="header-links float-right" style="margin-right:30px;">TESTIMONIES</span>
+                    </a>
+                    <a href="#howtoplay" target="_self">
+                        <span class="header-links float-right">HOW TO PLAY</span>
+                    </a>
+                    <a href="#!/">
+                        <span class="header-links float-right">HOME</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
             </div>
-            <div class="hidden-sm-down col-md-9">
-                <button class="butA header-buttons float-right" type="button" id="signInModalShow">SIGN IN</button>
-                <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
-                    <button class="butB header-buttons float-right" type="button">DONATE</button>
+            <div class="hidden-md-up" id="navbar">
+                <a href="#!/">
+                    <span class="">HOME</span>
                 </a>
-                <a href="#!/testimonies"><span class="header-links float-right" style="margin-right:30px;">TESTIMONIES</span></a>
+                <a href="#!/testimonies">
+                    <span class="">TESTIMONIES</span>
+                </a>
                 <a href="#howtoplay" target="_self">
-                    <span class="header-links float-right">HOW TO PLAY</span>
+                    <span class="">HOW TO PLAY</span>
                 </a>
-                <a href="#!/"><span class="header-links float-right">HOME</span></a>
+                <a href="javascript:;" id="signInModalShow2">
+                    <span>SIGN IN</span>
+                </a>
+                <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
+                    <span>DONATE</span>
+                </a>
                 <div class="clear"></div>
             </div>
         </div>
-        <div class="hidden-md-up" id="navbar">
-            <a href="#!/">
-                <span class="">HOME</span>
-            </a>
-            <a href="#!/testimonies">
-                <span class="">TESTIMONIES</span>
-            </a>
-            <a href="#howtoplay" target="_self">
-                <span class="">HOW TO PLAY</span>
-            </a>
-            <a href="javascript:;" id="signInModalShow2">
-                <span>SIGN IN</span>
-            </a>
-            <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
-                <span>DONATE</span>
-            </a>
-            <div class="clear"></div>
-        </div>
-    </div>
-</header>
-<div id="header-spacer"></div>
+    </header>
+    <div id="header-spacer"></div>
 
-<!-- ******************************************** -->
-<!--                Banner                        -->
-<!-- ******************************************** -->
+    <!-- ******************************************** -->
+    <!--                Banner                        -->
+    <!-- ******************************************** -->
 
-<section id="banner">
-    <div class="overlay" id="banner-overlay"></div>
-    <div class="overlay-top">
-        <div class="row">
-            <div class="col-12 col-md-8 offset-md-2">
-                <div class="text-center" id="banner-heading">Cards For Humanity</div>
-                <p class="text-center" id="banner-heading-small">A GAME FOR HORRIBLE PEOPLE DESPERATELY TRYING TO DO GOOD</p>
-                <p class="text-center" id="banner-body">
-                        Cards for Humanity is a fast-paced online version of the popular 
-                        card game, that provides a platform where you have fun and  have
-                        the opportunity to donate to children in need.
-                </p>
-                <div class="text-center">
-                    <a href="/#!/app"><button class="butA banner-buttons">START PLAYING</button></a>
-                    <button class="butB banner-buttons" id="signUpModalShow">SIGN UP</button>
+    <section id="banner">
+        <div class="overlay" id="banner-overlay"></div>
+        <div class="overlay-top">
+            <div class="row">
+                <div class="col-12 col-md-8 offset-md-2">
+                    <div class="text-center" id="banner-heading">Cards For Humanity</div>
+                    <p class="text-center" id="banner-heading-small">A GAME FOR HORRIBLE PEOPLE DESPERATELY TRYING TO DO GOOD</p>
+                    <p class="text-center" id="banner-body">
+                        Cards for Humanity is a fast-paced online version of the popular card game, that provides a platform where you have fun and
+                        have the opportunity to donate to children in need.
+                    </p>
+                    <div class="text-center">
+                        <a href="/#!/app">
+                            <button class="butA banner-buttons">PLAY AS A GUEST</button>
+                        </a>
+                        <button class="butB banner-buttons" ng-click='signUpClick()'>SIGN UP</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <video class="hidden-xs-down" id="banner-video" width="100%" height="100%" autoplay loop>
-        <source src="/assets/videos/banner.ogv" type='video/ogg'/>
-    </video>
-</section>
+        <video class="hidden-xs-down" id="banner-video" width="100%" height="100%" autoplay loop>
+            <source src="/assets/videos/banner.ogv" type='video/ogg' />
+        </video>
+    </section>
 
-<!-- ******************************************** -->
-<!--        About cards for humanity              -->
-<!-- ******************************************** -->
+    <!-- ******************************************** -->
+    <!--        About cards for humanity              -->
+    <!-- ******************************************** -->
 
-<section id="about">
-    <div class="row">
-        <div class="hidden-sm-down col-md-5">
-            <img src="/assets/img/bg-3.jpg" id="about-image">
+    <section id="about">
+        <div class="row">
+            <div class="hidden-sm-down col-md-5">
+                <img src="/assets/img/bg-3.jpg" id="about-image">
+            </div>
+            <div class="col-md-7">
+                <div id="about-heading" class='text-center'>ABOUT CARDS FOR HUMANITY</div>
+                <p id="about-body">
+                    Cards for Humanity is a fast-paced online version of the popular card game, which is a platform where you have fun and have
+                    the opportunity to donate to children in need, while remaining as despicable and awkward as you naturally.
+                    <br>
+                    <span style="color:red;">Warning!</span>
+                    <br>
+                    <!--  Needed for page section redirect -->
+                    This game contains offensive, profane, explicit content created by Cards Against Humanity and provided here, uncensored and
+                    complete, in digital form. Human Resources made us say that
+                </p>
+            </div>
         </div>
-        <div class="col-md-7">
-            <div id="about-heading" class='text-center'>ABOUT CARDS FOR HUMANITY</div>
-            <p id="about-body">
-                Cards for Humanity is a fast-paced online version of the popular card game, which is a platform 
-                where you have fun and  have the opportunity to donate to children in need, while remaining as 
-                despicable and awkward as you naturally.
-                <br>
-                <span style="color:red;">Warning!</span>
-                <br>
-                <!--  Needed for page section redirect -->
-                This game contains offensive, profane, explicit content created by Cards Against 
-                Humanity and provided here, uncensored and complete, in digital form. 
-                Human Resources made us say that
-            </p>
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- ******************************************** -->
-<!--       How to play cards for humanity         -->
-<!-- ******************************************** -->    
-<span id="howtoplay"></span>
-<section id="howto">
-    <img src="/assets/img/bg-1.jpg">
-    <div class="overlay"></div>
-    <div class="overlay-top">
-        <div class="page-align">
-            <div class='text-center' id="howto-heading">HOW TO PLAY THE GAME</div>
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="howto-card">
-                        <div class="first">
-                            A player is selected as the card "Czar" and is required to select a question card. 
+    <!-- ******************************************** -->
+    <!--       How to play cards for humanity         -->
+    <!-- ******************************************** -->
+    <span id="howtoplay"></span>
+    <section id="howto">
+        <img src="/assets/img/bg-1.jpg">
+        <div class="overlay"></div>
+        <div class="overlay-top">
+            <div class="page-align">
+                <div class='text-center' id="howto-heading">HOW TO PLAY THE GAME</div>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="howto-card">
+                            <div class="first">
+                                A player is selected as the card "Czar" and is required to select a question card.
+                            </div>
+                            <div class="second">Cards for Humanity</div>
                         </div>
-                        <div class="second">Cards for Humanity</div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="howto-card">
                             <div class="first">
                                 Each player is presented with the question card selected by the card "Czar" and 10 answer cards.
                             </div>
                             <div class="second">Cards for Humanity</div>
                         </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="howto-card">
-                        <div class="first">
-                        After answer submissions from players, the card "Czar" contemplate on the answer cards and select that which best answers the question.
-                        </div>
-                        <div class="second">Cards for Humanity</div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 offset-md-4 col-lg-3 offset-lg-0">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="howto-card">
+                            <div class="first">
+                                After answer submissions from players, the card "Czar" contemplate on the answer cards and select that which best answers
+                                the question.
+                            </div>
+                            <div class="second">Cards for Humanity</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 offset-md-4 col-lg-3 offset-lg-0">
                         <div class="howto-card">
                             <div class="first">
                                 The player whose answer card has been selected by the "Czar" is announced the winners of that round, and the process is repeated.
                             </div>
                             <div class="second">Cards for Humanity</div>
                         </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ******************************************** -->
-<!--                   Donations                  -->
-<!-- ******************************************** -->    
-
-<section id="donation">
-    <div class="row">
-        <div class="col-12 col-md-7">
-        <div class="page-align">
-            <div id="donation-heading" class='text-center'>DONATE TO CHARITY</div>
-            <h6 class="text-center" id="donation-heading-small">If you don't give back, who will ?</h6>
-            <div class="row mt-5">
-                <div class="col-12 col-md-12 col-xl-5">
-                    <div id="donation-box">
-                        <h6 class="text-center">MAKE AN IMPACT</h6>
-                        <h5 class="text-center">$767 Amount Raised</h6>
-                        <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
-                            <button class="butA" id="donate-button">DONATE NOW</button>
-                        </a>
                     </div>
                 </div>
-                <div class="col-12 hidden-lg-down col-lg-7">
-                    <p id="donation-p1">
-                        We've integrated donation widgets (via crowdrise.com), along with some reminders of the opportunity to donate. 
-                        If you're signed in when you donate, we'll even upgrade your account and place a crown on your avatar's head.
-                    </p>
-                    <p id="donation-p2">
-                        Read about the testimonies of struggling children about how these donations have affected their lives 
-                        <a href="#!/testimonies"><span id="donation-here">here</span></a>
-                    </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ******************************************** -->
+    <!--                   Donations                  -->
+    <!-- ******************************************** -->
+
+    <section id="donation">
+        <div class="row">
+            <div class="col-12 col-md-7">
+                <div class="page-align">
+                    <div id="donation-heading" class='text-center'>DONATE TO CHARITY</div>
+                    <h6 class="text-center" id="donation-heading-small">If you don't give back, who will ?</h6>
+                    <div class="row mt-5">
+                        <div class="col-12 col-md-12 col-xl-5">
+                            <div id="donation-box">
+                                <h6 class="text-center">MAKE AN IMPACT</h6>
+                                <h5 class="text-center">$767 Amount Raised</h6>
+                                    <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
+                                        <button class="butA" id="donate-button">DONATE NOW</button>
+                                    </a>
+                            </div>
+                        </div>
+                        <div class="col-12 hidden-lg-down col-lg-7">
+                            <p id="donation-p1">
+                                We've integrated donation widgets (via crowdrise.com), along with some reminders of the opportunity to donate. If you're
+                                signed in when you donate, we'll even upgrade your account and place a crown on your avatar's
+                                head.
+                            </p>
+                            <p id="donation-p2">
+                                Read about the testimonies of struggling children about how these donations have affected their lives
+                                <a href="#!/testimonies">
+                                    <span id="donation-here">here</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <h6 id="donation-base" class="text-center">
+                        All donations goes to the Make-a-Wish Foundation and benefit children in need.
+                    </h6>
                 </div>
             </div>
-            <h6 id="donation-base" class="text-center">
-                All donations goes to the Make-a-Wish Foundation and benefit children in need.
-            </h6>
-        </div>
-    </div>
-    <div class="col-md-5 hidden-sm-down">
-        <img src="/assets/img/bg-2.jpg" id="donation-image">
-    </div>
-</section>
+            <div class="col-md-5 hidden-sm-down">
+                <img src="/assets/img/bg-2.jpg" id="donation-image">
+            </div>
+    </section>
 
-<!-- ******************************************** -->
-<!--               Meet the team                  -->
-<!-- ******************************************** -->    
+    <!-- ******************************************** -->
+    <!--               Meet the team                  -->
+    <!-- ******************************************** -->
 
-<section id="team">
-    <div id="team-heading" class="text-center">MEET THE TEAM</div>
-    <div style="display:block;margin-top:70px">
-        <div class="row">
-            <!-- Team 1 -->
-            <div class="team-member col-6 col-sm-4 col-md-2 offset-md-1">
-                <img src="/assets/img/team-1.jpg" class='team-image'>
-                <div class='team-name text-center'>FREDRICK</div>
-            </div>
-            <!-- Team 1 -->
-            <div class="team-member col-6 col-sm-4 col-md-2">
-                <img src="/assets/img/team-2.jpg" class='team-image'>
-                <div class='team-name text-center'>MOHAMMAD</div>
-            </div>
-            <!-- Team 1 -->
-            <div class="team-member col-6 col-sm-4 col-md-2">
-                <img src="/assets/img/team-3.jpg" class='team-image'>
-                <div class='team-name text-center'>UCHEYA</div>
-            </div>
-            <!-- Team 1 -->
-            <div class="team-member col-6 col-sm-4 offset-sm-2 col-md-2 offset-md-0">
-                <img src="/assets/img/team-4.jpg" class='team-image'>
-                <div class='team-name text-center'>HENRY</div>
-            </div>
-            <!-- Team 1 -->
-            <div class="team-member col-6 offset-3 col-sm-4 offset-sm-0 col-md-2">
-                <img src="/assets/img/team-5.jpg" class='team-image'>
-                <div class='team-name text-center'>ABDULFATAI</div>
+    <section id="team">
+        <div id="team-heading" class="text-center">MEET THE TEAM</div>
+        <div style="display:block;margin-top:70px">
+            <div class="row">
+                <!-- Team 1 -->
+                <div class="team-member col-6 col-sm-4 col-md-2 offset-md-1">
+                    <img src="/assets/img/team-1.jpg" class='team-image'>
+                    <div class='team-name text-center'>FREDRICK</div>
+                </div>
+                <!-- Team 1 -->
+                <div class="team-member col-6 col-sm-4 col-md-2">
+                    <img src="/assets/img/team-2.jpg" class='team-image'>
+                    <div class='team-name text-center'>MOHAMMAD</div>
+                </div>
+                <!-- Team 1 -->
+                <div class="team-member col-6 col-sm-4 col-md-2">
+                    <img src="/assets/img/team-3.jpg" class='team-image'>
+                    <div class='team-name text-center'>UCHEYA</div>
+                </div>
+                <!-- Team 1 -->
+                <div class="team-member col-6 col-sm-4 offset-sm-2 col-md-2 offset-md-0">
+                    <img src="/assets/img/team-4.jpg" class='team-image'>
+                    <div class='team-name text-center'>HENRY</div>
+                </div>
+                <!-- Team 1 -->
+                <div class="team-member col-6 offset-3 col-sm-4 offset-sm-0 col-md-2">
+                    <img src="/assets/img/team-5.jpg" class='team-image'>
+                    <div class='team-name text-center'>ABDULFATAI</div>
+                </div>
             </div>
         </div>
+    </section>
+
+    <!-- ******************************************** -->
+    <!--                     Footer                   -->
+    <!-- ******************************************** -->
+
+    <footer ng-include src='"/views/partials/footer.html"'></footer>
     </div>
-</section>
-
-<!-- ******************************************** -->
-<!--                     Footer                   -->
-<!-- ******************************************** -->    
-
-<footer ng-include src='"/views/partials/footer.html"'></footer>
