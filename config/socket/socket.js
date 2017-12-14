@@ -93,6 +93,7 @@ module.exports = function (io) {
           player.username = 'Guest';
           player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
         } else {
+          player.userID = user._id;
           player.username = user.name;
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random() * 4) + 12];

@@ -6,6 +6,13 @@ import { isLoggedIn } from '../config/jwt';
 const route = (app, passport, auth) => {
   // User Routes
   const users = require('../app/controllers/users');
+  const logGame = require('../app/controllers/gamelog');
+
+  app.post('/api/games/:gameID/start');
+  app.param('gameID', logGame.saveGameLog);
+
+  app.get('/api/leaderboard', logGame.getLeaderBoard);
+  app.get('/api/games/history', logGame.gameHistory);
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
@@ -21,6 +28,7 @@ const route = (app, passport, auth) => {
 
   // Donation Routes
   app.post('/donations', users.addDonation);
+  app.get('/api/donations', users.getDonations);
 
   app.post('/users/session', passport.authenticate('local', {
     failureRedirect: '/signin',

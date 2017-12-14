@@ -45,4 +45,3 @@ QuestionSchema.statics = {
 
 const QuestionModel = mongoose.model('Question', QuestionSchema);
 export default QuestionModel;
- 
