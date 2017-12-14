@@ -25,6 +25,9 @@ button{
     cursor:pointer;
 }
 
+.close-button{
+    display:inline-block;color:#0275d8;margin-top:7px;font-size:24px;
+}
 /***************************************   
         Template Links
 ****************************************/
@@ -259,7 +262,7 @@ header{
 .banner-buttons{
     padding:10px 10px;
     border-radius:2px;
-    font-size:15px;
+    font-size:13px;
     background:none;
     border:2px solid white;
     min-width:130px;
@@ -435,6 +438,7 @@ header{
     background: #3570B0;
     min-height:400px;
     max-height:400px;
+    max-width: 100% !important;
     overflow:hidden;
 }
 #team-heading{
@@ -588,7 +592,17 @@ footer{
     padding:10px 10px;
     border:1px solid lightgray;
     border-radius:4px;
-    margin:0 0 15px;
+    margin:30px 0 15px;
+}
+.su-error-failed{
+    color:white;
+    background:#C2585A;
+    border-color:#C2585A;
+}
+.su-error-success{
+    color:white;
+    background:#3570B0;
+    border-color:#3570B0;
 }
 .su-error-failed{
     color:white;
@@ -738,11 +752,17 @@ footer{
     border:1px solid lightgray;position:relative;
 }
 .testimony img{
-    display:block;position:absolute;left:10%;top:-50px;width:100px;height:100px;
-    border:2px solid lightgray;border-radius:50%;
+    display:block;
+    position:absolute;
+    left:10%;top:-50px;
+    width:100px;height:100px;
+    border:2px solid lightgray;
+    border-radius:50%;
 }
 .testimony p{
-    display:block;font-weight:200;font:14px/180% 'Open Sans',arial;
+    display:block;
+    font-weight:200;
+    font:14px/180% 'Open Sans',arial;
     min-height:220px;
     max-height:220px;
     overflow:hidden;
@@ -751,5 +771,400 @@ footer{
     text-justify: iter-word;
 }
 .testimony div{
-    display:block;color:gray;text-align:center;padding:0 0 20px;font-size:13px;
+    display:block;
+    color:gray;
+    text-align:center;
+    padding:0 0 20px;
+    font-size:13px;
 }
+
+
+/***************************************   
+        Gamepage 
+****************************************/
+
+#game-wrapper{
+    display:block;
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background-size:cover;
+    background-repeat:none;
+    background-position:0 0;
+    background-image:url(/assets/img/gamebg.jpg)
+}
+#game-app-container {
+    display: block;
+    width: 90%;
+    margin: 2px auto;
+    overflow: hidden;
+}
+#game-top-div{
+    min-height:280px;
+    max-height:280px;
+    overflow:hidden;
+}
+#game-screen {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 300px;
+    max-height: 300px;
+    overflow: hidden;
+    background-image: url(/assets/img/sk3.svg);
+    background-repeat: none;
+    background-position: 0 0;
+    background-size:cover;
+}
+
+#timer-container {
+    display: block;
+    width: 100%;
+    margin: 10px auto 0;
+    border: 1px solid lightgray;
+    min-height: 250px;
+    max-height: 250px;
+    border-radius: 4px;
+    text-align: center;
+    overflow: hidden;
+}
+
+#timer-time {
+    display: inline-block;
+    width: 170px;
+    height: 175px;
+    border-radius: 44%;
+    margin: 20px auto 0;
+    color: white;
+    font-size: 70px;
+    font-style: italic;
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    vertical-align: center;
+    font-weight: 600;
+    padding-top: 30px;
+    background: #454853;
+}
+
+#timer-text {
+    display: block;
+    margin: 20px auto 0;
+    font-size: 17px;
+    font-weight: bold;
+    color:white;
+    text-align: center;
+}
+#players-div{
+    display:block;
+    width: 90%;
+    margin:0 auto;
+}
+#base-container{
+    width:100%;
+    position:relative;
+    min-height:420px;
+    max-height:420px;
+    margin:0 auto;
+    overflow:hidden;
+    border-radius:4px;
+}
+.base-container-tab{
+    display:block;
+    position:absolute;
+    width:100%;
+    height:auto;
+    overflow:hidden;
+    background: #454853;
+}
+.player-info{
+    margin:0 auto 20px;
+    border-radius:40px;
+    width:100%;
+    padding:3px 5px;
+    background:#7be5e9; 
+    min-height:43px;
+    max-height:43px;
+    overflow:hidden;
+}
+.player-info-0{ background:#feffa5; }
+.player-info-1{ background:#fc565d; }
+.player-info-2{ background:#f3adff; }
+.player-info-3{ background:#388ec4; }
+.player-info-4{ background:#8bff95; }
+.player-info-5{ background:#7be5e9; }
+.player-info-6{ background:#618060; }
+.player-info-7{ background:#d4b4b6; }
+.player-info-8{ background:#f3adff; }
+.player-info-9{ background:#388ec4; }
+.player-info-10{ background:#99c2e4; }
+.player-info-11{ background:#7ea384; }
+.player-info-img{
+    display:block;
+    margin:0 auto;
+    width:27px;
+    margin-top:4px;
+}
+.player-info-name{
+    padding:0;
+    font-size:15px;
+    padding-top:6px;
+    font-weight:600;
+    text-align:center;
+}
+.player-info-score{
+    display:inline-block;
+    padding:5px 8px;
+    margin-top:5px;
+    font-size:11px;
+    color:white;
+    border-radius:50px;
+    background:#2a336d;
+}
+#game-screen-content{
+    display:block;
+    width:88%;
+    position:relative;
+    min-height:220px;
+    max-height:220px;
+    overflow:hidden;
+    margin-top:25px;
+    margin-left:7.5%;
+}
+.game-screen-tab{
+    display:block;
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+.game-screen-tab-base{
+    display:block;
+    position:absolute;
+    width:100%;
+    height:auto;
+    top:80%;
+    background:none;
+    overflow:hidden;
+}
+#finding-players-text{
+    display:block;
+    text-align:center;
+    font-size:25px;
+    font-weight:bold;
+}
+.player-count{
+    display:inline-block;
+    margin:0 auto;
+}
+.player-count .top{
+    display:block;
+    font-size:35px;
+    text-align:center;
+    font-weight:bold;
+    width:100%;
+}
+.player-count .bottom{
+    display:block;
+    font-size:15px;
+    margin-top:5px;
+    font-weight:bold;
+    text-align:center;
+    width:100%;
+}
+.game-screen-loader{
+    display:inline-block;
+    width:55px;
+    margin-top:10px;
+}
+.game-screen-button,.game-screen-button-2{
+    display:inline-block;
+    padding:8px 14px;
+    background:white;
+    color:black;
+    margin-top:13px;
+    border-radius:3px;
+    font-size:16px;
+    font-weight:400;
+}
+
+.game-screen-button-2{
+    background:#1F959C;color:white;border-color:#1F959C;
+}
+
+#howtoplay{
+    z-index: 3;
+    padding-bottom:20px;
+}
+#czar-select{
+    z-index: 2;
+    padding-bottom:25px;
+}
+#howtoplay-heading{
+    text-align:center;
+    color:white;
+    margin-top:30px;
+}
+#howtoplay-ul{
+    color:white;
+    margin:40px auto 0;
+    width:95%;
+}
+#howtoplay-ul li{
+    list-style-type:none;
+    margin-bottom:15px;
+}
+#czar-select-h1{
+    text-align:center;
+    margin-top:45px;
+    font-size:30px;
+    font-weight:400;
+    color:white;
+}
+#czar-select-h2{
+    text-align:center;
+    margin:35px auto;
+    font-size:17px;
+    font-weight:400;
+    color:white;
+}
+#czar-select-base{
+    display:block;
+    width:92%;
+    background:white;
+    padding:20px 30px 0;
+    margin:20px auto 0;
+    border-radius:4px;
+    min-height:150px;
+}
+#czar-select-base .top{
+    display:block;
+    font:35px 'Tangerine',arial;
+}
+#czar-select-base .mid{
+    display:block;
+    margin:0 auto;
+    font-size:16px;
+    text-align:center
+}
+#czar-select-base .bottom{
+    display:inline-block;
+    height:50px;
+}
+#answers{
+    z-index:2;
+    padding-bottom:10px;
+}
+#deck{
+    z-index:2;
+    padding-bottom:10px;
+}
+.answers-cards{
+    float:left;
+    width:18%;
+    margin:10px 1% 0;
+    min-height:195px;
+    border-radius:2px;
+    background-image: url(/assets/img/cards.png);
+    background-size:cover;
+    background-position:center;
+    font-size:15px;
+    color:black;
+    text-align:center;
+    padding-top:15px;
+    font-weight:600;
+}
+.game-question-text{
+    margin-top:20px;
+    font-size:18px;
+    font-weight:600;
+}
+#intro-tab{
+    z-index:4;
+}
+#endgame-tab{
+    z-index:3;
+}
+#notification-tab{
+    text-align:right;
+    background:transparent;
+    z-index:5;
+}
+#advert-div{
+    display:block;
+    width:92%;
+    margin:15px auto;
+    min-height:65px;
+    max-height:65px;
+    overflow:hidden;
+    border-radius:3px;
+}
+#advert-div img{
+    display:block;
+    width:100%;
+    height:65px;
+}
+#donate-text-2{
+    width:90%;
+    color:white;
+    font-weight:200;
+    line-height:190%;
+    margin:40px auto;
+}
+#donate-box {
+    display: block;
+    width: 90%;
+    margin: 30px auto 0;
+    background: white;
+    border-radius: 3px;
+    padding: 12px 10px;
+  }
+
+  #donate-box-head {
+    display: block;
+    margin: 10px 0 10px;
+    text-align: center;
+    color: black;
+    font-weight: 200;
+    font-size: 15px;
+  }
+
+  #donate-box-amount {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  #donate-box-amount-text {
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  #donate-box-button {
+    display: block;
+    width: 80%;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    margin: 10px auto;
+    padding: 12px 0;
+    background: #f4781f;
+    color: white
+  }
+
+  #donate-box-image {
+    display: block;
+    height: 20px;
+    margin: 10px auto 15px;
+  }
+
+  .game-donation-button {
+    display: inline-block;
+    padding: 10px 10px;
+    text-align: center;
+    background: white;
+    margin: 0 15px;
+    font-size: 16px;
+    border-radius: 3px;
+    font-weight: bold;
+  }

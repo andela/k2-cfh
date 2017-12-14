@@ -1,26 +1,232 @@
-</script>
-<div ng-controller="GameController" style="background: url('/assets/img/bg6.jpg'); background-size:cover; background-position:center">
-  <div ng-include src='"/views/partials/header.html"'></div>
-  <div id="header-spacer" style="clear:both"></div>
-  <div ng-include src='"/views/adds.html"'></div>
+<style>
+  html,
+  body,
+  #main-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+</style>
+<div id='game-wrapper'>
+  <div id="main-controller-sub" ng-controller="GameController" ng-init="loadModal()">
+    <div ng-include src='"/views/partials/header.html"'></div>
+    <div id="header-spacer"></div>
 
+    <div id="game-app-container">
+      <div class='row mt-4'>
+        <!--  Left column -->
+        <div class="col-md-9">
+          <!--  Timer and game screen -->
+          <div class="row" id='game-top-div'>
+            <div class="col-md-3" style="padding-right:0">
+              <div id="timer-container">
+                <div ng-bind="game.time" id="timer-time"></div>
+                <div id="timer-text">
+                  <span ng-hide="game.state === 'winner has been chosen' || game.state === 'waiting for czar to decide'">Time Remaining</span>
+                  <span ng-show="game.state === 'winner has been chosen'">Next Round In</span>
+                  <span ng-show="game.state === 'waiting for czar to decide'">Czar Choosing</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div id="game-screen">
+                <div id="game-screen-content">
 
-  <div id="app-container"  style="height:100%; padding:5px;">
+                  <!--  Finding players -->
+                  <div id='intro-tab' class='game-screen-tab' ng-show='game.state === "awaiting players"'>
+                    <!-- <div id='finding-players-text'>Finding Players</div> -->
+                    <div class='mt-4 row'>
+                      <!-- <div class='col-md-4 text-center'>
+                        <div class='player-count'>
+                          <span class='top'>{{game.players.length}} / {{game.playerMaxLimit}}</span>
+                          <span class='bottom'>Players</span>
+                        </div>
+                      </div> -->
+                      <!-- <div class='col-md-3 text-center'>
+                        <img class='game-screen-loader' ng-src='../img/loader.gif'>
+                      </div> -->
+                      <!-- <div class='col-md-5 text-center'>
+                        <button ng-click='startGame()' ng-show='( game.playerIndex === 0 || game.joinOverride ) && game.players.length >= game.playerMinLimit'
+                          class='game-screen-button-2 mr-2' type='button'>Start Now</button>
+                        <button ng-hide='game.players.length > game.playerMaxLimit' class='game-screen-button' type='button'>Invite Users</button>
+                      </div> -->
+                    </div>
+                  </div>
 
-    <div id="gameplay-container">
-      <div id="upper-gameplay-container">
-        <div id="menu-timeremaining-container">
-          <div id="menu-container">
-            <span id="menu-button">Menu</span>
+                  <!--  Questions -->
+                  <div id='question-tab' ng-hide="game.state === 'game ended' || game.state === 'game dissolved' || game.state ==='awaiting players'"
+                    class='game-screen-tab'>
+                    <div ng-bind-html-unsafe='game.curQuestion.text' class='text-center game-question-text'></div>
+                  </div>
+                  <!-- game status view with too many people -->
+                  <div id='endgame-tab' class='game-screen-tab'>
+                    <div class='mt-4' ng-show="game.state === 'game dissolved' && game.gameWinner === -1">
+                      <h5 class='text-center'>What the!? The game ended because too many people left!</h5>
+                      <h6 class='text-center mt-2'>Our sincere apologies.</h6>
+                    </div>
+                    <div class='mt-4' ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
+                      <h5 class='text-center'>Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!</h5>
+                      <h6 class='text-center mt-2'>That makes you a loser, unfortunately.</h6>
+                    </div>
+                    <div class='mt-4' ng-show="game.state === 'game ended' && game.gameWinner === game.playerIndex">
+                      <h5 class='text-center'>Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</h5>
+                      <h6 class='text-center mt-2' style='line-height:190%;'>We hope you feel special. If you'd like to share that special feeling with the world, consider donating
+                        to charity. Or just horde it all for youself.</h6>
+                    </div>
+                  </div>
+
+                  <!--  Notification -->
+                  <div ng-if="game.notification" id='notification-tab' class='game-screen-tab-base'>
+                    <span style='font-weight:600;font-size:14px;' ng-animate='{enter: "animated fadeInLeft", leave:"animated fadeOut"}'>{{game.notification}}</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
-          <div id="timer-container">
-            <timer></timer>
+          <div class="row mt-3">
+            <div class="col-12">
+              <div id="base-container">
+                <!-- How to play -->
+                <div id="howtoplay" class='mt-4 base-container-tab' ng-show="game.state === 'awaiting players'">
+                  <h5 id='howtoplay-heading'>How To Play</h5>
+                  <ul id='howtoplay-ul'>
+                    <li>1.&nbsp;&nbsp;Each player begins with, and will always have, 10 white answer cards.</li>
+                    <li>2.&nbsp;&nbsp;For each round, one player is randomly chosen as the Card Czar.</li>
+                    <li>3.&nbsp;&nbsp;Everyone else answers the black question card by clicking on the answer card they want
+                      to use.</li>
+                    <li>4.&nbsp;&nbsp;The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</li>
+                    <li>5.&nbsp;&nbsp;Want to adorn your avatar with a glorious crown? Donate to charity after the game!</li>
+                  </ul>
+                </div>
+                <!-- Czar -->
+                <div id="czar-select" class='base-container-tab' ng-show="isCzar() && game.state !== 'game ended' && game.state !== 'game dissolved' && game.state !== 'waiting for czar to decide' && game.state !== 'winner has been chosen' && game.table.length  <= 0">
+                  <h4 id='czar-select-h1'>You are the Card Czar.</h4>
+                  <h5 id='czar-select-h2'>Players are choosing their answers. Prepare to select a winner.</h5>
+                  </h5>
+                  <div id='czar-select-base'>
+                    <div class='top'>Did you know?</div>
+                    <div class='mid'>Wish kids are more willing to comply with difficult, but vital, treatment regimens.</div>
+                    <img class='bottom float-right' ng-src='/assets/img/make-a-wish-logo.png'>
+                    <div class='clear'></div>
+                  </div>
+                  <!-- Advert image -->
+                  <div id='advert-div'>
+                    <img src='/assets/img/advert.png'>
+                  </div>
+                </div>
+
+                <!-- Donation -->
+                <div id="game-donation" class='base-container-tab' ng-show='game.state === "game ended" || game.state === "game dissolved"'>
+                  <div class="row">
+                    <div class='col-md-7'>
+                      <h3 class='mt-4 text-center' style='color:white;'>What would you like to do now?</h3>
+                      <h6 class='text-center' id='donate-text-2'>
+                        Help yourself to another game or help a child in need? Donating will also place a lovely crown on your avatar's head.
+                      </h6>
+                      <div class='mb-5 text-center'>
+                        <span class='game-donation-button' ng-click='startGame()'>Join a New Game</span>
+                        <span class='game-donation-button' ng-click='abandonGame()'>Return to Lobby</span>
+                      </div>
+                    </div>
+                    <div class='col-md-5'>
+                      <div id='donate-box'>
+                        <div id='donate-box-head'>MAKE AN IMPACT</div>
+                        <div class='text-center'>
+                          <span id='donate-box-amount'>$726</span>
+                          <span id='donate-box-amount-text'>AMOUNT RAISED</span>
+                        </div>
+                        <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
+                          <button id='donate-box-button' style="cursor:pointer;">Donate Now</button>
+                        </a>
+                        <img src='/assets/img/cr.png' id='donate-box-image'>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <span ng-show="winnerPicked()"></span>
+
+                <!-- Answers -->
+                <div id="answers" class='base-container-tab' ng-hide="showTable || isCzar() || game.state === 'awaiting players' || game.state === 'game ended' || game.state === 'game dissolved'">
+                  <div class='answers-cards' ng-style="{'cursor':'pointer'}" ng-click="pickCard(card)" ng-repeat="card in game.players[game.playerIndex].hand"
+                    ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
+                    <span ng-bind-html-unsafe="card.text"></span>
+                    <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
+                    <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
+                  </div>
+                  <div class='clear'></div>
+                </div>
+                <!-- czar select answers -->
+                <div id="deck" class='base-container-tab' ng-hide="game.state === 'awaiting players' || game.state === 'game ended' || game.state === 'game dissolved'">
+                  <span ng-repeat="answer in game.table">
+                    <div class='answers-cards' ng-style="{'cursor':'pointer'}" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
+                      ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}">
+                      <span ng-bind-html-unsafe="card.text"></span>
+                      <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
+                      <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
+                    </div>
+                  </span>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
-        <div id="question-container-outer">
-          <question ng-controller="InviteUserController"></question>
+        <!--  Right column -->
+        <div class="col-md-3">
+          <div id="players-div">
+            <div class='row player-info player-info-{{ $index }}' ng-repeat='player in game.players'>
+              <div class='col-3'>
+                <img ng-src='{{player.avatar}}' class='player-info-img'>
+              </div>
+              <div class='col-6 player-info-name'>
+                <span ng-hide='isPlayer($index)'>{{player.username | upperFirstLetter}}</span>
+                <span ng-show='isPlayer($index)'>You</span>
+                <span id='the-czar' style="font-size:12px;" ng-show="currentCzar($index)">CZAR</span>
+              </div>
+              <div class='col-3 '>
+                <span class='player-info-score'>{{player.points}}/{{game.pointLimit}}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <answers></answers>
+    </div>
+
+    <!--  Chat  -->
+    <div class="right-container-bottom chat-box" ng-controller="ChatController">
+      <div class="chat-box__messenger" ng-show="isChatOpen">
+        <div class="chat-box__header">
+          <h4>Chats</h4>
+        </div>
+        <ul class="chats">
+          <li class="chat" ng-repeat="chat in chats">
+            <img class="chat__user-img" ng-src="{{chat.user.avatar}}" alt="{{chat.user.username}}">
+            <div class="chat__content">
+              <div class="chat__content--top">
+                <span class="chat__user-name">{{chat.user.username}}</span>
+                <span class="chat__created-at">{{chat.createdAt}}</span>
+              </div>
+              <p class="chat__message">{{chat.content}}</p>
+            </div>
+          </li>
+        </ul>
+        <form ng-submit="addChat()" class="chat-box__form">
+          <!-- <img src="https://image.flaticon.com/icons/png/512/42/42877.png" alt=""> -->
+          <input type="text" class="form-control" placeholder="What's on your mind?" ng-model="content" id="chatInput">
+        </form>
+      </div>
+      <div class="chat-box__launcher" ng-click="toggleChatOpen()">
+        <i class="fa fa-times fa-2x" aria-hidden="true" ng-show="isChatOpen"></i>
+        <i class="fa fa-comment fa-2x" aria-hidden="true" ng-hide="isChatOpen">
+          <span class="hasUnread" ng-show="hasUnreadMessages"></span>
+        </i>
+      </div>
+    </div>
+    <div ng-include='"/views/partials/start.html"'></div>
   </div>
 </div>

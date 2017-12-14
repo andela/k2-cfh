@@ -1,23 +1,18 @@
-<div id="startGame" style="opacity: 1" ng-init="loadModal()" ng-show="game.state === 'awaiting players' || game.playerIndex === 0 || game.joinOverride">
-  <div id="start" class="modal fade" style="opacity: 1; z-index: 3000; position:absolute; top: 50px;" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        
-        <div ng-model="game" class="modal-body text-center">
-          <div class="modal-header">
-            <h4 class="text-center">Card For Humanity</h4>
-          </div>
-          <h4 style="font-weight:bold; border-bottom: 1px solid #ccc; padding-bottom: 15px; padding-top: 15px; color:rgb(29, 28, 28)">Cards For Humanity</h4>
-          <span style="top: 10px;">
-            <button ng-hide="game.playerIndex !== 0" ng-disabled="game.players.length < 3" ng-click="startGame()" class="btn btn-lg btn-danger"
-              data-dismiss="modal">Start Game</button>
-          </span>
-          <span>
-            <button ng-hide="game.playerIndex !== 0" ng-disabled="game.players.length >= 12" data-toggle="modal" data-target="#myModal" class="btn btn-lg btn-danger">Invite Players</button>
-          </span>
-
-          <br/>
-          <br/>
+<div id="startGame" ng-init="loadModal()" ng-show="game.state === 'awaiting players' || game.joinOverride || game.state !== 'waiting for players to pick' || game.state !== 'game desolved'"
+  style="display: block;">
+  <div class="modal fade" id="start" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display:block; opacity:0.9; background: #000; padding-top:100px; z-index:10000;">
+    <div class="modal-dialog" role="document" style="margin-top:100px; background:#fff">
+      <div class="modal-content" style="background:#fff; opacity:1;">
+        <div class="modal-header" style="text-align:center">
+          <h5 class="modal-title" id="exampleModalLabel" style="text-align:center; font-weight:bold">Cards For Humanity</h5>
+        </div>
+        <div class="modal-body" style="text-align:center">
+          <br />
+          <button type="button" class="btn btn-secondary" ng-disabled="game.players.length < 3" ng-hide="game.playerIndex !== 0" ng-click="startGame()"
+            data-dismiss="modal" style="background-color: green; color:#fff">Start Game</button>
+          <button type="button" class="btn btn-primary" ng-hide="game.playerIndex !== 0" ng-disabled="game.players.length > 12 ">Invite Players</button>
+          <br />
+          <br />
           <figcaption>
             <span style="font-weight:bolder">You need at least three players to start the game</span>
             <br /> Finding Players
@@ -29,11 +24,14 @@
                 <img ng-src="../img/loader.gif" />
               </div>
             </div>
-            <span ng-show="game.players.length >= 3">Waiting for {{game.players[0].username}} to start the game  <br></span>
-            <br>{{game.players.length}} players found</figcaption>
+            <span ng-show="game.players.length >= 3">Waiting for {{game.players[0].username}} to start the game
+              <br>
+            </span>
+            <br>{{game.players.length}} player(s) found
+          </figcaption>
         </div>
         <div class="modal-footer">
-          <button id="close" type="button" ng-click="abandonGame()" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" ng-click="abandonGame()" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

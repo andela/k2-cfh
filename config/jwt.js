@@ -29,14 +29,14 @@ export const signUser = (user) => {
 };
 
 export const isLoggedIn = (req, res, next) => {
-  const token = res.headers['x-access-token'];
+  const token = req.headers.auth;
   jwt.verify(token, tokenSecret, (err, result) => {
     if (err) {
       return res.status(401).json({
         success: false,
         message: 'Failed to authenticate token'
       });
-      next();
     }
+    next();
   });
 };

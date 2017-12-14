@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+<div style="margin-top: 70px; margin-bottom: -70px; width: 100%;">
+  <div style="width:100%; min-height: 90px; background-image: url('/img/bet.png'); margin-bottom: 100px; clear: both;"></div>
+</div>
+>>>>>>> e1f353b7ff79d78543309ecbc616197ab309ce84
 <div ng-cloak id="cards-container" style="margin-top:70px;" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
   <div id="social-bar-container">
     <player></player>
@@ -29,8 +35,8 @@
 
 <div id="info-container" ng-show="game.state === 'awaiting players'" style="margin-top:80px; background-color:rgb(58, 64, 80);">
   <div id="inner-info">
-    <div id="lobby-how-to-play">How To Play</div>
-    <ol id="oh-el">
+    <div id="">How To Play</div>
+    <ol id="">
 
       <li>Each player begins with, and will always have, 10 white answer cards.</li>
       <li>For each round, one player is randomly chosen as the Card Czar.</li>
@@ -75,7 +81,7 @@
   </div>
 </div>
 <div style="clear:both"></div>
-<div id="czar-blank-container" style="position: absolute; top: 300px; display: block; z-index: 1000; width: 80%;" ng-show="isCzar() && game.state !== 'game ended' && game.state !== 'game dissolved' && game.state !== 'waiting for czar to decide' && game.state !== 'winner has been chosen'">
+<div id="czar-blank-container" style="position: absolute; display: block; z-index: 1000; width: 80%;" ng-show="isCzar() && game.state !== 'game ended' && game.state !== 'game dissolved' && game.state !== 'waiting for czar to decide' && game.state !== 'winner has been chosen'">
   <div style="clear:both"></div>
   <div id="czar-blank-inner" style="top:10px;">
     You are the Card Czar.

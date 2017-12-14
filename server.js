@@ -16,8 +16,8 @@ import config from './config/config';
 import auth from './config/middlewares/authorization';
 import routes from './config/routes';
 import expressConfig from './config/express';
-import QuestionModel from './app/seeders/questions';
-import AnsersMigration from './app/seeders/answers';
+// import QuestionModel from './app/seeders/questions';
+// import AnsersMigration from './app/seeders/answers';
 
 
 dotenv.config();

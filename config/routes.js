@@ -1,12 +1,17 @@
 import async from 'async';
 import { createGame } from '../app/controllers/gameHistory';
-import { isLoggedIn } from '../config/jwt';
+import { isLoggedIn } from './jwt';
 
 const route = (app, passport, auth) => {
   // User Routes
   const users = require('../app/controllers/users');
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
+
+  app.get('/signout', users.signout);
+  app.post('/api/auth/signup', users.createJwt);
+  app.post('/api/auth/signin', users.loginJwt);
+
   app.get('/chooseavatars', users.checkAvatar);
 
   app.get('/signout', users.signout);
