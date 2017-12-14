@@ -4,7 +4,6 @@
  */
 import mongoose from 'mongoose';
 import config from '../../config/config';
-
 const Schema = mongoose.Schema;
 
 /**
@@ -21,6 +20,9 @@ const AnswerSchema = new Schema({
   },
   official: {
     type: Boolean
+  },
+  location: {
+    type: String
   },
   expansion: {
     type: String,

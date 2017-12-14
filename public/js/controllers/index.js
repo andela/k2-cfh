@@ -64,8 +64,7 @@ angular.module('mean.system')
         const { token } = response.data;
         //  If signin was successful
         if (status === 200 && token) {
-          //  save token
-          // var token = response.token;
+        //  save token
           $window.localStorage.setItem('token', token);
           $location.path('/avatars');
         } else {
@@ -92,7 +91,7 @@ angular.module('mean.system')
     };
     //  Setting focus on elements
     $scope.init = () => {
-      $('#signupName,#signupUsername,#signupEmail,#signupPassword').focus(() => {
+      $('#signupName, #signupUsername, #signupEmail, #signupPassword').focus(() => {
         $('#signupFlash')
           .removeClass('su-error-success')
           .removeClass('su-error-failed')
@@ -118,7 +117,6 @@ angular.module('mean.system')
         //  If signin was successful
         if (status === 201 && token) {
           //  save token
-          // var token = response.token;
           $window.localStorage.setItem('token', token);
           $location.path('/avatars');
         } else {

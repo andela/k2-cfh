@@ -25,6 +25,7 @@ const route = (app, passport, auth) => {
   app.get('/signout', users.signout);
   app.post('/api/auth/signup', users.createJwt);
   app.post('/api/auth/signin', users.loginJwt);
+  app.post('/api/region', users.setRegion);
 
   // Donation Routes
   app.post('/donations', users.addDonation);

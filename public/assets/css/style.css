@@ -26,7 +26,10 @@ button{
 }
 
 .close-button{
-    display:inline-block;color:#0275d8;margin-top:7px;font-size:24px;
+    display:inline-block;
+    color:#0275d8;
+    margin-top:7px;
+    font-size:24px;
 }
 /***************************************   
         Template Links
@@ -1168,4 +1171,36 @@ footer{
 }
 .introjs-tooltipbuttons{
     text-align:center !important;
+}
+
+.ap-heading{
+    display:block;
+    font-size:20px;
+    color:gray;
+}
+.ap-button{
+    display:block !important;
+    padding:10px 20px;
+    min-width:150px;
+    border-radius:200px;
+    margin:0 auto;
+}
+.ap-error{
+    display:none;
+    color:red;
+    width:100%;
+    font-size:18px;
+    font-weight:200;
+}
+.ap-hpad{
+    padding-left:35px;
+}
+.region-text{
+    display:inline-block;
+    max-width:90%;
+    font-size:20px;
+    margin:-3px 0 0 5%;
+}
+.region-radio{
+    zoom:2;cursor:pointer;
 }
