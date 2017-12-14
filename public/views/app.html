@@ -10,7 +10,7 @@
   }
 </style>
 <div id='game-wrapper'>
-  <div id="main-controller-sub" ng-controller="GameController">
+  <div id="main-controller-sub" ng-controller="GameController" ng-init="loadModal()">
     <div ng-include src='"/views/partials/header.html"'></div>
     <div id="header-spacer"></div>
 
@@ -36,22 +36,22 @@
 
                   <!--  Finding players -->
                   <div id='intro-tab' class='game-screen-tab' ng-show='game.state === "awaiting players"'>
-                    <div id='finding-players-text'>Finding Players</div>
+                    <!-- <div id='finding-players-text'>Finding Players</div> -->
                     <div class='mt-4 row'>
-                      <div class='col-md-4 text-center'>
+                      <!-- <div class='col-md-4 text-center'>
                         <div class='player-count'>
                           <span class='top'>{{game.players.length}} / {{game.playerMaxLimit}}</span>
                           <span class='bottom'>Players</span>
                         </div>
-                      </div>
-                      <div class='col-md-3 text-center'>
-                        <img class='game-screen-loader' ng-src='/assets/img/loader.gif'>
-                      </div>
-                      <div class='col-md-5 text-center'>
+                      </div> -->
+                      <!-- <div class='col-md-3 text-center'>
+                        <img class='game-screen-loader' ng-src='../img/loader.gif'>
+                      </div> -->
+                      <!-- <div class='col-md-5 text-center'>
                         <button ng-click='startGame()' ng-show='( game.playerIndex === 0 || game.joinOverride ) && game.players.length >= game.playerMinLimit'
                           class='game-screen-button-2 mr-2' type='button'>Start Now</button>
                         <button ng-hide='game.players.length > game.playerMaxLimit' class='game-screen-button' type='button'>Invite Users</button>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
 
@@ -127,8 +127,8 @@
                         Help yourself to another game or help a child in need? Donating will also place a lovely crown on your avatar's head.
                       </h6>
                       <div class='mb-5 text-center'>
-                        <span class='game-donation-button'>Join a New Game</span>
-                        <span class='game-donation-button'>Return to Lobby</span>
+                        <span class='game-donation-button' ng-click='startGame()'>Join a New Game</span>
+                        <span class='game-donation-button' ng-click='abandonGame()'>Return to Lobby</span>
                       </div>
                     </div>
                     <div class='col-md-5'>
@@ -138,7 +138,9 @@
                           <span id='donate-box-amount'>$726</span>
                           <span id='donate-box-amount-text'>AMOUNT RAISED</span>
                         </div>
-                        <button id='donate-box-button'>Donate Now</button>
+                        <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
+                          <button id='donate-box-button' style="cursor:pointer;">Donate Now</button>
+                        </a>
                         <img src='/assets/img/cr.png' id='donate-box-image'>
                       </div>
                     </div>
@@ -184,6 +186,7 @@
               <div class='col-6 player-info-name'>
                 <span ng-hide='isPlayer($index)'>{{player.username | upperFirstLetter}}</span>
                 <span ng-show='isPlayer($index)'>You</span>
+                <span id='the-czar' style="font-size:12px;" ng-show="currentCzar($index)">CZAR</span>
               </div>
               <div class='col-3 '>
                 <span class='player-info-score'>{{player.points}}/{{game.pointLimit}}</span>
@@ -224,6 +227,6 @@
         </i>
       </div>
     </div>
-
+    <div ng-include='"/views/partials/start.html"'></div>
   </div>
 </div>

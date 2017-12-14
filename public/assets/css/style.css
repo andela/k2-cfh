@@ -604,6 +604,16 @@ footer{
     background:#3570B0;
     border-color:#3570B0;
 }
+.su-error-failed{
+    color:white;
+    background:#C2585A;
+    border-color:#C2585A;
+}
+.su-error-success{
+    color:white;
+    background:#3570B0;
+    border-color:#3570B0;
+}
 
 /***************************************   
         Sign Up only
