@@ -1,6 +1,6 @@
 /* eslint-disable max-len, no-undef, no-plusplus, no-underscore-dangle, no-unused-vars, no-use-before-define */
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', (socket, $timeout) => {
+  .factory('game', ['socket', '$timeout', '$http', (socket, $timeout, $http) => {
     const game = {
       id: null, // This player's socket ID, so we know who this player is
       gameID: null,
@@ -201,6 +201,12 @@ angular.module('mean.system')
     game.pickWinning = (card) => {
       socket.emit('pickWinning', { card: card.id });
     };
+
+    socket.on('game data', (gameData) => {
+      if (game.state === 'game ended' && game.czar === game.playerIndex) {
+        $http.post(`/api/games/${game.gameID}/start`, gameData);
+      }
+    });
 
     decrementTime();
 

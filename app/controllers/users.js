@@ -401,3 +401,20 @@ exports.inviteUser = (req, res) => {
     }
   });
 };
+
+exports.getDonations = (req, res) => {
+  User.find()
+    .then((response) => {
+      if (response.length === 0) {
+        return res.json({ message: 'no donations found' });
+      }
+      const donationData = [];
+      response.forEach((donationArray) => {
+        donationData.push({ name: donationArray.name, donations: donationArray.donations.length });
+      });
+      res.send(donationData);
+    })
+    .catch((error) => {
+      res.send(error.message);
+    });
+};

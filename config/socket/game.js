@@ -1,4 +1,4 @@
-/* eslint-disable max-len, import/no-dynamic-require, func-names, prefer-destructuring, no-plusplus, no-underscore-dangle, import/no-unresolved, no-use-before-define */
+/* eslint-disable max-len, import/no-dynamic-require, func-names, prefer-destructuring, no-plusplus, no-underscore-dangle, import/no-unresolved, no-use-before-define, import/newline-after-import */
 const async = require('async');
 const _ = require('underscore');
 const answers = require(`${__dirname}/../../app/controllers/answers.js`);
@@ -65,6 +65,7 @@ Game.prototype.payload = function () {
     players.push({
       hand: player.hand,
       points: player.points,
+      userID: player._id,
       username: player.username,
       avatar: player.avatar,
       premium: player.premium,
@@ -235,7 +236,33 @@ Game.prototype.stateResults = function (self) {
 
 Game.prototype.stateEndGame = function (winner) {
   this.state = 'game ended';
+  this.gameWinner = winner;
+  /* eslint-enable */
+  const winnerProfile = {
+    userID: this.players[winner].userID,
+    username: this.players[winner].username,
+    email: this.players[winner].email,
+    avatar: this.players[winner].avatar,
+  };
+  const allPlayers = [];
+  _.each(this.players, (player) => {
+    allPlayers.push({
+      userID: player.userID,
+      username: player.username,
+      email: player.email,
+      avatar: player.avatar,
+      points: player.points
+    });
+  });
   this.sendUpdate();
+  this.io.sockets.in(this.gameID).emit(
+    'game data',
+    {
+      gameID: this.gameID,
+      winner: winnerProfile,
+      players: allPlayers,
+    }
+  );
 };
 
 Game.prototype.stateDissolveGame = function () {

@@ -1,0 +1,152 @@
+<style>
+  body {
+    background-color: #ADD8E6;
+  }
+</style>
+<div ng-controller="DashboardController" class="authentication">
+    <header>
+      <div class="page-align">
+          <div class="row">
+              <div class="col-12 col-md-3">
+                  <img src="/assets/img/logo.png" id="header-logo">
+              </div>
+              <div class="hidden-sm-down col-md-9">
+                  <!-- id="signInModalShow" -->
+                  <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
+                      <button class="butB header-buttons float-right" type="button">DONATE</button>
+                  </a>
+                  <a href="#!/testimonies">
+                      <span class="header-links float-right" style="margin-right:30px;">TESTIMONIES</span>
+                  </a>
+                  <a href="#!/dashboard"><span class="header-links float-right">DASHBOARD</span></a>
+                  <a href="#!/">
+                      <span class="header-links float-right">HOME</span>
+                  </a>
+                  <div class="clear"></div>
+              </div>
+          </div>
+          <div class="hidden-md-up" id="navbar">
+              <a href="#!/">
+                  <span class="">HOME</span>
+              </a>
+              <a href="#!/testimonies">
+                  <span class="">TESTIMONIES</span>
+              </a>
+              <a href="javascript:;" id="signInModalShow2">
+                  <span>SIGN IN</span>
+              </a>
+              <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
+                  <span>DONATE</span>
+              </a>
+              <div class="clear"></div>
+          </div>
+      </div>
+  </header>
+    <div class="page-align">
+      <div class="row" style="background-color: #256188; width: 100%">
+          <div class="col-12 col-md-3">
+              <img src="/assets/img/logo.png" id="header-logo">
+          </div>
+          <div class="hidden-sm-down col-md-9">
+              <!-- id="signInModalShow" -->
+              <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
+                  <button class="butB header-buttons float-right" type="button">DONATE</button>
+              </a>
+              <a href="#!/dashboard"><span class="header-links float-right" style="">DASHBOARD</span></a>
+              <a href="#howtoplay" target="_self">
+                  <span class="header-links float-right">HOW TO PLAY</span>
+              </a>
+              <a href="#!/">
+                  <span class="header-links float-right">HOME</span>
+              </a>
+              <div class="clear"></div>
+          </div>
+      </div>
+  <br>
+  <br>
+ <div class="col-md-8 col-md-offset-2 text-center" style="margin: 100px auto">
+     <div class="btn-group" role="group" style="margin: 2px">
+       <button type="button" class="btn btn-default btn-lg" ng-click="showGames()">Games</button>
+       &nbsp
+       <button type="button" class="btn btn-default btn-lg" ng-click="showLeaderBoard()">LeaderBoard</button>
+       &nbsp
+       <button type="button" class="btn btn-default btn-lg" ng-click="showDonations()">Donations</button>
+     </div>
+     <br>
+     <br>
+     <br>
+     <br>
+
+    <div class="panel panel-default signup-panel" > 
+        <div style="background-color: #256188; height: 40px; color: #ffffff; padding: 10px;">
+          <span>Dashboard</span>
+        </div>
+        <div ng-show="noDonations">
+            <h3>You haven't made any donations yet</h3>
+        </div>
+     <div class="table-responsive">
+
+     <table class="table table-striped table-bordered" ng-show="donations"  style="background-color: #fff">    
+      <thead>
+        <tr>
+          <th class="text-center">#</th>
+          <th class="text-center">User</th>
+          <th class="text-center">Donations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="information in donationData">
+            <td>{{ $index+1 }}</td>
+            <td>{{ information.name }}</td>
+            <td>{{ information.donations }}</td>
+        </tr>
+      </tbody>
+     </table>
+     
+     <table class="table table-bordered  table-striped" ng-show="leaderboard" style="table-layout: fixed; background-color: #fff">
+         <thead>
+             <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Wins</th>
+            </tr>
+         </thead>
+        <tbody>
+           <tr ng-repeat="leaderBoard in leaderboardInfo">
+            <td>{{ $index+1 }}</td>
+            <td>{{leaderBoard._id}}</td>
+            <td>{{leaderBoard.count}}</td>
+           </tr>
+        </tbody>
+     </table>
+
+      <table class="table table-bordered  table-striped" ng-show="gameLog" style="background-color: #fff">
+          <thead>
+              <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Winner</th>
+                <th class="text-center">Friends Played with</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="gamelog in gameLogInfo">
+                <td>{{ $index+1 }}</td>
+                <td>{{ gamelog.winner.username }}</td>
+                <td>
+                    <ul style="list-style-type: none">
+                        <li ng-repeat="player in gamelog.players"> 
+                            <span ng-if="player.points < 5">{{ player.username }}</span>
+                        </li>
+                    </ul>
+
+                </td>
+            </tr>
+        </tbody>
+     </table>
+
+     </div>
+    </div>
+ </div>
+</div> 
+</div> 
+
