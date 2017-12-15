@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved, import/extensions */
+/* eslint-disable import/no-unresolved, import/extensions, no-unused-vars */
 import jwt from 'jsonwebtoken';
 import { tokenSecret } from '../config/env/all';
 
@@ -28,3 +28,15 @@ export const signUser = (user) => {
   return jwt.sign(user, token);
 };
 
+export const isLoggedIn = (req, res, next) => {
+  const token = req.headers.auth;
+  jwt.verify(token, tokenSecret, (err, result) => {
+    if (err) {
+      return res.status(401).json({
+        success: false,
+        message: 'Failed to authenticate token'
+      });
+    }
+    next();
+  });
+};

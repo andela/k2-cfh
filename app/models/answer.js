@@ -2,14 +2,15 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  config = require('../../config/config'),
-  Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+import config from '../../config/config';
+
+const Schema = mongoose.Schema;
 
 /**
  * Answer Schema
  */
-var AnswerSchema = new Schema({
+const AnswerSchema = new Schema({
   id: {
     type: Number
   },
@@ -32,11 +33,12 @@ var AnswerSchema = new Schema({
  * Statics
  */
 AnswerSchema.statics = {
-  load: function(id, cb) {
+  load: (id, cb) => {
     this.findOne({
       id: id
     }).select('-_id').exec(cb);
   }
 };
 
-mongoose.model('Answer', AnswerSchema);
+const AnswerModel = mongoose.model('Answer', AnswerSchema);
+export default AnswerModel;

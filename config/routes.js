@@ -1,5 +1,9 @@
-/* eslint-disable max-len, global-require, import/no-unresolved */
-module.exports = (app, passport) => {
+/*  eslint-disable */
+import async from 'async';
+import { createGame } from '../app/controllers/gameHistory';
+import { isLoggedIn } from '../config/jwt';
+
+const route = (app, passport, auth) => {
   // User Routes
   const users = require('../app/controllers/users');
   app.get('/signin', users.signin);
@@ -7,11 +11,13 @@ module.exports = (app, passport) => {
   app.get('/chooseavatars', users.checkAvatar);
 
   app.get('/signout', users.signout);
-  app.post('/api/auth/signup', users.createJwt);
-  app.post('/api/auth/signin', users.loginJwt);
   // Setting up the users api
   app.post('/users', users.create);
   app.post('/users/avatars', users.avatars);
+
+  app.get('/signout', users.signout);
+  app.post('/api/auth/signup', users.createJwt);
+  app.post('/api/auth/signin', users.loginJwt);
 
   // Donation Routes
   app.post('/donations', users.addDonation);
@@ -85,4 +91,9 @@ module.exports = (app, passport) => {
   app.get('/', index.render);
   app.get('/api/search/users', users.searchUser);
   app.post('/api/users/invite', users.inviteUser);
+
+  // game route
+  app.post('/api/games/:id/start', isLoggedIn, createGame);
 };
+
+export default route;
