@@ -1,6 +1,7 @@
-/* eslint-disable max-len, no-undef, no-unused-vars */
+/* eslint-disable */
+
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) => {
+  .controller('GameController', ['$scope', 'game', '$timeout', '$http', '$location', 'MakeAWishFactsService', '$dialog', '$window', function ($scope, game, $timeout, $http, $location, MakeAWishFactsService, $dialog, $window) {
     toastr.options = {
       positionClass: 'toast-top-full-width',
       progressBar: 'true',
@@ -16,6 +17,7 @@ angular.module('mean.system')
     $scope.showTable = false;
     $scope.modalShown = false;
     $scope.game = game;
+    $scope.gameStarted = false;
     $scope.pickedCards = [];
     $scope.searchTerm = '';
     $scope.invitedUsers = [];
@@ -120,6 +122,9 @@ angular.module('mean.system')
     $scope.abandonGame = () => {
       game.leaveGame();
       $location.path('/');
+      $('#start').modal('hide');
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove();
     };
 
     // Catches changes to round to update when no players pick card
@@ -135,10 +140,66 @@ angular.module('mean.system')
       $scope.pickedCards = [];
     });
 
+    $scope.loadModal = () => {
+      if (game.state === 'awaiting players') {
+        $('#start').modal({
+          show: true,
+          backdrop: 'static',
+          keyboard: false,
+        });
+        if (game.state === 'waiting for players to pick') {
+          $('#start').modal('hide');
+          $('body').removeClass('modal-open');
+          $('.modal-backdrop').remove();
+        }
+      }
+    }
+
+
     // In case player doesn't pick a card in time, show the table
     $scope.$watch('game.state', () => {
+      $scope.loadModal();
+      if (game.state === 'waiting for players to pick') {
+        $('#start').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+      }
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
+        $('#start').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
         $scope.showTable = true;
+      }
+      if (!game.state) {
+        $('#start').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        $scope.showTable = true;
+      }
+      if (game.state === 'game ended' && game.playerIndex === game.czar) {
+        const players = game.players.map(player => {
+          return player.username;
+        });
+        const data = {
+          gameID: game.gameID,
+          creator: game.players[0].username,
+          rounds: game.round,
+          winner: game.players[game.winningCardPlayer].username,
+          players,
+        };
+
+        const token = localStorage.getItem('token');
+
+        $http.post('/api/games/' + game.gameID + '/start', data, {
+          headers: {
+            auth: token
+          }
+        })
+          .success(function (response) {
+            console.log(response);
+          }).error(function (error) {
+            console.log(error);
+          });
       }
     });
 
@@ -166,7 +227,6 @@ angular.module('mean.system')
         }
       }
     });
-
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       game.joinGame('joinGame', $location.search().game);
