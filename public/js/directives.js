@@ -65,7 +65,13 @@ angular.module('mean.directives', [])
       templateUrl: '/views/timer.html',
       link: function(scope, elem, attr){}
     };
-  }).directive('landing', function() {
+  }).directive('search', function () {
+    return {
+      restrict: 'EA',
+      templateUrl: '/views/search.html',
+      link: function (scope, elem, attr) { }
+    };
+  }).directive('landing', function () {
     return {
       restrict: 'EA',
       link: function(scope, elem, attr) {
