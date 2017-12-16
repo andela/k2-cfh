@@ -24,7 +24,6 @@ angular.module('mean.system')
     $scope.inviteCounter = 0;
     $scope.invited = [];
     $scope.inviteList = [];
-    $scope.notifications = [];
     
     let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();

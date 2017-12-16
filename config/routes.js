@@ -12,6 +12,7 @@ const route = (app, passport, auth) => {
   app.post('/api/games/:gameID/start');
   app.param('gameID', logGame.saveGameLog);
 
+  app.get('/signout', users.signout);
   // Add friends
   app.put('/api/user/friends', checkToken.validateToken, users.addFriend);
   app.get('/api/user/friends', checkToken.validateToken, users.getFirendsList);

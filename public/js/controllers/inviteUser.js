@@ -4,6 +4,7 @@ angular.module('mean.system')
     $scope.searchTerm = '';
     $scope.invitedUsers = [];
     $scope.message = '';
+    $scope.notifications = [];
     $scope.searchUser = () => {
       const { searchTerm } = $scope;
       $scope.searchResult = [];
@@ -98,6 +99,7 @@ angular.module('mean.system')
         .then(
           (response) => {
             $scope.notifications = response.data.notifications.sort((a, b) => b.id - a.id);
+            console.log('Here >>>>', $scope.notifications);
             if ($scope.notifications.length >= 1) {
               toastr.success(`You have ${$scope.notifications.length} new Notification${$scope.notifications.length > 1 ? 's' : ''}!`);
             }
@@ -109,6 +111,10 @@ angular.module('mean.system')
     };
 
     $scope.loadNotifications();
+
+    $scope.viewNotification = function () {
+      $('#notify').modal('show');
+    };
 
     $scope.inviteUser = (email) => {
       $scope.invitedUsers.push(email);
