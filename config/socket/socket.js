@@ -70,6 +70,13 @@ module.exports = function (io) {
       exitGame(socket);
     });
 
+    socket.on('broadcastNotification', (userId) => {
+      console.log('Broad Casting.........', userId);
+      const thisGame = allGames[socket.gameID];
+      thisGame.broadcastNotification(userId);
+      console.log('sending notifications.....');
+    });
+
     socket.on('disconnect', () => {
       console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       exitGame(socket);

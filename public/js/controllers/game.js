@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$http', '$location', 'MakeAWishFactsService', '$dialog', '$window', function ($scope, game, $timeout, $http, $location, MakeAWishFactsService, $dialog, $window) {
+  .controller('GameController', ['$scope', 'socket', 'game', '$timeout', '$http', '$location', 'MakeAWishFactsService', '$dialog', '$window', function ($scope, socket, game, $timeout, $http, $location, MakeAWishFactsService, $dialog, $window) {
     toastr.options = {
       positionClass: 'toast-top-full-width',
       progressBar: 'true',
@@ -21,6 +21,11 @@ angular.module('mean.system')
     $scope.pickedCards = [];
     $scope.searchTerm = '';
     $scope.invitedUsers = [];
+    $scope.inviteCounter = 0;
+    $scope.invited = [];
+    $scope.inviteList = [];
+    $scope.notifications = [];
+    
     let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
