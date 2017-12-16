@@ -29,6 +29,9 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
         .when('/dashboard', {
           templateUrl: '/views/gamelogs.html'
         })
+        .when('/test', {
+          templateUrl: '/views/test.html'
+        })
         .otherwise({
           redirectTo: '/avatars'
         });

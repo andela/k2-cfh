@@ -155,6 +155,21 @@ angular.module('mean.system')
       }
     }
 
+    $scope.addFriend = (email) => {
+      const token = localStorage.getItem('token');
+
+      $http.post('/api/users/addfriend', email, {
+        headers: {
+          auth: token
+        }
+      })
+        .success(function (response) {
+          console.log(response);
+        }).error(function (error) {
+          console.log(error);
+        });
+    }
+
 
     // In case player doesn't pick a card in time, show the table
     $scope.$watch('game.state', () => {
