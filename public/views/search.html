@@ -59,7 +59,7 @@
 
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Search</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Friends</button>
+  <button class="tablinks" ng-click="getFriendsList()" onclick="openCity(event, 'Paris')">Friends</button>
 </div>
 
 <!-- Tab content -->
@@ -72,7 +72,7 @@
   <div ng-hide="(game.player.length > game.playerMaxLimit)" class="modal-body" style="">
     <p style="text-align:center; color: red;">{{ message }}</p>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="type a name to search" autocomplete="off" ng-change="searchUser()" ng-blur=""
+      <input type="text" class="form-control" placeholder="type a name to search" autocomplete="off" ng-change="searchUser(); getFriendsList()" ng-blur=""
         ng-model="searchTerm" id="name">
     </div>
     <div>
@@ -84,7 +84,7 @@
             </div>
             <div class="col-md-6">
               <button class="btn btn-sm btn-warning" ng-click="inviteUser(user.email)" ng-disabled="isInvited(user.email)" style="float:left; margin-right: 5px;">invite</button>
-              <button class="btn btn-sm btn-success" ng-click="" ng-disabled="" style="float:left">Add as friend</button>
+              <button class="btn btn-sm btn-success" ng-click="addFriend(user.name, user._id, user.email)" ng-disabled="" style="float:left">Add as friend</button>
             </div>
           </div>
         </li>
@@ -95,7 +95,18 @@
 </div>
 
 <div id="Paris" class="tabcontent">
-
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="friend in friendsList" style="width:100%">
+      <div class="row" style="width:100%">
+        <div class="col-md-6">
+          <p>{{friend.friendName}}</p>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-sm btn-warning" ng-click="sendNotification(friend.friendId, friend.friendEmail)" ng-disabled="isInvited(user.email)" style="float:left; margin-right: 5px;">invite</button>
+        </div>
+      </div>
+    </li>
+  </ul>
 
 </div>
 

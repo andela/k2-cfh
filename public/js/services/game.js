@@ -55,6 +55,10 @@ angular.module('mean.system')
       $timeout(decrementTime, 950);
     };
 
+    game.broadcastNotification = function (data) {
+      socket.emit('broadcastNotification', data);
+    };
+
     socket.on('id', (data) => {
       game.id = data.id;
     });
@@ -180,8 +184,11 @@ angular.module('mean.system')
       mode = mode || 'joinGame';
       room = room || '';
       createPrivate = createPrivate || false;
+      const token = localStorage.getItem('token');
       const userID = window.user ? user._id : 'unauthenticated';
-      socket.emit(mode, { userID, room, createPrivate });
+      socket.emit(mode, {
+        userID, room, createPrivate, token
+      });
     };
 
     game.startGame = () => {

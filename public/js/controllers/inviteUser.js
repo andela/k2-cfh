@@ -1,6 +1,6 @@
 /* eslint-disable no-undef,  */
 angular.module('mean.system')
-  .controller('InviteUserController', ['$scope', 'socket', '$window', '$http', ($scope, socket, $window, $http) => {
+  .controller('InviteUserController', ['$scope', 'socket', 'game', '$window', '$http', ($scope, socket, game, $window, $http) => {
     $scope.searchTerm = '';
     $scope.invitedUsers = [];
     $scope.message = '';
@@ -39,14 +39,13 @@ angular.module('mean.system')
         friendName,
         friendEmail
       };
-
       $scope.setHttpHeader();
       $http.put('/api/user/friends', payload)
         .then(
-          (response) => {
+          () => {
             $scope.getFriendsList();
           },
-          (error) => {
+          () => {
             $scope.getFriendsList();
           }
         );
@@ -60,10 +59,9 @@ angular.module('mean.system')
         .then(
           (response) => {
             $scope.friendsList = response.data;
-            console.log($scope.friendsList);
             $scope.friendsId = response.data.map(friend => friend.friendId);
           },
-          (error) => {
+          () => {
             $scope.friendsList = [];
           }
         );
@@ -76,40 +74,35 @@ angular.module('mean.system')
         friendId
       };
       $scope.setHttpHeader();
-      $http.post('/api/notifications', payload).then((response) => {
+      $http.post('/api/notifications', payload).then(() => {
         $scope.inviteList.push(friendId);
-        console.log('here %%%%');
-        userID = game.players.filter(e => e.email === friendEmail);
-        console.log('it works >>', userID[0]);
+
+        const userID = game.players.filter(e => e.email === friendEmail);
         game.broadcastNotification(userID[0].socketID);
       });
     };
 
     socket.on('notificationReceived', (userId) => {
-      userID = game.players[game.playerIndex].socketID;
-      console.log('>>>>>>>>>>>', game.playerIndex);
+      const userID = game.players[game.playerIndex].socketID;
       if (userId === userID) {
-        console.log('userId:  >>>', userID);
         $scope.loadNotifications();
       } else {
-        console.log('not you man');
+        // console.log('not you man');
       }
     });
 
 
     $scope.loadNotifications = () => {
-      console.log('loading Notifications....');
       $scope.setHttpHeader();
       $http.get('/api/notifications')
         .then(
           (response) => {
-            console.log('from response', response.data);
             $scope.notifications = response.data.notifications.sort((a, b) => b.id - a.id);
             if ($scope.notifications.length >= 1) {
               toastr.success(`You have ${$scope.notifications.length} new Notification${$scope.notifications.length > 1 ? 's' : ''}!`);
             }
           },
-          (error) => {
+          () => {
             $scope.notifications = $scope.notifications;
           }
         );

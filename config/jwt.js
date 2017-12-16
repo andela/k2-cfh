@@ -40,3 +40,28 @@ export const isLoggedIn = (req, res, next) => {
     next();
   });
 };
+
+/**
+   * Verify JWT token
+   *
+   * @param {string} token
+   * @returns {object} user
+   * @memberof Auth
+   */
+export const verifyToken = (token) => {
+  let user = {};
+  if (token) {
+    const secret = process.env.JWT_SECRET || 'randomstring!^_)$';
+    jwt.verify(token, secret, (err, decoded) => {
+      if (err) {
+        user = { id: null };
+      } else {
+        user = decoded;
+      }
+    });
+  } else {
+    user = { id: null };
+  }
+
+  return user;
+};
