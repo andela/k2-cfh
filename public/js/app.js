@@ -11,6 +11,9 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
         .when('/app', {
           templateUrl: '/views/app.html',
         })
+        .when('/tour', {
+          templateUrl: '/views/tour.html',
+        })
         .when('/avatars', {
           templateUrl: '/views/avatars.html'
         })
