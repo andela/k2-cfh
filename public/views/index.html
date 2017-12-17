@@ -26,7 +26,9 @@
                 </div>
                 <div class="hidden-sm-down col-md-9">
                     <!-- id="signInModalShow" -->
-                    <button class="butA header-buttons float-right" type="button" ng-click='signInClick()'>SIGN IN</button>
+                    <button ng-show="showOptions" class="butA header-buttons float-right" type="button" ng-click='signInClick()'>SIGN IN</button>
+                    <button ng-hide="showOptions" class="butA header-buttons float-right" type="button" ng-click="signOut()" >SIGN OUT</a>
+                        
                     <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
                         <button class="butB header-buttons float-right" type="button">DONATE</button>
                     </a>
@@ -85,11 +87,20 @@
                         Cards for Humanity is a fast-paced online version of the popular card game, that provides a platform where you have fun and
                         have the opportunity to donate to children in need.
                     </p>
-                    <div class="text-center">
+                    <div class="text-center" ng-show="showOptions">
                         <a href="/#!/app">
                             <button class="butA banner-buttons">PLAY AS A GUEST</button>
                         </a>
                         <button class="butB banner-buttons" ng-click='signUpClick()'>SIGN UP</button>
+                    </div>
+
+                    <div class="text-center" ng-hide="showOptions">
+                        <a href="/#!/app">
+                            <button class="butA banner-buttons">PLAY WITH STRANGERS</button>
+                        </a>
+                        <a href="/#!/app?custom">
+                            <button class="butA banner-buttons">PLAY WITH FRIENDS</button>
+                        </a>
                     </div>
                 </div>
             </div>

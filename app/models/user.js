@@ -25,6 +25,7 @@ const UserSchema = mongoose.Schema({
   facebook: {},
   twitter: {},
   github: {},
+  friends: [],
   google: {}
 });
 

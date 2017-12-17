@@ -3,6 +3,7 @@ const Game = require('./game');
 const Player = require('./player');
 require('console-stamp')(console, 'm/dd HH:MM:ss');
 const mongoose = require('mongoose');
+const jwt = require('../jwt');
 
 const User = mongoose.model('User');
 
@@ -70,6 +71,13 @@ module.exports = function (io) {
       exitGame(socket);
     });
 
+    socket.on('broadcastNotification', (userId) => {
+      console.log('Broad Casting.........', userId);
+      const thisGame = allGames[socket.gameID];
+      thisGame.broadcastNotification(userId);
+      console.log('sending notifications.....');
+    });
+
     socket.on('disconnect', () => {
       console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       exitGame(socket);
@@ -79,10 +87,12 @@ module.exports = function (io) {
   let joinGame = (socket, data) => {
     const player = new Player(socket);
     data = data || {};
-    player.userID = data.userID || 'unauthenticated';
-    if (data.userID !== 'unauthenticated') {
+    // player.userID = data.userID || 'unauthenticated';
+    if (data.token) {
+      const decoderUser = jwt.verifyToken(data.token);
+      console.log(decoderUser);
       User.findOne({
-        _id: data.userID
+        _id: decoderUser.id
       }).exec((err, user) => {
         if (err) {
           console.log('err', err);
@@ -93,8 +103,10 @@ module.exports = function (io) {
           player.username = 'Guest';
           player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
         } else {
+          console.log(user);
           player.userID = user._id;
           player.username = user.name;
+          player.email = user.email;
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random() * 4) + 12];
         }

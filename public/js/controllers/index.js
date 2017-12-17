@@ -1,6 +1,12 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', ($scope, Global, $location, socket, game) => {
+  .controller('IndexController', ['$scope', '$window', '$route', 'Global', '$location', 'socket', 'game', ($scope, $window, $route, Global, $location, socket, game) => {
     $scope.global = Global;
+
+    $scope.signOut = () => {
+      $window.localStorage.removeItem('token');
+      $location.path('/');
+      $route.reload();
+    };
 
     $scope.playAsGuest = () => {
       game.joinGame();

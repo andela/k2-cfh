@@ -50,45 +50,73 @@
                       <div class='col-md-5 text-center'>
                         <button ng-click='startGame()' ng-show='( game.playerIndex === 0 || game.joinOverride ) && game.players.length >= game.playerMinLimit'
                           class='game-screen-button-2 mr-2' type='button'>Start Now</button>
-                        <button ng-hide='game.players.length > game.playerMaxLimit' class='game-screen-button' type='button' data-toggle="modal" data-target="#myModal">Invite Users</button>
+                        <button ng-hide='game.players.length > game.playerMaxLimit' class='game-screen-button' type='button' data-toggle="modal"
+                          data-target="#myModal">Invite Users</button>
                       </div>
                     </div>
                   </div>
 
-                  <div id='myModal' class='modal fade' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' ng-controller='InviteUserController' style="opacity: 1">
-                    <div class="modal-dialog" style="margin-top: 200px">
-                      <div class="modal-content">
-                  
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                          <h4 class="modal-title">Search for Users</h4>
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                  
-                        <!-- Modal body  -->
-                        <div ng-hide="(game.player.length > game.playerMaxLimit)" class="modal-body">
-                            <p style="text-align:center; color: red;">{{ message }}</p>
-                          <div class="form-group">
-                            <input type="text" class="form-control" placeholder="type a name to search" autocomplete="off" ng-change="searchUser()" ng-blur="" ng-model="searchTerm" id="name">
+                  <div id='myModal' class='modal fade' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' ng-controller='InviteUserController'
+                    style="opacity: 1; z-index: 80000">
+                    <div class="modal-dialog" style="
+                      top: 100px; 
+                      -webkit-max-logical-height: -webkit-fill-available;">
+
+
+
+                      <div class="modal-content" id="myTab" style="padding-top:5px;">
+                        <!-- Nav tabs -->
+                       <search></search>
+
+                        <div class="tab-content">
+                          <div id="#search" class="tab-pane active" role="tabpanel">
+                            <!-- Modal Header -->
+                            
+
+                                                        <div class="modal-body" ng-show="(game.player.length > game.playerMaxLimit)">
+                              <p>Maximum number of players reached.</p>
+                            </div>
                           </div>
-                          <div>
-                            <ul class="list-group">
-                              <li class="list-group-item" ng-repeat="user in searchResult">
-                                <div class="row">
-                                  <div class="col-md-4">
-                                    <p>{{user.name}}</p>
-                                  </div>
-                                  <div class="col-md-4 offset-md-4">
-                                      <button class="btn btn-color" ng-click="inviteUser(user.email)" ng-disabled="isInvited(user.email)">invite</button>
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
+
+                          <div id="#friends" class="tab-pane" role="tabpanel">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">Friends</h4>
+                            </div>
+
+                            <!-- Modal body  -->
+                            <div ng-hide="(game.player.length > game.playerMaxLimit)" class="modal-body">
+                              <p style="text-align:center; color: red;">{{ message }}</p>
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="type a name to search" autocomplete="off" ng-change="searchUser()" ng-blur=""
+                                  ng-model="searchTerm" id="name">
+                              </div>
+                              <div>
+                                <ul class="list-group">
+                                  <li class="list-group-item" ng-repeat="user in searchResult" style="width:100%">
+                                    <div class="row" style="width:100%">
+                                      <div class="col-md-6">
+                                        <p>{{user.name}}</p>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <button class="btn btn-sm btn-warning" ng-click="inviteUser(user.email)" ng-disabled="isInvited(user.email)" style="float:left; margin-right: 5px;">invite</button>
+                                        <button class="btn btn-sm btn-success" ng-click="inviteUser(user.email)" ng-disabled="isInvited(user.email)" style="float:left">Add as friend</button>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="modal-body" ng-show="(game.player.length > game.playerMaxLimit)">
+                              <p>Maximum number of players reached.</p>
+                            </div>
                           </div>
                         </div>
-                        <div class="modal-body" ng-show="(game.player.length > game.playerMaxLimit)">
-                          <p>Maximum number of players reached.</p>
-                        </div>
+
+
+
+
+
                         <!-- Modal footer -->
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -266,6 +294,19 @@
         </i>
       </div>
     </div>
+
     <div ng-include src='"/views/partials/start.html"'></div>
   </div>
 </div>
+<script>
+  $('document').ready(function () {
+    $('#search a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+    $('#friends a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+  });
+</script>

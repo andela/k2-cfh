@@ -7,10 +7,22 @@ const route = (app, passport, auth) => {
   // User Routes
   const users = require('../app/controllers/users');
   const logGame = require('../app/controllers/gamelog');
+  const checkToken = require('./middlewares/auth');
 
   app.post('/api/games/:gameID/start');
   app.param('gameID', logGame.saveGameLog);
 
+  app.get('/signout', users.signout);
+  // Add friends
+  app.put('/api/user/friends', checkToken.validateToken, users.addFriend);
+  app.get('/api/user/friends', checkToken.validateToken, users.getFirendsList);
+
+  // Notification routes
+  const notification = require('../app/controllers/notification');
+  app.post('/api/notifications', checkToken.validateToken, notification.addNotification);
+  app.get('/api/notifications', checkToken.validateToken, notification.loadNotification);
+  app.put('/api/notification/:id', checkToken.validateToken, notification.readNotification);
+  
   app.get('/api/leaderboard', logGame.getLeaderBoard);
   app.get('/api/games/history', logGame.gameHistory);
   app.get('/signin', users.signin);

@@ -69,6 +69,7 @@ Game.prototype.payload = function () {
       points: player.points,
       userID: player._id,
       username: player.username,
+      email: player.email,
       avatar: player.avatar,
       premium: player.premium,
       socketID: player.socket.id,
@@ -89,6 +90,12 @@ Game.prototype.payload = function () {
     pointLimit: this.pointLimit,
     curQuestion: this.curQuestion
   };
+};
+
+
+Game.prototype.broadcastNotification = function (userId) {
+  console.log('fron sockets', userId);
+  this.io.sockets.emit('notificationReceived', userId);
 };
 
 Game.prototype.sendNotification = function (msg) {

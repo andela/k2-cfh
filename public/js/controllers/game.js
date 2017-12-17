@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$http', '$location', 'MakeAWishFactsService', '$dialog', '$window', function ($scope, game, $timeout, $http, $location, MakeAWishFactsService, $dialog, $window) {
+  .controller('GameController', ['$scope', 'socket', 'game', '$timeout', '$http', '$location', 'MakeAWishFactsService', '$dialog', '$window', function ($scope, socket, game, $timeout, $http, $location, MakeAWishFactsService, $dialog, $window) {
     toastr.options = {
       positionClass: 'toast-top-full-width',
       progressBar: 'true',
@@ -21,6 +21,10 @@ angular.module('mean.system')
     $scope.pickedCards = [];
     $scope.searchTerm = '';
     $scope.invitedUsers = [];
+    $scope.inviteCounter = 0;
+    $scope.invited = [];
+    $scope.inviteList = [];
+    
     let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
@@ -155,6 +159,21 @@ angular.module('mean.system')
           $('.modal-backdrop').remove();
         }
       }
+    }
+
+    $scope.addFriend = (email) => {
+      const token = localStorage.getItem('token');
+
+      $http.post('/api/users/addfriend', email, {
+        headers: {
+          auth: token
+        }
+      })
+        .success(function (response) {
+          console.log(response);
+        }).error(function (error) {
+          console.log(error);
+        });
     }
 
 
