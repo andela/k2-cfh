@@ -2,7 +2,7 @@ angular.module('mean.system')
   .controller('avatarsController', [
     '$scope', '$location', 'AvatarService', '$http', '$window', '$cookies', ($scope, $location, AvatarService, $http, $window, $cookies) => {
       $scope.counter = 0;
-      //  Check if token is saved in cookie
+      $scope.locations = ['Africa', 'Europe', 'Asia', 'America', 'Australia', 'Antartica'];
       //  Move it to localstorage and remove from cookie
       const { token } = $cookies;
       if (typeof token === 'string') {
@@ -20,16 +20,24 @@ angular.module('mean.system')
 
       //  Setting up avatar
       let avatar = null;
+      let selectedLocation = null;
       //  to select an avatar
+      $scope.selectLocation = (location) => {
+        selectedLocation = location;
+      };
+
       $scope.checkAvatar = (index) => {
         $('#avatarError').css('display', 'none');
         $('.signup-avatar').removeClass('signup-avatar-active').addClass('signup-avatar-inactive');
         $(`#avatar${index}Span`).removeClass('signup-avatar-inactive').addClass('signup-avatar-active');
         avatar = $scope.avatars[index];
       };
+
       $scope.finish = () => {
         if (typeof avatar !== 'string') {
           $('#avatarError').css('display', 'block');
+        } else if (typeof selectedLocation !== 'string') {
+          $('#avatarError').html('Please select a region').css('display', 'block');
         } else {
           $window.localStorage.setItem('avatar', avatar);
           $location.path('/app');

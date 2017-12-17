@@ -25,6 +25,9 @@ var QuestionSchema = new Schema({
   official: {
     type: Boolean
   },
+  location: {
+    type: String
+  },
   expansion: {
     type: String,
     default: '',

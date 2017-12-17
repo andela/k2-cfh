@@ -1,4 +1,5 @@
-/* eslint-disable max-len, import/no-dynamic-require, func-names, prefer-destructuring, no-plusplus, no-underscore-dangle, import/no-unresolved, no-use-before-define, import/newline-after-import */
+/* eslint-disable max-len, import/no-dynamic-require, import/extensions, func-names, prefer-destructuring, no-plusplus, no-underscore-dangle, import/no-unresolved, no-use-before-define, import/newline-after-import */
+import { LocalStorage } from 'node-localstorage';
 const async = require('async');
 const _ = require('underscore');
 const answers = require(`${__dirname}/../../app/controllers/answers.js`);
@@ -17,6 +18,7 @@ const guestNames = [
   'The Spleen',
   'Dingle Dangle'
 ];
+const localStorage = new LocalStorage('./scratch');
 
 /**
  * function Game
@@ -137,8 +139,10 @@ Game.prototype.prepareGame = function () {
       if (err) {
         // console.log(err);
       }
-      self.questions = results[0];
-      self.answers = results[1];
+      self.questions = results[0].filter(result => result.location === localStorage.getItem('region'));
+      self.answers = results[1].filter(result => result.location === localStorage.getItem('region'));
+
+      console.log(self.questions);
 
       self.startGame();
     }
@@ -288,7 +292,7 @@ Game.prototype.shuffleCards = function (cards) {
   let randNum;
 
   while (shuffleIndex) {
-    randNum = Math.floor(Math.random() * shuffleIndex--);
+    randNum = Math.floor(Math.random() * (shuffleIndex -= 1));
     temp = cards[randNum];
     cards[randNum] = cards[shuffleIndex];
     cards[shuffleIndex] = temp;
@@ -302,7 +306,7 @@ Game.prototype.dealAnswers = function (maxAnswers) {
   const storeAnswers = function (err, data) {
     this.answers = data;
   };
-  for (let i = 0; i < this.players.length; i++) {
+  for (let i = 0; i < this.players.length; i += 1) {
     while (this.players[i].hand.length < maxAnswers) {
       this.players[i].hand.push(this.answers.pop());
       if (!this.answers.length) {
@@ -339,9 +343,9 @@ Game.prototype.pickCards = function (thisCardArray, thisPlayer) {
       if (!previouslySubmitted) {
         // Find the indices of the cards in the player's hand (given the card ids)
         const tableCard = [];
-        for (let i = 0; i < thisCardArray.length; i++) {
+        for (let i = 0; i < thisCardArray.length; i += 1) {
           let cardIndex = null;
-          for (let j = 0; j < this.players[playerIndex].hand.length; j++) {
+          for (let j = 0; j < this.players[playerIndex].hand.length; j += 1) {
             if (this.players[playerIndex].hand[j].id === thisCardArray[i]) {
               cardIndex = j;
             }
@@ -388,7 +392,7 @@ Game.prototype.removePlayer = function (thisPlayer) {
     const playerName = this.players[playerIndex].username;
 
     // If this player submitted a card, take it off the table
-    for (let i = 0; i < this.table.length; i++) {
+    for (let i = 0; i < this.table.length; i += 1) {
       if (this.table[i].player === thisPlayer) {
         this.table.splice(i, 1);
       }
@@ -417,7 +421,7 @@ Game.prototype.removePlayer = function (thisPlayer) {
     } else {
       // Update the czar's position if the removed player is above the current czar
       if (playerIndex < this.czar) {
-        this.czar--;
+        this.czar -= 1;
       }
       this.sendNotification(`${playerName} has left the game.`);
     }
@@ -441,7 +445,7 @@ Game.prototype.pickWinning = function (thisCard, thisPlayer, autopicked) {
       const winnerIndex = this._findPlayerIndexBySocket(this.table[cardIndex].player);
       this.sendNotification(`${this.players[winnerIndex].username} has won the round!`);
       this.winningCardPlayer = winnerIndex;
-      this.players[winnerIndex].points++;
+      this.players[winnerIndex].points += 1;
       clearTimeout(this.judgingTimeout);
       this.winnerAutopicked = autopicked;
       this.stateResults(this);

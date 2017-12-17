@@ -116,6 +116,8 @@ angular.module('mean.system')
     $scope.winnerPicked = () => game.winningCard !== -1;
 
     $scope.startGame = () => {
+      $scope.data = { region: $scope.region };
+      $http.post('/api/region', $scope.data);
       game.startGame();
     };
 

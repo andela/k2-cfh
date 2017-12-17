@@ -4,10 +4,12 @@
  */
 import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
+import { LocalStorage } from 'node-localstorage';
 import validator from 'validator';
 import avatarImport from './avatars';
 import { signUser } from '../../config/jwt';
 
+const localStorage = new LocalStorage('./scratch');
 const User = mongoose.model('User');
 const avatars = avatarImport.all();
 
@@ -417,4 +419,9 @@ exports.getDonations = (req, res) => {
     .catch((error) => {
       res.send(error.message);
     });
+};
+
+exports.setRegion = function (req, res) {
+  localStorage.setItem('region', req.body.region);
+  return res.send({ message: 'Region set' });
 };

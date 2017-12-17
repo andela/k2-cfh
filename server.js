@@ -1,4 +1,4 @@
-/* eslint-disable import/no-dynamic-require, global-require, import/no-unresolved, import/extensions, max-len */
+/* eslint-disable import/no-dynamic-require, global-require, import/no-unresolved, import/extensions, max-len, no-unused-vars */
 
 /**
  * Module dependencies.
@@ -12,6 +12,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import paths from 'path';
 import cookieParser from 'cookie-parser';
+import { LocalStorage } from 'node-localstorage';
 import config from './config/config';
 import auth from './config/middlewares/authorization';
 import routes from './config/routes';
@@ -21,7 +22,7 @@ import expressConfig from './config/express';
 
 
 dotenv.config();
-
+const localStorage = new LocalStorage('./scratch');
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
