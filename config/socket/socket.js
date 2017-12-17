@@ -67,6 +67,22 @@ module.exports = function (io) {
       }
     });
 
+    socket.on('drawCzarCard', () => {
+      if (allGames[socket.gameID]) {
+        const thisGame = allGames[socket.gameID];
+        if (thisGame.players.length >= thisGame.playerMinLimit) {
+          // Remove this game from gamesNeedingPlayers so new players can't join it.
+          gamesNeedingPlayers.forEach((game, index) => {
+            if (game.gameID === socket.gameID) {
+              return gamesNeedingPlayers.splice(index, 1);
+            }
+          });
+          thisGame.drawCzarCard();
+          thisGame.sendNotification('Players should select their answers!');
+        }
+      }
+    });
+
     socket.on('leaveGame', () => {
       exitGame(socket);
     });
@@ -132,8 +148,10 @@ module.exports = function (io) {
       // the new game ID, causing the view to reload.
       // Also checking the number of players, so node doesn't crash when
       // no one is in this custom room.
-      if (game.state === 'awaiting players' && (!game.players.length ||
-        game.players[0].socket.id !== socket.id)) {
+      if (
+        game.state === 'awaiting players' &&
+        (!game.players.length || game.players[0].socket.id !== socket.id)
+      ) {
         // Put player into the requested game
         console.log('Allowing player to join', requestedGameId);
         allPlayers[socket.id] = true;
@@ -209,7 +227,7 @@ module.exports = function (io) {
       for (let i = 0; i < 6; i++) {
         uniqueRoom += chars[Math.floor(Math.random() * chars.length)];
       }
-      if (!allGames[uniqueRoom] && !(/^\d+$/).test(uniqueRoom)) {
+      if (!allGames[uniqueRoom] && !/^\d+$/.test(uniqueRoom)) {
         isUniqueRoom = true;
       }
     }
@@ -227,12 +245,12 @@ module.exports = function (io) {
 
   let exitGame = (socket) => {
     console.log(socket.id, 'has disconnected');
-    if (allGames[socket.gameID]) { // Make sure game exists
+    if (allGames[socket.gameID]) {
+      // Make sure game exists
       const game = allGames[socket.gameID];
       console.log(socket.id, 'has left game', game.gameID);
       delete allPlayers[socket.id];
-      if (game.state === 'awaiting players' ||
-        game.players.length - 1 >= game.playerMinLimit) {
+      if (game.state === 'awaiting players' || game.players.length - 1 >= game.playerMinLimit) {
         game.removePlayer(socket.id);
       } else {
         game.stateDissolveGame();
