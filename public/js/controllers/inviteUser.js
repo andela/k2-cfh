@@ -24,9 +24,9 @@ angular.module('mean.system')
       }
     };
 
-    $scope.viewNotification = function () {
-      $('#notify').modal('show');
-    };
+    // $scope.viewNotification = function () {
+    //   $('#notify').modal('show');
+    // };
 
     // Set http header
     $scope.setHttpHeader = () => {

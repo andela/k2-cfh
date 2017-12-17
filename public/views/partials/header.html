@@ -14,28 +14,6 @@
                   <i class="fa fa-bell" aria-hidden="true"></i> <sup style="top: -1.0em; font-size: 10px">{{notifications.length}}</sup>
               </button>
 
-              <div>
-                  <div id="notify" class="modal fade" role="dialog" >
-                      <div class="modal-dialog">
-                      <div class="modal-content" style="margin-left: auto; margin-right: auto; text-align:center">
-                          <div class="modal-header" style="background-color: #256188; color: #FFF; border-top-right-radius: unset; border-top-left-radius: unset">
-                          <h4 class="modal-title" style="margin-right:auto; margin-left:auto; margin-top: .5rem; line-height: 1">Cards For Humanity</h4>
-                          </div>
-                          <div class="modal-body" style="height: 200px; overflow: scroll;">
-                          <table class="table table-striped">
-                              <tr ng-repeat="notice in notifications" class="notification">
-                              <td>{{notice.message}}</td>
-                              <td><a target="_blank" href="{{notice.link}}"><button>join</button></a></td>
-                              </tr>
-                          </table>
-                          </div>
-                          <div class="modal-footer" style="background-color: #256188; color: #FFF; padding-top: 10px; padding-bottom: 10px">
-                          <button style="background: #FF8800; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor: pointer" type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
-                          </div>
-                      </div>
-                      </div>
-                  </div>
-              </div>
               <div ng-show="!game.state">
                   <button class="butA header-buttons float-right" type="button" id="signInModalShow">SIGN IN</button>
                   <a target="_blank" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fcfh.io%2F%23!%2F&stylesheet=&amounts=">
@@ -72,3 +50,27 @@
       </div>
   </div>
 </header>
+
+<div ng-controller="InviteUserController">
+    <div id="notify" class="modal fade" role="dialog" style="opacity:1">
+      <div class="modal-dialog">
+        <div class="modal-content" style="margin-left: auto; margin-right: auto; text-align:center">
+          <div class="modal-header" style="color: #FFF; border-top-right-radius: unset; border-top-left-radius: unset">
+            <h4 class="modal-title" style="margin-right:auto; margin-left:auto; margin-top: .5rem; line-height: 1">Cards For Humanity</h4>
+          </div>
+          <div class="modal-body" style="height: 200px; overflow: scroll;">
+            <table class="table table-striped">
+              <tr ng-repeat="notice in notifications" class="notification">
+                <td>{{notice.message}}</td>
+                <td><a target="_blank" href="{{notice.link}}"><button class="butB header-buttons" type="button">join</button></a></td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer" style="color: #FFF; padding-top: 10px; padding-bottom: 10px">
+            <button style="background: #3570B0; color: #FFF; border-radius: 12px; font-family: cursive; font-size: 1.1rem; padding: .1rem 2rem; cursor: pointer" type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
