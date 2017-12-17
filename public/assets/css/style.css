@@ -1158,3 +1158,14 @@ footer{
     border-radius: 3px;
     font-weight: bold;
   }
+
+/***************************************   
+    Tour
+****************************************/
+.tour-wrapper{
+    display:block;
+    padding:16px 13px;min-width:200px;font-size:13px;line-height:190%;text-align: center;
+}
+.introjs-tooltipbuttons{
+    text-align:center !important;
+}

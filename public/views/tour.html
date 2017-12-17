@@ -1,0 +1,226 @@
+<style>
+    html,
+    body,
+    #main-container {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+</style>
+<div id='game-wrapper'>
+    <div id="main-controller-sub" ng-controller="TourController" ng-init='init()'>
+        <header>
+            <div class="page-align">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <img src="/assets/img/logo.png" id="header-logo">
+                    </div>
+                    <div class="hidden-sm-down col-md-9">
+                        <button class="butB header-buttons float-right" type="button">ABANDON GAME</button>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div id="header-spacer"></div>
+        <span id='#step1'></span>
+        <div id="game-app-container">
+            <div class='row mt-4'>
+                <!--  Left column -->
+                <div class="col-md-9">
+                    <!--  Timer and game screen -->
+                    <div class="row" id='game-top-div'>
+                        <div class="col-md-3" style="padding-right:0">
+                            <div id="timer-container">
+                                <div id="timer-time">{{ general.countdownFrom }}</div>
+                                <div id="timer-text">
+                                    <span>Time Remaining</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div id="game-screen">
+                                <div id="game-screen-content">
+
+                                    <!--  Finding players -->
+                                    <div id='intro-tab' class='game-screen-tab' ng-hide='true'>
+                                        <div id='finding-players-text'>Finding Players</div>
+                                        <div class='mt-4 row'>
+                                            <div class='col-md-4 text-center'>
+                                                <div class='player-count'>
+                                                    <span class='top'>{{game.players.length}} / {{game.playerMaxLimit}}</span>
+                                                    <span class='bottom'>Players</span>
+                                                </div>
+                                            </div>
+                                            <div class='col-md-3 text-center'>
+                                                <img class='game-screen-loader' ng-src='/assets/img/loader.gif'>
+                                            </div>
+                                            <div class='col-md-5 text-center'>
+                                                <button ng-click='startGame()' ng-show='( game.playerIndex === 0 || game.joinOverride ) && game.players.length >= game.playerMinLimit'
+                                                    class='game-screen-button-2 mr-2' type='button'>Start Now</button>
+                                                <button ng-hide='game.players.length > game.playerMaxLimit' class='game-screen-button' type='button' data-toggle="modal"
+                                                    data-target="#myModal">Invite Users</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--  Questions -->
+                                    <div id='question-tab' ng-show="general.qshow === true" class='game-screen-tab'>
+                                        <div class='text-center game-question-text'>
+                                            Do you love mugabi ?
+                                        </div>
+                                    </div>
+                                    <!-- game status view with too many people -->
+                                    <div id='endgame-tab' class='game-screen-tab'>
+                                        <div class='mt-4' ng-show="game.state === 'game dissolved' && game.gameWinner === -1">
+                                            <h5 class='text-center'>What the!? The game ended because too many people left!</h5>
+                                            <h6 class='text-center mt-2'>Our sincere apologies.</h6>
+                                        </div>
+                                        <div class='mt-4' ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
+                                            <h5 class='text-center'>Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won
+                                                the game!</h5>
+                                            <h6 class='text-center mt-2'>That makes you a loser, unfortunately.</h6>
+                                        </div>
+                                        <div class='mt-4' ng-show="game.state === 'game ended' && game.gameWinner === game.playerIndex">
+                                            <h5 class='text-center'>Congratulations! You won the game, {{game.players[game.playerIndex].username
+                                                | upperFirstLetter}}!</h5>
+                                            <h6 class='text-center mt-2' style='line-height:190%;'>We hope you feel special. If you'd like to share that special feeling with the
+                                                world, consider donating to charity. Or just horde it all for youself.</h6>
+                                        </div>
+                                    </div>
+
+                                    <!--  Notification -->
+                                    <div id='notification-tab' class='game-screen-tab-base' ng-show="general.notify === true">
+                                        <span style='font-weight:600;font-size:14px;'>abdulfatai won the round.</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div id="base-container">
+                                <!-- How to play -->
+                                <div id="howtoplay" class='mt-4 base-container-tab' ng-show="general.howto === true">
+                                    <h5 id='howtoplay-heading'>How To Play</h5>
+                                    <ul id='howtoplay-ul'>
+                                        <li>1.&nbsp;&nbsp;Each player begins with, and will always have, 10 white answer cards.</li>
+                                        <li>2.&nbsp;&nbsp;For each round, one player is randomly chosen as the Card Czar.</li>
+                                        <li>3.&nbsp;&nbsp;Everyone else answers the black question card by clicking on the answer
+                                            card they want to use.</li>
+                                        <li>4.&nbsp;&nbsp;The Card Czar then picks a favorite answer, and whoever played that
+                                            answer wins the round.</li>
+                                        <li>5.&nbsp;&nbsp;Want to adorn your avatar with a glorious crown? Donate to charity
+                                            after the game!</li>
+                                    </ul>
+                                </div>
+                                <!-- Czar -->
+                                <div id="czar-select" class='base-container-tab' ng-show="general.czarIntro === true">
+                                    <h4 id='czar-select-h1'>You are the Card Czar.</h4>
+                                    <h5 id='czar-select-h2'>Players are choosing their answers. Prepare to select a winner.</h5>
+                                    </h5>
+                                    <div id='czar-select-base'>
+                                        <div class='top'>Did you know?</div>
+                                        <div class='mid'>Wish kids are more willing to comply with difficult, but vital, treatment regimens.</div>
+                                        <img class='bottom float-right' ng-src='/assets/img/make-a-wish-logo.png'>
+                                        <div class='clear'></div>
+                                    </div>
+                                    <!-- Advert image -->
+                                    <div id='advert-div'>
+                                        <img src='/assets/img/advert.png'>
+                                    </div>
+                                </div>
+
+                                <!-- Donation -->
+                                <div id="game-donation" class='base-container-tab' ng-show='general.donation === true'>
+                                    <div class="row">
+                                        <div class='col-md-7'>
+                                            <h3 class='mt-4 text-center' style='color:white;'>What would you like to do now?</h3>
+                                            <h6 class='text-center' id='donate-text-2'>
+                                                Help yourself to another game or help a child in need? Donating will also place a lovely crown on your avatar's head.
+                                            </h6>
+                                            <div class='mb-5 text-center'>
+                                                <span class='game-donation-button'>Join a New Game</span>
+                                                <span class='game-donation-button'>Return to Lobby</span>
+                                            </div>
+                                        </div>
+                                        <div class='col-md-5'>
+                                            <div id='donate-box'>
+                                                <div id='donate-box-head'>MAKE AN IMPACT</div>
+                                                <div class='text-center'>
+                                                    <span id='donate-box-amount'>$726</span>
+                                                    <span id='donate-box-amount-text'>AMOUNT RAISED</span>
+                                                </div>
+                                                <button id='donate-box-button'>Donate Now</button>
+                                                <img src='/assets/img/cr.png' id='donate-box-image'>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <span ng-show="winnerPicked()"></span>
+
+                                <!-- Answers -->
+                                <div id="answers" class='base-container-tab' ng-show="general.answers === true">
+                                    <div class='answers-cards' ng-style="{'cursor':'pointer'}" ng-repeat="answer in playersAnswers track by $index">
+                                        <span>{{ answer }}</span>
+                                    </div>
+                                    <div class='clear'></div>
+                                </div>
+                                <!-- czar select answers -->
+                                <div id="deck" style='z-index:3 !important' class='base-container-tab' ng-show="general.deck === true">
+                                    <span ng-repeat="answer in czarAnswers track by $index">
+                                        <div class='answers-cards' ng-style="{'cursor':'pointer'}">
+                                            <span>{{ answer }}</span>
+                                        </div>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  Right column -->
+                <div class="col-md-3">
+                    <div id="players-div">
+                        <div class='row player-info player-info-{{ $index }}' ng-repeat='player in players'>
+                            <div class='col-3'>
+                                <img ng-src='{{player.avatar}}' class='player-info-img'>
+                            </div>
+                            <div class='col-6 player-info-name'>
+                                <span>{{player.username | upperFirstLetter}}</span>
+                            </div>
+                            <div class='col-3 '>
+                                <span class='player-info-score'>{{player.points}}/{{player.pointsLimit}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--  Chat  -->
+        <div class="right-container-bottom chat-box" id='chatbox' ng-controller="ChatController">
+            <div class="chat-box__messenger" style='z-index:4490' ng-show="general.isChatOpen">
+                <div class="chat-box__header">
+                    <h4>Chats</h4>
+                </div>
+                <ul class="chats">
+                    <li></li>
+                </ul>
+                <form ng-submit="addChat()" class="chat-box__form">
+                    <input type="text" class="form-control" placeholder="What's on your mind?" ng-model="content" id="chatInput">
+                </form>
+            </div>
+            <div class="chat-box__launcher" ng-click="toggleTourChatOpen()">
+                <i class="fa fa-times fa-2x" aria-hidden="true" ng-show="general.isChatOpen"></i>
+                <i class="fa fa-comment fa-2x" aria-hidden="true" ng-hide="general.isChatOpen"></i>
+            </div>
+        </div>
+        <div ng-include src='"/views/partials/start.html"'></div>
+    </div>
+</div>
