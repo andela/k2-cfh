@@ -17,6 +17,7 @@ import config from './config/config';
 import auth from './config/middlewares/authorization';
 import routes from './config/routes';
 import expressConfig from './config/express';
+import passportConfig from './config/passport';
 // import QuestionModel from './app/seeders/questions';
 // import AnsersMigration from './app/seeders/answers';
 
@@ -50,7 +51,7 @@ const walk = (path) => {
 walk(modelsPath);
 
 // bootstrap passport config
-// passportConfig(passport);
+passportConfig(passport);
 
 const app = express();
 
