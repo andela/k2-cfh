@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved, import/extensions, no-unused-vars */
+/* eslint-disable import/no-unresolved, import/extensions, no-unused-vars, arrow-body-style */
 import jwt from 'jsonwebtoken';
 import { tokenSecret } from '../config/env/all';
 
@@ -24,8 +24,8 @@ export const verify = (req, res, next) => {
 };
 
 export const signUser = (user) => {
-  const token = process.env.JWT_SECRET || 'randomstring!^_)$';
-  return jwt.sign(user, token);
+  // const token = process.env.JWT_SECRET || 'randomstring!^_)$';
+  return jwt.sign(user, tokenSecret);
 };
 
 export const isLoggedIn = (req, res, next) => {
@@ -51,8 +51,8 @@ export const isLoggedIn = (req, res, next) => {
 export const verifyToken = (token) => {
   let user = {};
   if (token) {
-    const secret = process.env.JWT_SECRET || 'randomstring!^_)$';
-    jwt.verify(token, secret, (err, decoded) => {
+    // const secret = process.env.JWT_SECRET || 'randomstring!^_)$';
+    jwt.verify(token, tokenSecret, (err, decoded) => {
       if (err) {
         user = { id: null };
       } else {

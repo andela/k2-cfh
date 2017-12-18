@@ -1,9 +1,7 @@
 /* eslint-disable */
 const jwt = require('jsonwebtoken');
-
+import { tokenSecret } from '../env/all';
 require('dotenv').config();
-
-const key = process.env.JWT_SECRET;
 
 exports.validateToken = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers.token;
@@ -13,7 +11,7 @@ exports.validateToken = (req, res, next) => {
     });
   }
 
-  jwt.verify(token, key, (err, decoded) => {
+  jwt.verify(token, tokenSecret, (err, decoded) => {
     if (err) {
       return res.status(403).send({
         error: 'Token could not be authenticated'

@@ -24,7 +24,7 @@
                 <div class="col-12 col-md-3">
                     <img src="/assets/img/logo.png" id="header-logo">
                 </div>
-                <div class="hidden-sm-down col-md-9">
+                <div class="hidden-sm-down col-md-9" ng-controller="InviteUserController">
                     <!-- id="signInModalShow" -->
                     <button ng-show="showOptions" class="butA header-buttons float-right" type="button" ng-click='signInClick()'>SIGN IN</button>
                     <button ng-hide="showOptions" class="butA header-buttons float-right" type="button" ng-click="signOut()" >SIGN OUT</a>
