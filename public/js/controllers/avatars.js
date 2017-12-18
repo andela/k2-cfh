@@ -40,7 +40,7 @@ angular.module('mean.system')
           $('#avatarError').html('Please select a region').css('display', 'block');
         } else {
           $window.localStorage.setItem('avatar', avatar);
-          $location.path('/app');
+          $location.path('/');
         }
       };
     }]);
