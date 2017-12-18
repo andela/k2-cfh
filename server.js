@@ -17,9 +17,7 @@ import config from './config/config';
 import auth from './config/middlewares/authorization';
 import routes from './config/routes';
 import expressConfig from './config/express';
-// import QuestionModel from './app/seeders/questions';
-// import AnsersMigration from './app/seeders/answers';
-
+import passportConfig from './config/passport';
 
 dotenv.config();
 const localStorage = new LocalStorage('./scratch');
@@ -50,7 +48,7 @@ const walk = (path) => {
 walk(modelsPath);
 
 // bootstrap passport config
-// passportConfig(passport);
+passportConfig(passport);
 
 const app = express();
 
@@ -74,9 +72,6 @@ require('./config/socket/socket')(ioObj);
 
 // Initializing logger
 logger.init(app, passport, mongoose);
-
-// QuestionModel();
-// AnsersMigration();
 
 // expose app
 export default app;

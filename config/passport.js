@@ -87,7 +87,7 @@ export default (passport) => {
       })
     ));
   } catch (error) {
-    console.log('An error occured during this operation');
+    console.log('An error occurred during this operation');
   }
 
 
@@ -127,7 +127,7 @@ export default (passport) => {
       })
     ));
   } catch (error) {
-    console.log('An error occured during this operation');
+    console.log('An error occurred during this operation');
   }
 
 
@@ -166,7 +166,7 @@ export default (passport) => {
       })
     ));
   } catch (error) {
-    console.log('An error occured during this operation');
+    console.log('An error occurred during this operation');
   }
 
   // Use google strategy
@@ -203,6 +203,6 @@ export default (passport) => {
       })
     ));
   } catch (error) {
-    console.log('An error occured during this operation');
+    console.log('An error occurred during this operation');
   }
 };
