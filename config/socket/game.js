@@ -94,7 +94,6 @@ Game.prototype.payload = function () {
   };
 };
 
-
 Game.prototype.broadcastNotification = function (userId) {
   console.log('fron sockets', userId);
   this.io.sockets.emit('notificationReceived', userId);
@@ -145,10 +144,7 @@ Game.prototype.startGame = function () {
 
 Game.prototype.drawCzarCard = function () {
   const self = this;
-  async.parallel([
-    this.getQuestions,
-    this.getAnswers
-  ], (err, results) => {
+  async.parallel([this.getQuestions, this.getAnswers], (err, results) => {
     if (err) {
       return err;
     }
@@ -252,7 +248,7 @@ Game.prototype.stateResults = function (self) {
     if (winner !== -1) {
       self.stateEndGame(winner);
     } else {
-      self.stateChoosing(self);
+      self.setCzar(self);
     }
   }, self.timeLimits.stateResults * 1000);
 };
